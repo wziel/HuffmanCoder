@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.Model.Tree
 {
-    public class HuffmanTree<T> : IHuffmanTree<T>
+    internal class HuffmanTree<T>
     {
         private HuffmanTreeNode<T> root;
 

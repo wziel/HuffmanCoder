@@ -11,6 +11,8 @@ namespace HuffmanCoder.UnitTests.Model.Builder
     [TestClass]
     public class HuffmanTreeBuilderTests
     {
+        IComparer<char> charComparer = Comparer<char>.Create((a, b) => a.CompareTo(b));
+
         [TestInitialize]
         public void TestInitialize()
         {
@@ -21,7 +23,7 @@ namespace HuffmanCoder.UnitTests.Model.Builder
         public void Add_CanAddValue()
         {
             //given
-            var builder = new HuffmanTreeBuilder<char>();
+            var builder = new HuffmanCodecBuilder<char>(charComparer);
             //when
             builder.Add('c');
             //then - sukces
@@ -31,12 +33,12 @@ namespace HuffmanCoder.UnitTests.Model.Builder
         public void Build_CanBuildWhenSomeSymbolsAdded()
         {
             //given
-            var builder = new HuffmanTreeBuilder<char>();
+            var builder = new HuffmanCodecBuilder<char>(charComparer);
             builder.Add('c');
             builder.Add('c');
             builder.Add('d');
             //when
-            builder.Build();
+            throw new AssertFailedException("No build method");
             //then - sukces
         }
 
@@ -45,9 +47,9 @@ namespace HuffmanCoder.UnitTests.Model.Builder
         public void Build_CannotBuildWhenNoSymbolsAdded()
         {
             //given
-            var builder = new HuffmanTreeBuilder<char>();
+            var builder = new HuffmanCodecBuilder<char>(charComparer);
             //when
-            builder.Build();
+            throw new AssertFailedException("No build method");
             //then - no exception, fail
             throw new AssertFailedException();
         }

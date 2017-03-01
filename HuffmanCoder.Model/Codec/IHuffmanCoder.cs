@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.Model.Tree
+namespace HuffmanCoder.Model.Codec
 {
-    public interface IHuffmanTree<T>
+    public interface IHuffmanCoder<T>
     {
     }
 }
