@@ -8,5 +8,6 @@ namespace HuffmanCoder.Model.Codec
 {
     public interface IHuffmanDecoder<T>
     {
+        void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output);
     }
 }

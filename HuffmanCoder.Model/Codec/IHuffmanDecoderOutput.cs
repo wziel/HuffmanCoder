@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.Model.Codec
 {
-    public interface IHuffmanCoder<T>
+    public interface IHuffmanDecoderOutput<T>
     {
-        void Encode(IHuffmanCoderInput<T> input, IHuffmanCoderOutput output);
+        void Write(T symbol);
     }
 }

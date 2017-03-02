@@ -50,7 +50,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Model\Builder\HuffmanTreeBuilderTests.cs" />
+    <Compile Include="Model\Builder\HuffmanCodecBuilderTests.cs" />
+    <Compile Include="Model\Builder\HuffmanTreeNodeComparerTests.cs" />
+    <Compile Include="Model\Codec\HuffmanCoderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

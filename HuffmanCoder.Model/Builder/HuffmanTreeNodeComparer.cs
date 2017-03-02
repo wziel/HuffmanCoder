@@ -35,7 +35,7 @@ namespace HuffmanCoder.Model.Builder
         {
             if(x.Quantity != y.Quantity)
             {
-                return x.Quantity = y.Quantity;
+                return x.Quantity - y.Quantity;
             }
             if(x.SubTreeDepth != y.SubTreeDepth)
             {

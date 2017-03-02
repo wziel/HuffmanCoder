@@ -50,10 +50,13 @@
     <Compile Include="Codec\HuffmanCoder.cs" />
     <Compile Include="Codec\HuffmanDecoder.cs" />
     <Compile Include="Codec\IHuffmanCoder.cs" />
+    <Compile Include="Codec\IHuffmanCoderInput.cs" />
+    <Compile Include="Codec\IHuffmanCoderOutput.cs" />
     <Compile Include="Codec\IHuffmanDecoder.cs" />
+    <Compile Include="Codec\IHuffmanDecoderInput.cs" />
+    <Compile Include="Codec\IHuffmanDecoderOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tree\HuffmanTree.cs" />
-    <Compile Include="Tree\HuffmanTreeNode.cs" />
+    <Compile Include="Builder\HuffmanTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

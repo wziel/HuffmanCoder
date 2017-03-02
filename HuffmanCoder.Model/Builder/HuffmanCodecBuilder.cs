@@ -15,8 +15,6 @@ namespace HuffmanCoder.Model.Builder
     /// <typeparam name="T"></typeparam>
     public class HuffmanCodecBuilder<T> : IHuffmanCodecBuilder<T>
     {
-        private const int LEAF_SUB_TREE_DEPTH = 0;
-
         private Dictionary<T, int> symbolQuantityDic = new Dictionary<T, int>();
         private HuffmanTreeNodeComparer<T> nodeComparer;
 
@@ -28,9 +26,10 @@ namespace HuffmanCoder.Model.Builder
         /// relation only if other means based on Quantity and Subtree depth fail.
         /// It should never return 0 (equality) for different elements.
         /// </param>
+        /// <param name="terminalSymbol">symbol that means the end of input</param>
         public HuffmanCodecBuilder(IComparer<T> valueComparer)
         {
-            this.nodeComparer = new HuffmanTreeNodeComparer<T>(valueComparer);
+            nodeComparer = new HuffmanTreeNodeComparer<T>(valueComparer);
         }
 
         /// <summary>
@@ -81,22 +80,22 @@ namespace HuffmanCoder.Model.Builder
         /// Builds a Huffman tree from symbols that previously were added to this builder.
         /// </summary>
         /// <returns>Huffman tree from this builder.</returns>
-        private HuffmanTree<T> BuildTree()
+        private HuffmanTreeNode<T> BuildTree()
         {
             var priorityQueue = GetHuffmanNodePriorityQueue();
-            if (priorityQueue.Count() == 0)
+            if (priorityQueue.Count() < 2)
             {
-                throw new Exception("Cannot build an empty Hufffman tree");
+                throw new Exception("Huffman tree requires at leas two different symbols");
             }
             while (priorityQueue.Count() > 1)
             {
-                var first = priorityQueue.DeleteMax();
-                var second = priorityQueue.DeleteMax();
+                var first = priorityQueue.DeleteMin();
+                var second = priorityQueue.DeleteMin();
                 var mergedNode = Merge(first, second);
                 priorityQueue.Add(mergedNode);
 
             }
-            return new HuffmanTree<T>(priorityQueue.DeleteMax());
+            return priorityQueue.DeleteMin();
         }
 
         /// <summary>
@@ -108,8 +107,7 @@ namespace HuffmanCoder.Model.Builder
             priorityQueue.AddAll(symbolQuantityDic.Select(
                 s => new HuffmanTreeNode<T>(
                     value: s.Key,
-                    quantity: s.Value,
-                    subTreeDepth: LEAF_SUB_TREE_DEPTH
+                    quantity: s.Value
                 )
             ));
             return priorityQueue;

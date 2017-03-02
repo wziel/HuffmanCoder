@@ -8,11 +8,11 @@ namespace HuffmanCoder.Model.Tree
 {
     internal class HuffmanTreeNode<T>
     {
-        public HuffmanTreeNode(T value, int quantity, int subTreeDepth)
+        public HuffmanTreeNode(T value, int quantity, int subTreeDepth = 0)
         {
             this.Value = value;
             this.Quantity = quantity;
-            this.SubTreeDepth = SubTreeDepth;
+            this.SubTreeDepth = subTreeDepth;
         }
 
         public int SubTreeDepth { get; internal set; }
@@ -21,6 +21,7 @@ namespace HuffmanCoder.Model.Tree
         public HuffmanTreeNode<T> Parent { get; internal set; }
         public HuffmanTreeNode<T> LeftChild { get; internal set; }
         public HuffmanTreeNode<T> RightChild { get; internal set; }
+        public bool IsLeaf { get { return SubTreeDepth == 0;  } }
 
         public override string ToString()
         {
