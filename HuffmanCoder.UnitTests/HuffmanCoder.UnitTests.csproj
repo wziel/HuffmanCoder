@@ -53,6 +53,7 @@
     <Compile Include="Model\Builder\HuffmanCodecBuilderTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeNodeComparerTests.cs" />
     <Compile Include="Model\Codec\HuffmanCoderTests.cs" />
+    <Compile Include="Model\Codec\HuffmanDecoderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

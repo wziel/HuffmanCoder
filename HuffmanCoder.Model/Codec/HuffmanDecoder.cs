@@ -14,7 +14,6 @@ namespace HuffmanCoder.Model.Codec
         internal HuffmanDecoder(HuffmanTreeNode<T> root)
         {
             this.root = root;
-            throw new NotImplementedException("Please unit test me first :(");
         }
 
         public void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output)
@@ -24,7 +23,7 @@ namespace HuffmanCoder.Model.Codec
 
         private void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output, HuffmanTreeNode<T> currentNode)
         {
-            while(!input.IsEnd())
+            while(!output.IsEnd())
             {
                 var bit = input.Read();
                 currentNode = bit ? currentNode.RightChild : currentNode.LeftChild;
@@ -33,11 +32,6 @@ namespace HuffmanCoder.Model.Codec
                     output.Write(currentNode.Value);
                     currentNode = root;
                 }
-            }
-            if(currentNode != root)
-            {
-                throw new Exception(@"Unexpected end of input. 
-                    Decoder was during encoding of current symbol and input ended.");
             }
         }
     }
