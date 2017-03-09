@@ -9,7 +9,7 @@ namespace HuffmanCoder.Model.Codec
     /// <summary>
     /// Interface that supplies encoded bits to huffman decoder.
     /// </summary>
-    public interface IHuffmanDecoderInput
+    internal interface IHuffmanDecoderInput
     {
         /// <summary>
         /// Reads a single bit of encoded input.

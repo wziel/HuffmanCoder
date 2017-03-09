@@ -9,7 +9,7 @@ namespace HuffmanCoder.Model.Codec
     /// <summary>
     /// Output of huffman coder that consumes bits.
     /// </summary>
-    public interface IHuffmanCoderOutput
+    internal interface IHuffmanCoderOutput
     {
         /// <summary>
         /// Writes a single bit of encoded input to the output.

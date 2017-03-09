@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HuffmanCoder.Model.Tree;
 using C5;
 using HuffmanCoder.Model.Codec;
 
-namespace HuffmanCoder.Model.Builder
+namespace HuffmanCoder.Model.Builder.FromQuantity
 {
     /// <summary>
-    /// Class used for building a huffman tree. 
+    /// Class used for building a huffman tree based on quantitty of symbols used.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class HuffmanCodecBuilder<T> : IHuffmanCodecBuilder<T>
+    internal class QHuffmanTreeBuilder<T> : IHuffmanTreeBuilder<T>
     {
         private Dictionary<T, int> symbolQuantityDic = new Dictionary<T, int>();
-        private HuffmanTreeNodeComparer<T> nodeComparer;
+        private QHuffmanTreeNodeComparer<T> nodeComparer;
 
         /// <summary>
         /// </summary>
@@ -27,9 +25,9 @@ namespace HuffmanCoder.Model.Builder
         /// It should never return 0 (equality) for different elements.
         /// </param>
         /// <param name="terminalSymbol">symbol that means the end of input</param>
-        public HuffmanCodecBuilder(IComparer<T> valueComparer)
+        public QHuffmanTreeBuilder(IComparer<T> valueComparer)
         {
-            nodeComparer = new HuffmanTreeNodeComparer<T>(valueComparer);
+            nodeComparer = new QHuffmanTreeNodeComparer<T>(valueComparer);
         }
 
         /// <summary>
@@ -59,28 +57,10 @@ namespace HuffmanCoder.Model.Builder
         }
 
         /// <summary>
-        /// Returns coder that represents state of this builder.
-        /// </summary>
-        /// <returns>Coder</returns>
-        public IHuffmanCoder<T> GetCoder()
-        {
-            return new HuffmanCoder<T>(BuildTree());
-        }
-
-        /// <summary>
-        /// Returns decoder that represents state of this builder.
-        /// </summary>
-        /// <returns>Decoder</returns>
-        public IHuffmanDecoder<T> GetDecoder()
-        {
-            return new HuffmanDecoder<T>(BuildTree());
-        }
-
-        /// <summary>
         /// Builds a Huffman tree from symbols that previously were added to this builder.
         /// </summary>
         /// <returns>Huffman tree from this builder.</returns>
-        private HuffmanTreeNode<T> BuildTree()
+        public IHuffmanTreeNode<T> BuildTree()
         {
             var priorityQueue = GetHuffmanNodePriorityQueue();
             if (priorityQueue.Count() < 2)
@@ -101,11 +81,11 @@ namespace HuffmanCoder.Model.Builder
         /// <summary>
         /// </summary>
         /// <returns>An initial priority queue created for building Huffman tree.</returns>
-        private IntervalHeap<HuffmanTreeNode<T>> GetHuffmanNodePriorityQueue()
+        private IntervalHeap<QHuffmanTreeNode<T>> GetHuffmanNodePriorityQueue()
         {
-            var priorityQueue = new IntervalHeap<HuffmanTreeNode<T>>(nodeComparer);
+            var priorityQueue = new IntervalHeap<QHuffmanTreeNode<T>>(nodeComparer);
             priorityQueue.AddAll(symbolQuantityDic.Select(
-                s => new HuffmanTreeNode<T>(
+                s => new QHuffmanTreeNode<T>(
                     value: s.Key,
                     quantity: s.Value
                 )
@@ -120,9 +100,9 @@ namespace HuffmanCoder.Model.Builder
         /// <param name="first">first node to merge</param>
         /// <param name="second">second node to merge</param>
         /// <returns>a node representing a parent of given nodes</returns>
-        private HuffmanTreeNode<T> Merge(HuffmanTreeNode<T> left, HuffmanTreeNode<T> right)
+        private QHuffmanTreeNode<T> Merge(QHuffmanTreeNode<T> left, QHuffmanTreeNode<T> right)
         {
-            var parent = new HuffmanTreeNode<T>(
+            var parent = new QHuffmanTreeNode<T>(
                 value: left.Value,
                 quantity: left.Quantity + right.Quantity,
                 subTreeDepth: Math.Max(left.SubTreeDepth, right.SubTreeDepth) + 1

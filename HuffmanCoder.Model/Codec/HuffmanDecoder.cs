@@ -9,9 +9,9 @@ namespace HuffmanCoder.Model.Codec
 {
     internal class HuffmanDecoder<T> : IHuffmanDecoder<T>
     {
-        private HuffmanTreeNode<T> root;
+        private IHuffmanTreeNode<T> root;
 
-        internal HuffmanDecoder(HuffmanTreeNode<T> root)
+        public HuffmanDecoder(IHuffmanTreeNode<T> root)
         {
             this.root = root;
         }
@@ -21,7 +21,7 @@ namespace HuffmanCoder.Model.Codec
             Decode(input, output, root);
         }
 
-        private void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output, HuffmanTreeNode<T> currentNode)
+        private void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output, IHuffmanTreeNode<T> currentNode)
         {
             while(!output.IsEnd())
             {

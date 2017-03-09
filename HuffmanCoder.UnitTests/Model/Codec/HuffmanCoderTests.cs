@@ -1,4 +1,5 @@
 ﻿using HuffmanCoder.Model.Builder;
+using HuffmanCoder.Model.Builder.FromQuantity;
 using HuffmanCoder.Model.Codec;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -12,12 +13,12 @@ namespace HuffmanCoder.UnitTests.Model.Codec
     [TestClass]
     public class HuffmanCoderTests
     {
-        private HuffmanCodecBuilder<char> builder;
+        private QHuffmanTreeBuilder<char> builder;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            builder = new HuffmanCodecBuilder<char>(Comparer<char>.Default);
+            builder = new QHuffmanTreeBuilder<char>(Comparer<char>.Default);
         }
 
         [TestMethod]
@@ -26,7 +27,8 @@ namespace HuffmanCoder.UnitTests.Model.Codec
             //given
             builder.Add('a', 10); //1
             builder.Add('b', 5); //0
-            var coder = builder.GetCoder();
+            var tree = builder.BuildTree();
+            var coder = new HuffmanCoder<char>(tree);
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'a', 'b' });
             var output = new MockCoderOutput();
             //when
@@ -41,7 +43,8 @@ namespace HuffmanCoder.UnitTests.Model.Codec
             //given
             builder.Add('a', 10); //0
             builder.Add('b', 10); //1
-            var coder = builder.GetCoder();
+            var tree = builder.BuildTree();
+            var coder = new HuffmanCoder<char>(tree);
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'a', 'b' });
             var output = new MockCoderOutput();
             //when
@@ -57,7 +60,8 @@ namespace HuffmanCoder.UnitTests.Model.Codec
             builder.Add('a', 2); //01
             builder.Add('b', 1); //00
             builder.Add('c', 10); //1
-            var coder = builder.GetCoder();
+            var tree = builder.BuildTree();
+            var coder = new HuffmanCoder<char>(tree);
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c' });
             var output = new MockCoderOutput();
             //when
@@ -73,7 +77,8 @@ namespace HuffmanCoder.UnitTests.Model.Codec
             builder.Add('a', 8); //11
             builder.Add('b', 7); //10
             builder.Add('c', 10); //0
-            var coder = builder.GetCoder();
+            var tree = builder.BuildTree();
+            var coder = new HuffmanCoder<char>(tree);
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c' });
             var output = new MockCoderOutput();
             //when
@@ -89,7 +94,8 @@ namespace HuffmanCoder.UnitTests.Model.Codec
             builder.Add('a', 5); //10
             builder.Add('b', 5); //11
             builder.Add('c', 10); //0
-            var coder = builder.GetCoder();
+            var tree = builder.BuildTree();
+            var coder = new HuffmanCoder<char>(tree);
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c' });
             var output = new MockCoderOutput();
             //when

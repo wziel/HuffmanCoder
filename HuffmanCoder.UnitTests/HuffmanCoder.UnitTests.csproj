@@ -50,8 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Model\Builder\HuffmanCodecBuilderTests.cs" />
-    <Compile Include="Model\Builder\HuffmanTreeNodeComparerTests.cs" />
+    <Compile Include="Model\Builder\FromEncoding\EncHuffmanTreeBuilderTests.cs" />
+    <Compile Include="Model\Builder\FromEncoding\EncHuffmanTreeNodeTests.cs" />
+    <Compile Include="Model\Builder\FromQuantity\QHuffmanTreeBuilderTests.cs" />
+    <Compile Include="Model\Builder\FromQuantity\QHuffmanTreeNodeTests.cs" />
+    <Compile Include="Model\Builder\FromQuantity\QHuffmanTreeNodeComparerTests.cs" />
     <Compile Include="Model\Codec\HuffmanCoderTests.cs" />
     <Compile Include="Model\Codec\HuffmanDecoderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

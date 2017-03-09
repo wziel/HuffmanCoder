@@ -11,7 +11,7 @@ namespace HuffmanCoder.Model.Codec
     /// are no more symbols expected.
     /// </summary>
     /// <typeparam name="T">Type of symbols class.</typeparam>
-    public interface IHuffmanDecoderOutput<T>
+    internal interface IHuffmanDecoderOutput<T>
     {
         /// <summary>
         /// Writes a decoded symbol to the output.

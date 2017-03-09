@@ -9,18 +9,18 @@ namespace HuffmanCoder.Model.Codec
 {
     internal class HuffmanCoder<T> : IHuffmanCoder<T>
     {
-        Dictionary<T, bool[]> symbolEncodingDic = new Dictionary<T, bool[]>();
+        public Dictionary<T, bool[]> EncodingDictionary { get; private set; } = new Dictionary<T, bool[]>();
 
-        internal HuffmanCoder(HuffmanTreeNode<T> root)
+        public HuffmanCoder(IHuffmanTreeNode<T> root)
         {
             GenerateSymbolEncodingDic(root, new List<bool>());
         }
 
-        private void GenerateSymbolEncodingDic(HuffmanTreeNode<T> node, List<bool> currentEncoding)
+        private void GenerateSymbolEncodingDic(IHuffmanTreeNode<T> node, List<bool> currentEncoding)
         {
             if(node.IsLeaf)
             {
-                symbolEncodingDic.Add(node.Value, currentEncoding.ToArray());
+                EncodingDictionary.Add(node.Value, currentEncoding.ToArray());
                 return;
             }
             currentEncoding.Add(false);
@@ -37,7 +37,7 @@ namespace HuffmanCoder.Model.Codec
             {
                 var symbol = input.Read();
                 bool[] symbolEncoding;
-                var found = symbolEncodingDic.TryGetValue(symbol, out symbolEncoding);
+                var found = EncodingDictionary.TryGetValue(symbol, out symbolEncoding);
                 if(!found)
                 {
                     throw new Exception($"Symbol {symbol.ToString()} not found");
