@@ -15,7 +15,7 @@ namespace HuffmanCoder.UI
 
     public class UICoder
     {
-        public void Encode(string filePath, HuffmanEncodeModel huffmanEncodeModel)
+        public void Encode(string inputFilePath, string outputFilePath, HuffmanEncodeModel huffmanEncodeModel)
         {
 
         }

@@ -8,7 +8,7 @@ namespace HuffmanCoder.UI
 {
     public class UIDecoder
     {
-        public void Decode(string filePath)
+        public void Decode(string inputFilePath, string outputFilePath)
         {
 
         }

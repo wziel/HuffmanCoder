@@ -56,12 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UICoder.cs" />
     <Compile Include="UIDecoder.cs" />
-    <EmbeddedResource Include="HufffmanCoder.bin.resx">
-      <DependentUpon>HufffmanCoder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HufffmanCoder.pl-PL.resx">
-      <DependentUpon>HufffmanCoder.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HufffmanCoder.resx">
       <DependentUpon>HufffmanCoder.cs</DependentUpon>
     </EmbeddedResource>

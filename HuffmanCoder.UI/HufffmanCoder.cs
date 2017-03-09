@@ -19,23 +19,47 @@ namespace HuffmanCoder.UI
 
         private void encodeBTN_Click(object sender, EventArgs e)
         {
-            UICoder coder = new UICoder();
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (!System.IO.File.Exists(inputTB.Text) || !System.IO.File.Exists(outputTB.Text))
             {
-                HuffmanEncodeModel huffmanEncodeModel;
-                if (modelWithoutMemoryRadio.Checked)
-                    huffmanEncodeModel = HuffmanEncodeModel.Standard;
-                else if (blockModelRadio.Checked)
-                    huffmanEncodeModel = HuffmanEncodeModel.Block;
-                else
-                    huffmanEncodeModel = HuffmanEncodeModel.Markov;
-                coder.Encode(openFileDialog1.FileName, huffmanEncodeModel);
+                MessageBox.Show("Please choose input file and output file");
+                return;
             }
+            UICoder coder = new UICoder();
+            HuffmanEncodeModel huffmanEncodeModel;
+            if (modelWithoutMemoryRadio.Checked)
+                huffmanEncodeModel = HuffmanEncodeModel.Standard;
+            else if (blockModelRadio.Checked)
+                huffmanEncodeModel = HuffmanEncodeModel.Block;
+            else
+                huffmanEncodeModel = HuffmanEncodeModel.Markov;
+            coder.Encode(inputTB.Text, outputTB.Text, huffmanEncodeModel);
         }
 
         private void decodeBTN_Click(object sender, EventArgs e)
         {
-            string name = saveFileDialog1.FileName;
+            if (!System.IO.File.Exists(inputTB.Text) || !System.IO.File.Exists(outputTB.Text))
+            {
+                MessageBox.Show("Please choose input file and output file");
+                return;
+            }
+            UIDecoder decoder = new UIDecoder();
+            decoder.Decode(inputTB.Text, outputTB.Text);
+        }
+
+        private void inputFileBTN_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                inputTB.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void outputFileBTN_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                outputTB.Text = openFileDialog1.FileName;
+            }
         }
     }
 }

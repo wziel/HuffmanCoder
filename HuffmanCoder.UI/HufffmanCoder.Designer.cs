@@ -37,6 +37,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.inputTB = new System.Windows.Forms.TextBox();
+            this.outputTB = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.inputFileBTN = new System.Windows.Forms.Button();
+            this.outputFileBTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,26 +83,63 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.modelWithoutMemoryRadio);
             this.groupBox1.Controls.Add(this.markowModelRadio);
             this.groupBox1.Controls.Add(this.blockModelRadio);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             // 
-            // saveFileDialog1
+            // inputTB
             // 
-            resources.ApplyResources(this.saveFileDialog1, "saveFileDialog1");
+            resources.ApplyResources(this.inputTB, "inputTB");
+            this.inputTB.Name = "inputTB";
+            this.inputTB.ReadOnly = true;
+            // 
+            // outputTB
+            // 
+            resources.ApplyResources(this.outputTB, "outputTB");
+            this.outputTB.Name = "outputTB";
+            this.outputTB.ReadOnly = true;
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // inputFileBTN
+            // 
+            resources.ApplyResources(this.inputFileBTN, "inputFileBTN");
+            this.inputFileBTN.Name = "inputFileBTN";
+            this.inputFileBTN.UseVisualStyleBackColor = true;
+            this.inputFileBTN.Click += new System.EventHandler(this.inputFileBTN_Click);
+            // 
+            // outputFileBTN
+            // 
+            resources.ApplyResources(this.outputFileBTN, "outputFileBTN");
+            this.outputFileBTN.Name = "outputFileBTN";
+            this.outputFileBTN.UseVisualStyleBackColor = true;
+            this.outputFileBTN.Click += new System.EventHandler(this.outputFileBTN_Click);
             // 
             // HufffmanCoder
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.outputFileBTN);
+            this.Controls.Add(this.inputFileBTN);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.outputTB);
+            this.Controls.Add(this.inputTB);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.encodeBTN);
             this.Controls.Add(this.decodeBTN);
@@ -105,6 +148,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -118,6 +162,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TextBox inputTB;
+        private System.Windows.Forms.TextBox outputTB;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button inputFileBTN;
+        private System.Windows.Forms.Button outputFileBTN;
     }
 }
 
