@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuffmanCoder.Model", "Huffm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuffmanCoder.UnitTests", "HuffmanCoder.UnitTests\HuffmanCoder.UnitTests.csproj", "{9968919A-353F-4366-ACB7-6ED7C63C4C09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuffmanCoder.UI", "HuffmanCoder.UI\HuffmanCoder.UI.csproj", "{1D611A4C-640C-484E-8CA2-8CD6B8EB818F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9968919A-353F-4366-ACB7-6ED7C63C4C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9968919A-353F-4366-ACB7-6ED7C63C4C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9968919A-353F-4366-ACB7-6ED7C63C4C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D611A4C-640C-484E-8CA2-8CD6B8EB818F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D611A4C-640C-484E-8CA2-8CD6B8EB818F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D611A4C-640C-484E-8CA2-8CD6B8EB818F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D611A4C-640C-484E-8CA2-8CD6B8EB818F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
