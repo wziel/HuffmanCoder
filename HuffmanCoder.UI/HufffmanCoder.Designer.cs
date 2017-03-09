@@ -63,6 +63,7 @@
             // modelWithoutMemoryRadio
             // 
             resources.ApplyResources(this.modelWithoutMemoryRadio, "modelWithoutMemoryRadio");
+            this.modelWithoutMemoryRadio.Checked = true;
             this.modelWithoutMemoryRadio.Name = "modelWithoutMemoryRadio";
             this.modelWithoutMemoryRadio.TabStop = true;
             this.modelWithoutMemoryRadio.UseVisualStyleBackColor = true;
