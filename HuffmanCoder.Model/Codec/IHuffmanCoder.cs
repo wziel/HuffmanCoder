@@ -18,11 +18,5 @@ namespace HuffmanCoder.Model.Codec
         /// <param name="input">Input from which symbols are read.</param>
         /// <param name="output">Output to which bits are written.</param>
         void Encode(IHuffmanCoderInput<T> input, IHuffmanCoderOutput output);
-
-        /// <summary>
-        /// The encoding dictionary used for encoding, which
-        /// maps the symbol to its bit representation.
-        /// </summary>
-        Dictionary<T, bool[]> EncodingDictionary { get; }
     }
 }

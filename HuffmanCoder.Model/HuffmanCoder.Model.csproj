@@ -44,11 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\FromEncoding\EncHuffmanTreeBuilder.cs" />
-    <Compile Include="Builder\FromEncoding\EncHuffmanTreeNode.cs" />
-    <Compile Include="Builder\FromQuantity\QHuffmanTreeBuilder.cs" />
-    <Compile Include="Builder\FromQuantity\QHuffmanTreeNodeComparer.cs" />
-    <Compile Include="Builder\IHuffmanTreeBuilder.cs" />
+    <Compile Include="Builder\HuffmanTreeBuilder.cs" />
+    <Compile Include="Builder\HuffmanTreeNodeComparer.cs" />
     <Compile Include="Codec\HuffmanCoder.cs" />
     <Compile Include="Codec\HuffmanDecoder.cs" />
     <Compile Include="Codec\IHuffmanCoder.cs" />
@@ -58,9 +55,8 @@
     <Compile Include="Codec\IHuffmanDecoderInput.cs" />
     <Compile Include="Codec\IHuffmanDecoderOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Builder\FromQuantity\QHuffmanTreeNode.cs" />
-    <Compile Include="Tree\IHuffmanTreeNode.cs" />
     <Compile Include="Builder\HuffmanTreeNode.cs" />
+    <Compile Include="Tree\IHuffmanTreeNode.cs" />
     <Compile Include="Readers\IInputReader.cs" />
     <Compile Include="Readers\InputReader.cs" />
     <Compile Include="Writers\DecoderOutputWriter.cs" />

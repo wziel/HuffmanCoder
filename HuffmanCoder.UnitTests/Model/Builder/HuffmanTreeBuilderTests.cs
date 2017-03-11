@@ -1,5 +1,4 @@
 ﻿using HuffmanCoder.Model.Builder;
-using HuffmanCoder.Model.Builder.FromQuantity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -7,35 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
+namespace HuffmanCoder.UnitTests.Model.Builder
 {
     [TestClass]
-    public class QHuffmanTreeBuilderTests
+    public class HuffmanTreeBuilderTests
     {
-        QHuffmanTreeBuilder<char> builder;
-
         [TestInitialize]
         public void TestInitialize()
         {
-            builder = new QHuffmanTreeBuilder<char>(Comparer<char>.Default);
-        }
-
-        [TestMethod]
-        public void Add_CanAddValue()
-        {
-            //given
-            //when
-            builder.Add('c');
-            //then - sukces
         }
 
         [TestMethod]
         public void BuildTree_WhenMoreThanOneSymbolsAdded()
         {
             //given
-            builder.Add('c');
-            builder.Add('c');
-            builder.Add('d');
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>()
+            {
+                { 'c', 2 },
+                { 'd', 1 }
+            });
             //when
             builder.BuildTree();
             //then - sukces
@@ -46,6 +35,7 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void BuildTree_ExceptionWhenNoSymbolsAdded()
         {
             //given
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>());
             //when
             builder.BuildTree();
             //then - no exception, fail
@@ -57,9 +47,10 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void BuildTree_ExceptionWhenOneSymbolsAdded()
         {
             //given
-            builder.Add('a');
-            builder.Add('a');
-            builder.Add('a', 4);
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>()
+            {
+                { 'c', 66 },
+            });
             //when
             builder.BuildTree();
             //then - no exception, fail
@@ -70,8 +61,11 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void BuildTree_LessProbableIsLeft()
         {
             //given
-            builder.Add('a', 10); //1
-            builder.Add('b', 5); //0
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>()
+            {
+                { 'a', 10 },//1
+                { 'b', 5 },//0
+            });
             //when
             var treeRoot = builder.BuildTree();
             //then
@@ -83,8 +77,11 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void BuildTree_WhenEqualyProbable_BigIsRight_BecauseComparator()
         {
             //given
-            builder.Add('a', 10); //0
-            builder.Add('b', 10); //1
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>()
+            {
+                { 'a', 10 },//0
+                { 'b', 10 },//1
+            });
             //when
             var treeRoot = builder.BuildTree();
             //then
@@ -96,9 +93,12 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void BuildTree_TwoSmallAreLessProbableThanBig_BigIsRight_BecauseMoreProbable()
         {
             //given
-            builder.Add('a', 2); //01
-            builder.Add('b', 1); //00
-            builder.Add('c', 10); //1
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>()
+            {
+                { 'a', 2 },//01
+                { 'b', 1 },//00
+                { 'c', 10 },//1
+            });
             //when
             var treeRoot = builder.BuildTree();
             //then
@@ -111,9 +111,12 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void BuildTree_TwoSmallAreMoreProbableThanBig_BigIsLeft_BecauseLessProbable()
         {
             //given
-            builder.Add('a', 8); //11
-            builder.Add('b', 7); //10
-            builder.Add('c', 10); //0
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>()
+            {
+                { 'a', 8 },//11
+                { 'b', 7 },//10
+                { 'c', 10 },//0
+            });
             //when
             var treeRoot = builder.BuildTree();
             //then
@@ -126,9 +129,12 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void BuildTree_TwoSmallAreEqualyProbableToBig_BigIsRLeft_BecauseLessSubtreeDepth()
         {
             //given
-            builder.Add('a', 5); //10
-            builder.Add('b', 5); //11
-            builder.Add('c', 10); //0
+            var builder = new HuffmanTreeBuilder<char>(Comparer<char>.Default, new Dictionary<char, int>()
+            {
+                { 'a', 5 },//10
+                { 'b', 5 },//11
+                { 'c', 10 },//0
+            });
             //when
             var treeRoot = builder.BuildTree();
             //then

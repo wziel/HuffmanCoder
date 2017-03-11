@@ -1,5 +1,4 @@
 ﻿using HuffmanCoder.Model.Builder;
-using HuffmanCoder.Model.Builder.FromQuantity;
 using HuffmanCoder.Model.Codec;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -13,21 +12,16 @@ namespace HuffmanCoder.UnitTests.Model.Codec
     [TestClass]
     public class HuffmanCoderTests
     {
-        private QHuffmanTreeBuilder<char> builder;
-
         [TestInitialize]
         public void TestInitialize()
         {
-            builder = new QHuffmanTreeBuilder<char>(Comparer<char>.Default);
         }
 
         [TestMethod]
-        public void Encode_LessProbableIs0()
+        public void Encode_TwoNodes()
         {
             //given
-            builder.Add('a', 10); //1
-            builder.Add('b', 5); //0
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('b', 'a');
             var coder = new HuffmanCoder<char>(tree);
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'a', 'b' });
             var output = new MockCoderOutput();
@@ -38,31 +32,12 @@ namespace HuffmanCoder.UnitTests.Model.Codec
         }
 
         [TestMethod]
-        public void Encode_WhenEqualyProbable_BigIs1_BecauseCustomComparator()
+        public void Encode_ThreeNodes_TwoAreLeft()
         {
             //given
-            builder.Add('a', 10); //0
-            builder.Add('b', 10); //1
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('#', 'b', 'a', 'c');
             var coder = new HuffmanCoder<char>(tree);
-            var input = new MockCoderInput<char>(new List<char>() { 'a', 'a', 'b' });
-            var output = new MockCoderOutput();
-            //when
-            coder.Encode(input, output);
-            //then
-            output.AssertEquals(new List<int>() { 0, 0, 1 });
-        }
-
-        [TestMethod]
-        public void Encode_TwoSmallAreLessProbableThanBig_BigIs1_BecauseMoreProbable()
-        {
-            //given
-            builder.Add('a', 2); //01
-            builder.Add('b', 1); //00
-            builder.Add('c', 10); //1
-            var tree = builder.BuildTree();
-            var coder = new HuffmanCoder<char>(tree);
-            var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c' });
+            var input = new MockCoderInput<char>(new List<char>() { 'c', 'a', 'b' });
             var output = new MockCoderOutput();
             //when
             coder.Encode(input, output);
@@ -71,13 +46,10 @@ namespace HuffmanCoder.UnitTests.Model.Codec
         }
 
         [TestMethod]
-        public void Encode_TwoSmallAreMoreProbableThanBig_BigIs0_BecauseLessProbable()
+        public void Encode_ThreeNodes_TwoAreRight()
         {
             //given
-            builder.Add('a', 8); //11
-            builder.Add('b', 7); //10
-            builder.Add('c', 10); //0
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('c', '#', 'b', 'a');
             var coder = new HuffmanCoder<char>(tree);
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c' });
             var output = new MockCoderOutput();
@@ -88,20 +60,31 @@ namespace HuffmanCoder.UnitTests.Model.Codec
         }
 
         [TestMethod]
-        public void Encode_TwoSmallAreEqualyProbableToBig_BigIs0_BecauseLessSubtreeDepth()
+        public void Encode_FourNodes_BalancedTree()
         {
             //given
-            builder.Add('a', 5); //10
-            builder.Add('b', 5); //11
-            builder.Add('c', 10); //0
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('#', '#', 'a', 'b', 'c', 'd');
             var coder = new HuffmanCoder<char>(tree);
-            var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c' });
+            var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c', 'd' });
             var output = new MockCoderOutput();
             //when
             coder.Encode(input, output);
             //then
-            output.AssertEquals(new List<int>() { 1, 0, 1, 1, 0 });
+            output.AssertEquals(new List<int>() { 0, 0, 0, 1, 1, 0, 1, 1 });
+        }
+
+        [TestMethod]
+        public void Encode_FourNodes_DeepTree()
+        {
+            //given
+            var tree = MockHuffmanTreeBuilder.Build('a', '#', 'b', '#', 'c', 'd');
+            var coder = new HuffmanCoder<char>(tree);
+            var input = new MockCoderInput<char>(new List<char>() { 'a', 'b', 'c', 'd' });
+            var output = new MockCoderOutput();
+            //when
+            coder.Encode(input, output);
+            //then
+            output.AssertEquals(new List<int>() { 0, 1, 0, 1, 1, 0, 1, 1, 1 });
         }
 
         private class MockCoderInput<T> : IHuffmanCoderInput<T>

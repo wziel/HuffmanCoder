@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.Model.Builder.FromQuantity
+namespace HuffmanCoder.Model.Builder
 {
-    internal class QHuffmanTreeNode<T> : IHuffmanTreeNode<T>
+    internal class HuffmanTreeNode<T> : IHuffmanTreeNode<T>
     {
-        public QHuffmanTreeNode(T value, int quantity, int subTreeDepth = 0)
+        public HuffmanTreeNode(T value, int quantity, int subTreeDepth = 0)
         {
             Value = value;
             Quantity = quantity;
@@ -20,16 +20,16 @@ namespace HuffmanCoder.Model.Builder.FromQuantity
         public int Quantity { get; set; }
         public int SubTreeDepth { get; set; }
         public bool IsLeaf { get { return RightChild == null && LeftChild == null; } }
-        public QHuffmanTreeNode<T> Parent { get; set; }
-        public QHuffmanTreeNode<T> LeftChild { get; set; }
-        public QHuffmanTreeNode<T> RightChild { get; set; }
+        public HuffmanTreeNode<T> Parent { get; set; }
+        public HuffmanTreeNode<T> LeftChild { get; set; }
+        public HuffmanTreeNode<T> RightChild { get; set; }
         IHuffmanTreeNode<T> IHuffmanTreeNode<T>.Parent { get { return Parent;  } }
         IHuffmanTreeNode<T> IHuffmanTreeNode<T>.LeftChild { get { return LeftChild; } }
         IHuffmanTreeNode<T> IHuffmanTreeNode<T>.RightChild { get { return RightChild;  } }
 
         public override string ToString()
         {
-            return $"(leaf, {Quantity}, {Value.ToString()})";
+            return $"(leaf={IsLeaf},{Quantity},{Value.ToString()})";
         }
     }
 }

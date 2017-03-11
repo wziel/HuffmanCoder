@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.Model.Builder.FromQuantity
+namespace HuffmanCoder.Model.Builder
 {
     /// <summary>
     /// Comparer used for comparing two huffman tree nodes. The smaller is assumed to be in order:
@@ -15,7 +15,7 @@ namespace HuffmanCoder.Model.Builder.FromQuantity
     /// Value comparer is defined by user of this class.
     /// </summary>
     /// <typeparam name="T">Value type of huffman nodes</typeparam>
-    internal class QHuffmanTreeNodeComparer<T> : IComparer<QHuffmanTreeNode<T>>
+    internal class HuffmanTreeNodeComparer<T> : IComparer<HuffmanTreeNode<T>>
     {
         private IComparer<T> valueComparer;
 
@@ -26,12 +26,12 @@ namespace HuffmanCoder.Model.Builder.FromQuantity
         /// relation between huffman nodes.
         /// It should never return 0 (equality) for different elements.
         /// </param>
-        public QHuffmanTreeNodeComparer(IComparer<T> valueComparer)
+        public HuffmanTreeNodeComparer(IComparer<T> valueComparer)
         {
             this.valueComparer = valueComparer;
         }
 
-        public int Compare(QHuffmanTreeNode<T> x, QHuffmanTreeNode<T> y)
+        public int Compare(HuffmanTreeNode<T> x, HuffmanTreeNode<T> y)
         {
             if(x.Quantity != y.Quantity)
             {

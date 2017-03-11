@@ -1,5 +1,4 @@
 ﻿using HuffmanCoder.Model.Builder;
-using HuffmanCoder.Model.Builder.FromQuantity;
 using HuffmanCoder.Model.Tree;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -8,27 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
+namespace HuffmanCoder.UnitTests.Model.Builder
 {
     [TestClass]
-    public class QHuffmanTreeNodeComparerTests
+    public class HuffmanTreeNodeComparerTests
     {
-        private QHuffmanTreeNodeComparer<char> comparer;
+        private HuffmanTreeNodeComparer<char> comparer;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.comparer = new QHuffmanTreeNodeComparer<char>(Comparer<char>.Default);
+            this.comparer = new HuffmanTreeNodeComparer<char>(Comparer<char>.Default);
         }
 
         [TestMethod]
         public void Compare_ComparesByQuantitiyFirst()
         {
             //given
-            var a = new QHuffmanTreeNode<char>('a', 10, 1);
-            var b = new QHuffmanTreeNode<char>('b', 4, 2);
-            var c = new QHuffmanTreeNode<char>('c', 15, 0);
-            var orderedList = new List<QHuffmanTreeNode<char>>(){ b, a, c };
+            var a = new HuffmanTreeNode<char>('a', 10, 1);
+            var b = new HuffmanTreeNode<char>('b', 4, 2);
+            var c = new HuffmanTreeNode<char>('c', 15, 0);
+            var orderedList = new List<HuffmanTreeNode<char>>(){ b, a, c };
             //then
             AssertOrderCompareByPairs(orderedList);
         }
@@ -37,10 +36,10 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void Compare_ComparesBySubTreeLengthSecond()
         {
             //given
-            var a = new QHuffmanTreeNode<char>('a', 10, 1);
-            var b = new QHuffmanTreeNode<char>('b', 10, 2);
-            var c = new QHuffmanTreeNode<char>('c', 10, 0);
-            var orderedList = new List<QHuffmanTreeNode<char>>() { c, a, b };
+            var a = new HuffmanTreeNode<char>('a', 10, 1);
+            var b = new HuffmanTreeNode<char>('b', 10, 2);
+            var c = new HuffmanTreeNode<char>('c', 10, 0);
+            var orderedList = new List<HuffmanTreeNode<char>>() { c, a, b };
             //then
             AssertOrderCompareByPairs(orderedList);
         }
@@ -49,15 +48,15 @@ namespace HuffmanCoder.UnitTests.Model.Builder.FromQuantity
         public void Compare_ComparesByCustomCompareLast()
         {
             //given
-            var a = new QHuffmanTreeNode<char>('a', 10, 0);
-            var b = new QHuffmanTreeNode<char>('b', 10, 0);
-            var c = new QHuffmanTreeNode<char>('c', 10, 0);
-            var orderedList = new List<QHuffmanTreeNode<char>>() { a, b, c};
+            var a = new HuffmanTreeNode<char>('a', 10, 0);
+            var b = new HuffmanTreeNode<char>('b', 10, 0);
+            var c = new HuffmanTreeNode<char>('c', 10, 0);
+            var orderedList = new List<HuffmanTreeNode<char>>() { a, b, c};
             //then
             AssertOrderCompareByPairs(orderedList);
         }
 
-        private void AssertOrderCompareByPairs(List<QHuffmanTreeNode<char>> orderedList)
+        private void AssertOrderCompareByPairs(List<HuffmanTreeNode<char>> orderedList)
         {
             for(int i = 0; i < orderedList.Count; ++i)
             for(int j = 0; j < orderedList.Count; ++j)

@@ -9,7 +9,7 @@ namespace HuffmanCoder.Model.Codec
 {
     internal class HuffmanCoder<T> : IHuffmanCoder<T>
     {
-        public Dictionary<T, bool[]> EncodingDictionary { get; private set; } = new Dictionary<T, bool[]>();
+        private Dictionary<T, bool[]> EncodingDictionary { get; } = new Dictionary<T, bool[]>();
 
         public HuffmanCoder(IHuffmanTreeNode<T> root)
         {

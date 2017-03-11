@@ -1,5 +1,4 @@
 ﻿using HuffmanCoder.Model.Builder;
-using HuffmanCoder.Model.Builder.FromQuantity;
 using HuffmanCoder.Model.Codec;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -13,21 +12,16 @@ namespace HuffmanCoder.UnitTests.Model.Codec
     [TestClass]
     public class HuffmanDecoderTests
     {
-        private QHuffmanTreeBuilder<char> builder;
-
         [TestInitialize]
         public void TestInitialize()
         {
-            builder = new QHuffmanTreeBuilder<char>(Comparer<char>.Default);
         }
 
         [TestMethod]
-        public void Decode_TwoSymbols_LeastProbableIs0()
+        public void Decode_TwoSymbols()
         {
             //given
-            builder.Add('a', 2); //1
-            builder.Add('x', 1); //0
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('x', 'a');
             var decoder = new HuffmanDecoder<char>(tree);
             var input = new MockDecoderInput(new List<int> { 1, 0 });
             var output = new MockDecoderOutput(new List<char> { 'a', 'x'});
@@ -38,32 +32,13 @@ namespace HuffmanCoder.UnitTests.Model.Codec
         }
 
         [TestMethod]
-        public void Decode_TwoSymbolsAndSameProbability__LexicographicallyFirstIs0()
+        public void Decode_ThreeSymbols_TwoSymbolsAreLeft()
         {
             //given
-            builder.Add('x', 1); //1
-            builder.Add('a', 1); //0
-            var tree = builder.BuildTree();
-            var decoder = new HuffmanDecoder<char>(tree);
-            var input = new MockDecoderInput(new List<int> { 1, 0 });
-            var output = new MockDecoderOutput(new List<char> { 'x', 'a' });
-            //when
-            decoder.Decode(input, output);
-            //then
-            output.AssertCorrectOutput();
-        }
-
-        [TestMethod]
-        public void Decode_ThreeSymbols_TwoSummedAreLessProbableThanThird_ThirdIs1_BecauseMoreProbable()
-        {
-            //given
-            builder.Add('x', 1); //00
-            builder.Add('a', 2); //01
-            builder.Add('c', 10); //1
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('#', 'x', 'a', 'c');
             var decoder = new HuffmanDecoder<char>(tree);
             var input = new MockDecoderInput(new List<int> { 1, 0, 1, 0, 0 });
-            var output = new MockDecoderOutput(new List<char> { 'c', 'a', 'x' });
+            var output = new MockDecoderOutput(new List<char> { 'x', 'c', 'a' });
             //when
             decoder.Decode(input, output);
             //then
@@ -71,13 +46,10 @@ namespace HuffmanCoder.UnitTests.Model.Codec
         }
 
         [TestMethod]
-        public void Decode_ThreeSymbols_TwoSummedAreEquallyProbableToThird_ThirdIs0_BecauseLessSubtreeLength()
+        public void Decode_ThreeSymbols_TwoAreRight()
         {
             //given
-            builder.Add('x', 1); //10
-            builder.Add('a', 9); //11
-            builder.Add('c', 10); //0
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('c', '#', 'x', 'a');
             var decoder = new HuffmanDecoder<char>(tree);
             var input = new MockDecoderInput(new List<int> { 0, 1, 1, 1, 0 });
             var output = new MockDecoderOutput(new List<char> { 'c', 'a', 'x' });
@@ -88,16 +60,27 @@ namespace HuffmanCoder.UnitTests.Model.Codec
         }
 
         [TestMethod]
-        public void Decode_ThreeSymbols_TwoSummedAreMoreProbableThanThird_ThirdIs0_BecauseLessProbable()
+        public void Decode_FourSymbols_BalancedTree()
         {
             //given
-            builder.Add('x', 4); //10
-            builder.Add('a', 9); //11
-            builder.Add('c', 10); //0
-            var tree = builder.BuildTree();
+            var tree = MockHuffmanTreeBuilder.Build('#', '#', 'a', 'b', 'c', 'd');
             var decoder = new HuffmanDecoder<char>(tree);
-            var input = new MockDecoderInput(new List<int> { 0, 1, 1, 1, 0 });
-            var output = new MockDecoderOutput(new List<char> { 'c', 'a', 'x' });
+            var input = new MockDecoderInput(new List<int> { 0, 0, 0, 1, 1, 0, 1, 1 });
+            var output = new MockDecoderOutput(new List<char> { 'a', 'b', 'c', 'd' });
+            //when
+            decoder.Decode(input, output);
+            //then
+            output.AssertCorrectOutput();
+        }
+
+        [TestMethod]
+        public void Decode_FourSymbols_DeepTree()
+        {
+            //given
+            var tree = MockHuffmanTreeBuilder.Build('a', '#', 'b', '#', 'c', 'd');
+            var decoder = new HuffmanDecoder<char>(tree);
+            var input = new MockDecoderInput(new List<int> { 0, 1, 0, 1, 1, 0, 1, 1, 1 });
+            var output = new MockDecoderOutput(new List<char> { 'a', 'b', 'c', 'd' });
             //when
             decoder.Decode(input, output);
             //then
