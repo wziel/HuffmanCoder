@@ -56,11 +56,15 @@
     <Compile Include="Model\Codec\HuffmanCoderTests.cs" />
     <Compile Include="Model\Codec\HuffmanDecoderTests.cs" />
     <Compile Include="Model\Codec\MockHuffmanTreeBuilder.cs" />
-    <Compile Include="Model\Writers\ByteCreatorTests.cs" />
+    <Compile Include="Logic\Writers\Encoding\ByteCreatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\HuffmanCoder.Logic\HuffmanCoder.Logic.csproj">
+      <Project>{e7039cd7-b04c-4937-8ad7-c0e8a74ad7d5}</Project>
+      <Name>HuffmanCoder.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HuffmanCoder.Model\HuffmanCoder.Model.csproj">
       <Project>{dbe30483-4b91-45fb-9dda-2bc84c383162}</Project>
       <Name>HuffmanCoder.Model</Name>

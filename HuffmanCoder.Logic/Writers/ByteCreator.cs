@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.Model.Writers
+namespace HuffmanCoder.Logic.Writers.Encoding
 {
-    internal interface IByteCreator
+    public interface IByteCreator
     {
         bool IsReady { get; }
         byte Data { get; }
@@ -15,7 +15,7 @@ namespace HuffmanCoder.Model.Writers
         void Add(bool bit);   
     }
 
-    internal class ByteCreator : IByteCreator
+    public class ByteCreator : IByteCreator
     {
         public byte CurrentByteAligned
         {

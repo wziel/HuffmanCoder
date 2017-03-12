@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.Model.Entities
+namespace HuffmanCoder.Logic.Entities
 {
     public struct OutputValues
     {

@@ -1,11 +1,11 @@
-﻿using HuffmanCoder.Model.Entities;
+﻿using HuffmanCoder.Logic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.UnitTests.Model.Helpers
+namespace HuffmanCoder.Logic.Helpers
 {
     public interface IStatisticsGenerator
     {

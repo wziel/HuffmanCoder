@@ -1,30 +1,33 @@
 ﻿using HuffmanCoder.Model.Codec;
-using HuffmanCoder.Model.Entities;
+using HuffmanCoder.Logic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.Model.Writers
+namespace HuffmanCoder.Logic.Writers.Encoding
 {
-    public interface ICoderOutputWriter : IDisposable
+    public interface ICoderOutputWriter
     {
         void Write(bool bit);
         void Save(Dictionary<string, OutputValues> map);
-        Dictionary<string, OutputValues> map { get; }
+        Dictionary<string, OutputValues> SymbolMap { get; }
         uint Size { get; }    
     }
     public class CoderOutputWriter : ICoderOutputWriter
     {
+        private uint currentSize = 0;
         private List<Byte> data = new List<byte>();
         private IByteCreator byteCreator;
+        private Dictionary<string, OutputValues> symbolMap;
+        private string outputPath;
 
-        public Dictionary<string, OutputValues> map
+        public Dictionary<string, OutputValues> SymbolMap
         {
             get
             {
-                throw new NotImplementedException();
+                return symbolMap;
             }
         }
 
@@ -32,19 +35,23 @@ namespace HuffmanCoder.Model.Writers
         {
             get
             {
-                throw new NotImplementedException();
+                return currentSize;
             }
         }
 
         public CoderOutputWriter(string outputPath)
         {
             this.byteCreator = new ByteCreator();
+            this.outputPath = outputPath;
         }
 
         public void Write(bool bit)
         {
             if (byteCreator.IsReady)
+            {
+                ++currentSize;
                 data.Add(byteCreator.Data);
+            }
             else
                 byteCreator.Add(bit);
         }
@@ -52,13 +59,12 @@ namespace HuffmanCoder.Model.Writers
         public void Save(Dictionary<string, OutputValues> map)
         {
             if (byteCreator.IsEmpty == false)
+            {
+                ++currentSize;
                 data.Add(byteCreator.CurrentByteAligned);
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
+            }
+            this.symbolMap = map;
+            System.IO.File.WriteAllBytes(outputPath, data.ToArray());
         }
     }
 }

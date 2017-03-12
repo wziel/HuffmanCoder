@@ -56,7 +56,7 @@ namespace HuffmanCoder.UI
 
         private void outputFileBTN_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 outputTB.Text = openFileDialog1.FileName;
             }

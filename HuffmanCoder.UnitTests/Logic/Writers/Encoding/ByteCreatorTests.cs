@@ -1,4 +1,4 @@
-﻿using HuffmanCoder.Model.Writers;
+﻿using HuffmanCoder.Logic.Writers.Encoding;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

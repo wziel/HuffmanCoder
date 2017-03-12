@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBE30483-4B91-45FB-9DDA-2BC84C383162}</ProjectGuid>
+    <ProjectGuid>{E7039CD7-B04C-4937-8AD7-C0E8A74AD7D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HuffmanCoder.Model</RootNamespace>
-    <AssemblyName>HuffmanCoder.Model</AssemblyName>
+    <RootNamespace>HuffmanCoder.Logic</RootNamespace>
+    <AssemblyName>HuffmanCoder.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="C5, Version=2.4.5947.17248, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
-      <HintPath>..\packages\C5.2.4.5947.17249\lib\net45\C5.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,24 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\HuffmanTreeBuilder.cs" />
-    <Compile Include="Builder\HuffmanTreeNodeComparer.cs" />
-    <Compile Include="Codec\HuffmanCoder.cs" />
-    <Compile Include="Codec\HuffmanDecoder.cs" />
-    <Compile Include="Codec\IHuffmanCoder.cs" />
-    <Compile Include="Codec\IHuffmanCoderInput.cs" />
-    <Compile Include="Codec\IHuffmanCoderOutput.cs" />
-    <Compile Include="Codec\IHuffmanDecoder.cs" />
-    <Compile Include="Codec\IHuffmanDecoderInput.cs" />
-    <Compile Include="Codec\IHuffmanDecoderOutput.cs" />
+    <Compile Include="Entities\OutputValues.cs" />
+    <Compile Include="Entities\Statistics.cs" />
+    <Compile Include="Helpers\StatisticsGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Builder\HuffmanTreeNode.cs" />
-    <Compile Include="Tree\IHuffmanTreeNode.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="Readers\BitReader.cs" />
+    <Compile Include="Readers\Decoding\DecoderReader.cs" />
+    <Compile Include="Readers\Encoding\InputReader.cs" />
+    <Compile Include="Writers\ByteCreator.cs" />
+    <Compile Include="Writers\Encoding\CoderOutputWriter.cs" />
+    <Compile Include="Writers\Decoding\DecoderFileWriter.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\HuffmanCoder.Model\HuffmanCoder.Model.csproj">
+      <Project>{dbe30483-4b91-45fb-9dda-2bc84c383162}</Project>
+      <Name>HuffmanCoder.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

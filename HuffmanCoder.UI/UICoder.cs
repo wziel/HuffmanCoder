@@ -1,7 +1,7 @@
-﻿using HuffmanCoder.Model.Entities;
-using HuffmanCoder.Model.Readers;
-using HuffmanCoder.Model.Writers;
-using HuffmanCoder.UnitTests.Model.Helpers;
+﻿using HuffmanCoder.Logic.Entities;
+using HuffmanCoder.Logic.Helpers;
+using HuffmanCoder.Logic.Readers.Encoding;
+using HuffmanCoder.Logic.Writers.Encoding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +23,10 @@ namespace HuffmanCoder.UI
         {
             Statistics statiscs;
             IStatisticsGenerator statiscsGenerator = new StatisticsGenerator();
-            using (IInputReader input = new InputReader(inputFilePath))
-            using (ICoderOutputWriter output = new CoderOutputWriter(outputFilePath))
-            {
-                //ToDo Michal depends on enum
-                statiscs = statiscsGenerator.GenerateStatistics(output.map, input.Size, output.Size);
-            }
+            IInputReader input = new InputReader(inputFilePath);
+            ICoderOutputWriter output = new CoderOutputWriter(outputFilePath);
+            //ToDo Michal depends on enum
+            statiscs = statiscsGenerator.GenerateStatistics(output.SymbolMap, input.Size, output.Size);
             return statiscs;
         }
     }
