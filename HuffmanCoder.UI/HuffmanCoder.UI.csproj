@@ -81,6 +81,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HuffmanCoder.Model\HuffmanCoder.Model.csproj">
+      <Project>{dbe30483-4b91-45fb-9dda-2bc84c383162}</Project>
+      <Name>HuffmanCoder.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,9 +8,14 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.Model.Readers
 {
-    public sealed class InputReader : IEnumerator<byte[]>
+    public interface IInputReader : IEnumerator<byte>, IDisposable
     {
-        private byte[] data;
+        uint Size { get; }
+    }
+
+    public sealed class InputReader : IInputReader
+    {
+        private byte data;
         private StreamReader stream;
 
         public InputReader(string filePath)
@@ -18,11 +23,19 @@ namespace HuffmanCoder.Model.Readers
             this.stream = new StreamReader(filePath);
         }
 
-        public byte[] Current
+        public byte Current
         {
             get
             {
                 return data;
+            }
+        }
+
+        public uint Size
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 
@@ -41,12 +54,13 @@ namespace HuffmanCoder.Model.Readers
 
         public bool MoveNext()
         {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                this.stream.BaseStream.CopyTo(ms);
-                data = ms.ToArray();
-            }
-            return false;
+            //using (MemoryStream ms = new MemoryStream())
+            //{
+            //    this.stream.BaseStream.CopyTo(ms);
+            //    data = ms.ToArray();
+            //}
+            //return false;
+            throw new NotImplementedException();
         }
 
         public void Reset()

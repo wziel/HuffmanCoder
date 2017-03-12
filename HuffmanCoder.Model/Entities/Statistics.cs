@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuffmanCoder.Model.Readers
+namespace HuffmanCoder.Model.Entities
 {
-    public interface IInputReader : IEnumerator<byte[]>
+    public struct Statistics
     {
-
+        //ToDo Kacper Entropy etc
     }
 }
