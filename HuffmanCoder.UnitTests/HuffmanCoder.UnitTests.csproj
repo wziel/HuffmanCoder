@@ -45,11 +45,14 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Logic\Helpers\HuffmanStatisticsHelperTest.cs" />
     <Compile Include="Model\Builder\HuffmanTreeBuilderTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeNodeTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeNodeComparerTests.cs" />

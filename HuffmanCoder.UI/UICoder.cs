@@ -22,11 +22,11 @@ namespace HuffmanCoder.UI
         public Statistics Encode(string inputFilePath, string outputFilePath, HuffmanEncodeModel huffmanEncodeModel)
         {
             Statistics statiscs;
-            IStatisticsGenerator statiscsGenerator = new StatisticsGenerator();
+            IStatisticsBuilder statiscsGenerator = new StatisticsBuilder();
             IInputReader input = new InputReader(inputFilePath);
             ICoderOutputWriter output = new CoderOutputWriter(outputFilePath);
             //ToDo Michal depends on enum
-            statiscs = statiscsGenerator.GenerateStatistics(output.SymbolMap, input.Size, output.Size);
+            statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, input.Size, output.Size);
             return statiscs;
         }
     }

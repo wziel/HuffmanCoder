@@ -9,6 +9,6 @@ namespace HuffmanCoder.Logic.Entities
     public struct OutputValues
     {
         public int Counts { get; set; }
-        public int BitSize { get; set; }
+        public int BitsLength { get; set; }
     }
 }

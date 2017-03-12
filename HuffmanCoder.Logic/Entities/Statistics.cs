@@ -8,6 +8,8 @@ namespace HuffmanCoder.Logic.Entities
 {
     public struct Statistics
     {
-        //ToDo Kacper Entropy etc
+        public double Entropy { get; set; }
+        public BitsMeanStatistics BitsMeanStatistics { get; set; }
+        public FilesSizeStatistics FileSizeStatistics { get; set; }
     }
 }
