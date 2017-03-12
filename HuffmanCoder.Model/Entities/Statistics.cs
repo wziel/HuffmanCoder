@@ -8,6 +8,6 @@ namespace HuffmanCoder.Model.Entities
 {
     public struct Statistics
     {
-        //ToDo Kacper Entropy etc
+        public double Entropy { get; set; }
     }
 }

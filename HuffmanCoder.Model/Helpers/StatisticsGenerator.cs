@@ -16,7 +16,6 @@ namespace HuffmanCoder.UnitTests.Model.Helpers
     {
         public Statistics GenerateStatistics(Dictionary<string, OutputValues> map, uint inputFileSize, uint outputFileSize)
         {
-            //ToDo Kacper
             throw new NotImplementedException();
         }
     }
