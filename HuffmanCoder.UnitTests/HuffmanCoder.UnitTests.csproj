@@ -59,7 +59,7 @@
     <Compile Include="Model\Codec\HuffmanDecoderTests.cs" />
     <Compile Include="Model\Codec\MockHuffmanTreeBuilder.cs" />
     <Compile Include="Model\Writers\ByteCreatorTests.cs" />
-    <Compile Include="Model\Helpers\HuffmanEfficiencyEvaluationHelperTests.cs" />
+    <Compile Include="Model\Helpers\HuffmanStatisticsHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

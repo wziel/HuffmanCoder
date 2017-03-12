@@ -54,11 +54,14 @@
     <Compile Include="Codec\IHuffmanDecoder.cs" />
     <Compile Include="Codec\IHuffmanDecoderInput.cs" />
     <Compile Include="Codec\IHuffmanDecoderOutput.cs" />
+    <Compile Include="Entities\FilesSizeStatistics.cs" />
     <Compile Include="Entities\OutputValues.cs" />
+    <Compile Include="Entities\BitsMeanStatistics.cs" />
+    <Compile Include="Entities\SymbolStatistics.cs" />
     <Compile Include="Entities\Statistics.cs" />
-    <Compile Include="Helpers\StatisticsGenerator.cs" />
-    <Compile Include="Helpers\HuffmanEfficiencyEvaluationHelper.cs" />
-    <Compile Include="Helpers\IHuffmanEfficencyEvaluationHelper.cs" />
+    <Compile Include="Helpers\StatisticsBuilder.cs" />
+    <Compile Include="Helpers\HuffmanStatisticsHelper.cs" />
+    <Compile Include="Helpers\IHuffmanStatisticsHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builder\HuffmanTreeNode.cs" />
     <Compile Include="Tree\IHuffmanTreeNode.cs" />
