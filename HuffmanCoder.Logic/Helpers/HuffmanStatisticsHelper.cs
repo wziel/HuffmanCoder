@@ -35,10 +35,8 @@ namespace HuffmanCoder.Logic.Helpers
 
         private int GetBitsLengthFromStringSymbol(string symbol)
         {
-            int bitsLength = 2;
-            // TODO IMPLEMENT METHOD
-
-            return bitsLength;
+            int singleSymbolBitsLength = 8;
+            return symbol.Length * singleSymbolBitsLength;
         }
 
         public double EvaluateEntropy(List<SymbolStatistics> symbolStatisticsList)
