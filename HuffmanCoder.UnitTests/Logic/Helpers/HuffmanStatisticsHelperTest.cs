@@ -28,15 +28,15 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
             symbolsMap = new Dictionary<string, OutputValues>();
             OutputValues valuesForA = new OutputValues();
             valuesForA.Counts = 2;
-            valuesForA.BitsLength = 1;
+            valuesForA.BitsLength = 2;
             symbolsMap.Add("A", valuesForA);
             OutputValues valuesForB = new OutputValues();
             valuesForB.Counts = 3;
-            valuesForB.BitsLength = 1;
+            valuesForB.BitsLength = 2;
             symbolsMap.Add("B", valuesForB);
             OutputValues valuesForC = new OutputValues();
             valuesForC.Counts = 5;
-            valuesForC.BitsLength = 1;
+            valuesForC.BitsLength = 2;
             symbolsMap.Add("C", valuesForC);
         }
 
@@ -45,20 +45,20 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
             symbolStatisticsList = new List<SymbolStatistics>();
 
             SymbolStatistics symbolA = new SymbolStatistics();
-            symbolA.InputFileBitsLength = 2;
-            symbolA.OutputFileBitsLength = 1;
+            symbolA.InputFileBitsLength = 8;
+            symbolA.OutputFileBitsLength = 2;
             symbolA.Probability = 0.2;
             symbolStatisticsList.Add(symbolA);
 
             SymbolStatistics symbolB = new SymbolStatistics();
-            symbolB.InputFileBitsLength = 2;
-            symbolB.OutputFileBitsLength = 1;
+            symbolB.InputFileBitsLength = 8;
+            symbolB.OutputFileBitsLength = 2;
             symbolB.Probability = 0.3;
             symbolStatisticsList.Add(symbolB);
 
             SymbolStatistics symbolC = new SymbolStatistics();
-            symbolC.InputFileBitsLength = 2;
-            symbolC.OutputFileBitsLength = 1;
+            symbolC.InputFileBitsLength = 8;
+            symbolC.OutputFileBitsLength = 2;
             symbolC.Probability = 0.5;
             symbolStatisticsList.Add(symbolC);
         }
@@ -95,9 +95,9 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
             var helper = new HuffmanStatisticsHelper();
 
             BitsMeanStatistics expectedStatistics = new BitsMeanStatistics();
-            expectedStatistics.InputFileBitsMean = 2;
-            expectedStatistics.OutputFileBitsMean = 1;
-            expectedStatistics.BitsMeanProportion = 0.5;
+            expectedStatistics.InputFileBitsMean = 8;
+            expectedStatistics.OutputFileBitsMean = 2;
+            expectedStatistics.BitsMeanProportion = 0.25;
 
             BitsMeanStatistics statistics = helper.EvaluateBitsMeanStatistics(symbolStatisticsList);
 
