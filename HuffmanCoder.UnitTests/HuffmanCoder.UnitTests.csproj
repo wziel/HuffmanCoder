@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Logic\Helpers\HuffmanStatisticsHelperTest.cs" />
     <Compile Include="Logic\Readers\BitReaderTests.cs" />
+    <Compile Include="Logic\Writers\Decoding\HeaderCreatorTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeBuilderTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeNodeTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeNodeComparerTests.cs" />
