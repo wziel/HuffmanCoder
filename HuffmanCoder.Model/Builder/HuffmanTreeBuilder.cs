@@ -11,7 +11,7 @@ namespace HuffmanCoder.Model.Builder
     /// Class used for building a huffman tree based on quantitty of symbols used.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class HuffmanTreeBuilder<T>
+    public class HuffmanTreeBuilder<T>
     {
         private Dictionary<T, int> symbolQuantityDic = new Dictionary<T, int>();
         private HuffmanTreeNodeComparer<T> nodeComparer;

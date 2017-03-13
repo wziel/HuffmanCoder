@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.Model.Tree
 {
-    internal interface IHuffmanTreeNode<T>
+    public interface IHuffmanTreeNode<T>
     {
         T Value { get; }
         IHuffmanTreeNode<T> Parent { get; }

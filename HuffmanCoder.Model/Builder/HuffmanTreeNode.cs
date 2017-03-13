@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.Model.Builder
 {
-    internal class HuffmanTreeNode<T> : IHuffmanTreeNode<T>
+    public class HuffmanTreeNode<T> : IHuffmanTreeNode<T>
     {
         public HuffmanTreeNode(T value, int quantity, int subTreeDepth = 0)
         {

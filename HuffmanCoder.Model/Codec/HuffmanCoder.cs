@@ -7,7 +7,7 @@ using HuffmanCoder.Model.Tree;
 
 namespace HuffmanCoder.Model.Codec
 {
-    internal class HuffmanCoder<T> : IHuffmanCoder<T>
+    public class HuffmanCoder<T> : IHuffmanCoder<T>
     {
         private Dictionary<T, bool[]> EncodingDictionary { get; } = new Dictionary<T, bool[]>();
 
