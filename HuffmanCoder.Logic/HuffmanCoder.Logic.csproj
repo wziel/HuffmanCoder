@@ -56,7 +56,6 @@
     <Compile Include="Writers\ByteCreator.cs" />
     <Compile Include="Writers\Encoding\CoderOutputWriter.cs" />
     <Compile Include="Writers\Decoding\DecoderFileWriter.cs" />
-    <Compile Include="Writers\Encoding\FileGenerator.cs" />
     <Compile Include="Writers\Encoding\HeaderCreator.cs" />
   </ItemGroup>
   <ItemGroup />
