@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoderInterfaces\HuffmanCoderOutput.cs" />
+    <Compile Include="CoderInterfaces\IHuffmanCoderInterface.cs" />
+    <Compile Include="CoderInterfaces\StandardHuffmanCoder\StandardHuffmanCoderInput.cs" />
+    <Compile Include="CoderInterfaces\StandardHuffmanCoder\StandardHuffmanCoderInterface.cs" />
     <Compile Include="Entities\BitMeanStatistics.cs" />
     <Compile Include="Entities\FilesMeanStatistcs.cs" />
     <Compile Include="Entities\OutputValues.cs" />
