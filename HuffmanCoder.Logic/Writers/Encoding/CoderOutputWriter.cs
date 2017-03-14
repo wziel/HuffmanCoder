@@ -23,6 +23,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         private Dictionary<string, OutputValues> symbolMap;
         private string outputPath;
         private List<Byte> header = new List<byte>();
+        private uint bitsAmount = 0;
 
         public Dictionary<string, OutputValues> SymbolMap
         {
@@ -55,23 +56,20 @@ namespace HuffmanCoder.Logic.Writers.Encoding
             }
             else
                 byteCreator.Add(bit);
-        }
-
-        private void CreateHeader()
-        {
-
+            ++bitsAmount;
         }
 
         public void Save(Dictionary<string, OutputValues> map)
         {
+            var headerCreator = new HeaderCreator();
+            byte[] header = headerCreator.Create(bitsAmount, map);
             this.symbolMap = map;
             if (byteCreator.IsEmpty == false)
             {
                 ++currentSize;
                 data.Add(byteCreator.CurrentByteAligned);
             }
-            CreateHeader();
-            System.IO.File.WriteAllBytes(outputPath, data.ToArray());
+            System.IO.File.WriteAllBytes(outputPath, header.Concat(data).ToArray());
         }
     }
 }

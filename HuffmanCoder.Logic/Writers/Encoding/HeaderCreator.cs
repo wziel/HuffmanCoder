@@ -12,11 +12,10 @@ namespace HuffmanCoder.Logic.Writers.Encoding
     -dataSizeInBits - 4 bytes
     -map (symbol and symbol counts)
     */
-    public class HeaderCreator
+    internal class HeaderCreator
     {
-        public byte[] Create(uint bitAmount, Dictionary<string, OutputValues> map)
+        internal byte[] Create(uint bitAmount, Dictionary<string, OutputValues> map)
         {
-
             throw new NotImplementedException();
         }
     }
