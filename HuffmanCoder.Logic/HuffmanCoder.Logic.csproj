@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="CoderInterfaces\HuffmanCoderOutput.cs" />
     <Compile Include="CoderInterfaces\IHuffmanCoderInterface.cs" />
+    <Compile Include="CoderInterfaces\PairHuffmanCoder\PairHuffmanCoderInput.cs" />
+    <Compile Include="CoderInterfaces\PairHuffmanCoder\PairHuffmanCoderInterface.cs" />
     <Compile Include="CoderInterfaces\StandardHuffmanCoder\StandardHuffmanCoderInput.cs" />
     <Compile Include="CoderInterfaces\StandardHuffmanCoder\StandardHuffmanCoderInterface.cs" />
     <Compile Include="Entities\BitMeanStatistics.cs" />

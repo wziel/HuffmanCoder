@@ -9,6 +9,7 @@ using HuffmanCoder.Logic.Writers.Encoding;
 using System.Collections;
 using HuffmanCoder.Logic.Entities;
 using HuffmanCoder.Logic.CoderInterfaces.StandardHuffmanCoder;
+using HuffmanCoder.Logic.CoderInterfaces.PairHuffmanCoder;
 
 namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
 {
@@ -29,6 +30,23 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
 
             //then
             outputWriter.AssertEquals(new List<int>() { 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0 });
+        }
+
+        [TestMethod]
+        public void PairCoderEncodeInput()
+        {
+            //given
+            byte[] input = new byte[] { (byte)'A', (byte)'B', (byte)'C', (byte)'A', (byte)'B', (byte)'D', (byte)'A', (byte)'B', (byte)'C', (byte)'A' };
+            MockInputReader inputReader = new MockInputReader(input);
+            MockCoderOutputWriter outputWriter = new MockCoderOutputWriter();
+
+            //when
+            PairHuffmanCoderInterface pairHuffmanCoderInterface = new PairHuffmanCoderInterface(inputReader, outputWriter, new MockComparer());
+            pairHuffmanCoderInterface.Encode();
+
+            //then
+            outputWriter.AssertEquals(new List<int>() { 1, 1, 0, 1, 0, 1, 1, 0 });
+
         }
 
         private class MockInputReader : IInputReader
