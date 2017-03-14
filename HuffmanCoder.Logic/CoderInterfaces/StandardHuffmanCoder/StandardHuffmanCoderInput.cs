@@ -10,6 +10,7 @@ namespace HuffmanCoder.Logic.CoderInterfaces.StandardHuffmanCoder
 {
     class StandardHuffmanCoderInput : IHuffmanCoderInput<byte>
     {
+        private bool isEnd = false;
 
         private IInputReader inputReader;
 
@@ -19,13 +20,13 @@ namespace HuffmanCoder.Logic.CoderInterfaces.StandardHuffmanCoder
         }
         public bool IsEnd()
         {
-            return inputReader.MoveNext();
+            return isEnd;
         }
 
         public byte Read()
         {
             byte symbol = inputReader.Current;
-            inputReader.MoveNext();
+            isEnd = !inputReader.MoveNext();
             return symbol;
         }
     }
