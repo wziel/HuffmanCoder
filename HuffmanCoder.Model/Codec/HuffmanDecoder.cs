@@ -7,7 +7,7 @@ using HuffmanCoder.Model.Tree;
 
 namespace HuffmanCoder.Model.Codec
 {
-    internal class HuffmanDecoder<T> : IHuffmanDecoder<T>
+    public class HuffmanDecoder<T> : IHuffmanDecoder<T>
     {
         private IHuffmanTreeNode<T> root;
 

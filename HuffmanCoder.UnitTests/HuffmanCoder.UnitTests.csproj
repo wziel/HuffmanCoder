@@ -60,6 +60,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Logic\CoderInterfaces\HuffmanCoderInterfacesTests.cs" />
     <Compile Include="Logic\Helpers\HuffmanStatisticsHelperTest.cs" />
     <Compile Include="Logic\Readers\BitReaderTests.cs" />
     <Compile Include="Logic\Readers\Encoding\InputReaderTests.cs" />
