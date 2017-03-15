@@ -10,7 +10,7 @@ namespace HuffmanCoder.Model.Codec
     /// Class responsible for decoding encoded bits to symbols.
     /// </summary>
     /// <typeparam name="T">Type of symbols class.</typeparam>
-    internal interface IHuffmanDecoder<T>
+    public interface IHuffmanDecoder<T>
     {
         /// <summary>
         /// Decodes bits supplied by input to symbols that are delieverd to output.

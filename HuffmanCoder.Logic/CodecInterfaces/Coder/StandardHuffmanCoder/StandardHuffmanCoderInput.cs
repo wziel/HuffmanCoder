@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HuffmanCoder.Model.Codec;
 using HuffmanCoder.Logic.Readers.Encoding;
 
-namespace HuffmanCoder.Logic.CoderInterfaces.StandardHuffmanCoder
+namespace HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder
 {
     class StandardHuffmanCoderInput : IHuffmanCoderInput<byte>
     {

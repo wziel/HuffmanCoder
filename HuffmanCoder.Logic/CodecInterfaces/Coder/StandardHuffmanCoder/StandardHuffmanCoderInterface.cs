@@ -8,22 +8,20 @@ using HuffmanCoder.Logic.Writers.Encoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
 
-namespace HuffmanCoder.Logic.CoderInterfaces.StandardHuffmanCoder
+namespace HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder
 {
     public class StandardHuffmanCoderInterface : IHuffmanCoderInterface
     {
         private IInputReader inputReader;
         private ICoderOutputWriter coderOutputWriter;
-        private IComparer<byte> comparer;
-        public StandardHuffmanCoderInterface(IInputReader inputReader, ICoderOutputWriter coderOutputWriter, IComparer<byte> comparer)
+        public StandardHuffmanCoderInterface(IInputReader inputReader, ICoderOutputWriter coderOutputWriter)
         {
             this.inputReader = inputReader;
             this.coderOutputWriter = coderOutputWriter;
-            this.comparer = comparer;
         }
         public void Encode()
         {
-            HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(comparer, createDictionary());
+            HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(Comparer<byte>.Default, createDictionary());
             IHuffmanCoder<byte> huffmanCoder = new HuffmanCoder<byte>(huffmanTreeBuilder.BuildTree());
             huffmanCoder.Encode(new StandardHuffmanCoderInput(inputReader), new HuffmanCoderOutput(coderOutputWriter));
         }

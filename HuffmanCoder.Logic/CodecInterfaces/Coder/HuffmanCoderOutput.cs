@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HuffmanCoder.Model.Codec;
 using HuffmanCoder.Logic.Writers.Encoding;
 
-namespace HuffmanCoder.Logic.CoderInterfaces
+namespace HuffmanCoder.Logic.CodecInterfaces.Coder
 {
     class HuffmanCoderOutput : IHuffmanCoderOutput
     {

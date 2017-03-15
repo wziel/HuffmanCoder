@@ -8,8 +8,8 @@ using HuffmanCoder.Logic.Readers.Encoding;
 using HuffmanCoder.Logic.Writers.Encoding;
 using System.Collections;
 using HuffmanCoder.Logic.Entities;
-using HuffmanCoder.Logic.CoderInterfaces.StandardHuffmanCoder;
-using HuffmanCoder.Logic.CoderInterfaces.PairHuffmanCoder;
+using HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder;
+using HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder;
 
 namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
 {

@@ -8,18 +8,16 @@ using HuffmanCoder.Logic.Writers.Encoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
 
-namespace HuffmanCoder.Logic.CoderInterfaces.PairHuffmanCoder
+namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
 {
     class PairHuffmanCoderInterface : IHuffmanCoderInterface
     {
         private IInputReader inputReader;
         private ICoderOutputWriter coderOutputWriter;
-        private IComparer<byte> comparer;
-        public PairHuffmanCoderInterface(IInputReader inputReader, ICoderOutputWriter coderOutputWriter, IComparer<byte> comparer)
+        public PairHuffmanCoderInterface(IInputReader inputReader, ICoderOutputWriter coderOutputWriter)
         {
             this.inputReader = inputReader;
             this.coderOutputWriter = coderOutputWriter;
-            this.comparer = comparer;
         }
         public void Encode()
         {
