@@ -13,7 +13,8 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         void Write(bool bit);
         void CreateFileBytes(Dictionary<string, OutputValues> map);
         Dictionary<string, OutputValues> SymbolMap { get; }
-        uint Size { get; }    
+        uint Size { get; }
+        byte[] FileBytes { get; }
     }
     public class CoderOutputWriter : ICoderOutputWriter
     {
@@ -21,10 +22,16 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         private List<Byte> data = new List<byte>();
         private IByteCreator byteCreator;
         private Dictionary<string, OutputValues> symbolMap;
-        private string outputPath;
         private List<Byte> header = new List<byte>();
         private uint bitsAmount = 0;
         private byte[] fileBytes;
+        private IHeaderCreator headerCreator;
+
+        public CoderOutputWriter(IByteCreator byteCreator, IHeaderCreator headerCreator)
+        {
+            this.byteCreator = byteCreator;
+            this.headerCreator = headerCreator;
+        }
 
         public Dictionary<string, OutputValues> SymbolMap
         {
@@ -50,11 +57,6 @@ namespace HuffmanCoder.Logic.Writers.Encoding
             }
         }
 
-        public CoderOutputWriter()
-        {
-            this.byteCreator = new ByteCreator();
-        }
-
         public void Write(bool bit)
         {
             if (byteCreator.IsReady)
@@ -69,7 +71,6 @@ namespace HuffmanCoder.Logic.Writers.Encoding
 
         public void CreateFileBytes(Dictionary<string, OutputValues> map)
         {
-            var headerCreator = new HeaderCreator();
             byte[] header = headerCreator.Create(bitsAmount, map);
             this.symbolMap = map;
             if (byteCreator.IsEmpty == false)

@@ -46,7 +46,6 @@ namespace HuffmanCoder.UnitTests.Model.Writers
                 byteCreator.Add(true);
             Assert.AreEqual(byteCreator.IsReady, true);
             Assert.AreEqual((byte)255, byteCreator.Data);
-            Assert.AreEqual(byteCreator.IsReady, false);
             Assert.AreEqual(byteCreator.IsEmpty, true);
             byteCreator.Add(true);
             Assert.AreEqual((byte)128, byteCreator.CurrentByteAligned);
