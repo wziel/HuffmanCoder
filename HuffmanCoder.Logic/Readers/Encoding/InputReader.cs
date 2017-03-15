@@ -16,10 +16,10 @@ namespace HuffmanCoder.Logic.Readers.Encoding
     public sealed class InputReader : IInputReader
     {
         private byte currentByte;
-        private uint currentSize = 0;
         private StreamReader stream;
         private byte[] data;
-        private int iterator;
+        private uint currentSize;
+        private uint iterator = 0;
 
         public InputReader(string filePath)
         {
@@ -38,6 +38,7 @@ namespace HuffmanCoder.Logic.Readers.Encoding
             if (data == null || data.Length==0)
                 throw new Exception($"Input file is empty");
             currentByte = data[0];
+            ++iterator;
         }
 
         public byte Current
@@ -52,7 +53,7 @@ namespace HuffmanCoder.Logic.Readers.Encoding
         {
             get
             {
-                return currentSize;
+                return iterator;
             }
         }
 
@@ -73,8 +74,8 @@ namespace HuffmanCoder.Logic.Readers.Encoding
         {
             if (iterator == data.Length)
                 return false;
-            ++iterator;
             currentByte = data[iterator];
+            ++iterator;
             return true;             
         }
 

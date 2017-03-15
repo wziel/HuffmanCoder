@@ -24,8 +24,9 @@ namespace HuffmanCoder.UI
             Statistics statiscs;
             IStatisticsBuilder statiscsGenerator = new StatisticsBuilder();
             IInputReader input = new InputReader(inputFilePath);
-            ICoderOutputWriter output = new CoderOutputWriter(outputFilePath);
+            ICoderOutputWriter output = new CoderOutputWriter();
             //ToDo Michal depends on enum
+            output.CreateFileBytes()
             statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, input.Size, output.Size);
             return statiscs;
         }
