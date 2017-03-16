@@ -11,19 +11,26 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.StandardHuffmanDecoder
     class StandardHuffmanDecoderOutput : IHuffmanDecoderOutput<byte>
     {
         private IDecoderFileWriter decoderFileWriter;
+        private int symbolsCount;
+        private int symbolsDecoded = 0;
+        private bool isEnd = false;
 
-        public StandardHuffmanDecoderOutput(IDecoderFileWriter decoderFileWriter)
+        public StandardHuffmanDecoderOutput(IDecoderFileWriter decoderFileWriter, int symbolsCount)
         {
             this.decoderFileWriter = decoderFileWriter;
+            this.symbolsCount = symbolsCount;
         }
         public bool IsEnd()
         {
-            throw new NotImplementedException();
+            return isEnd;
         }
 
         public void Write(byte symbol)
         {
             decoderFileWriter.Write(symbol);
+            ++symbolsDecoded;
+            if (symbolsDecoded == symbolsCount)
+                isEnd = true;
         }
     }
 }

@@ -8,28 +8,27 @@ using HuffmanCoder.Logic.Writers.Decoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
 
-namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.StandardHuffmanDecoder
+namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.MarkowHuffmanDecoder
 {
-    public class StandardHuffmanDecoderInterface : IHuffmanDecoderInterface
+    class MarkowHuffmanDecoderInterface : IHuffmanDecoderInterface
     {
         private IDecoderReader decoderReader;
         private IDecoderFileWriter decoderFileWriter;
-        private Dictionary<byte, int> symbolQuantityDic;
-        
+        private Dictionary<byte, Dictionary<byte, int>> symbolQuantityDic;
 
-        public StandardHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<byte, int> symbolQuantityDic)
+
+        public MarkowHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<byte, Dictionary<byte, int>> symbolQuantityDic)
         {
             this.decoderReader = decoderReader;
             this.decoderFileWriter = decoderFileWriter;
             this.symbolQuantityDic = symbolQuantityDic;
         }
-            
+
         public void Decode()
         {
             HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(Comparer<byte>.Default, symbolQuantityDic);
             IHuffmanDecoder<byte> huffmanDecoder = new HuffmanDecoder<byte>(huffmanTreeBuilder.BuildTree());
-            int symbolsCount = symbolQuantityDic.Sum(x => x.Value);
-            huffmanDecoder.Decode(new HuffmanDecoderInput(decoderReader), new StandardHuffmanDecoderOutput(decoderFileWriter, symbolsCount));
+            huffmanDecoder.Decode(new HuffmanDecoderInput(decoderReader), new MarkowHuffmanDecoderOutput(decoderFileWriter));
         }
     }
 }
