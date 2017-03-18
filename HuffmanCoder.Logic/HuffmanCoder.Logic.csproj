@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="CodecInterfaces\Coder\HuffmanCoderOutput.cs" />
     <Compile Include="CodecInterfaces\Coder\IHuffmanCoderInterface.cs" />
+    <Compile Include="CodecInterfaces\Coder\MarkowHuffmanCoder\MarkowHuffmanCoderInput.cs" />
+    <Compile Include="CodecInterfaces\Coder\MarkowHuffmanCoder\MarkowHuffmanCoderInterface.cs" />
     <Compile Include="CodecInterfaces\Coder\PairHuffmanCoder\PairHuffmanCoderInput.cs" />
     <Compile Include="CodecInterfaces\Coder\PairHuffmanCoder\PairHuffmanCoderInterface.cs" />
     <Compile Include="CodecInterfaces\Coder\StandardHuffmanCoder\StandardHuffmanCoderInput.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="CodecInterfaces\Decoder\PairHuffmanDecoder\PairHuffmanDecoderOutput.cs" />
     <Compile Include="CodecInterfaces\Decoder\StandardHuffmanDecoder\StandardHuffmanDecoderInterface.cs" />
     <Compile Include="CodecInterfaces\Decoder\StandardHuffmanDecoder\StandardHuffmanDecoderOutput.cs" />
+    <Compile Include="CodecInterfaces\DefaultableSymbol.cs" />
     <Compile Include="Entities\BitMeanStatistics.cs" />
     <Compile Include="Entities\FilesMeanStatistcs.cs" />
     <Compile Include="Entities\OutputValues.cs" />

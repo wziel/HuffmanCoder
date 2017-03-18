@@ -10,6 +10,7 @@ using System.Collections;
 using HuffmanCoder.Logic.Entities;
 using HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder;
 using HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder;
+using HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder;
 
 namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
 {
@@ -25,7 +26,7 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
             MockCoderOutputWriter outputWriter = new MockCoderOutputWriter();
 
             //when
-            StandardHuffmanCoderInterface standardHuffmanCoderInterface = new StandardHuffmanCoderInterface(inputReader, outputWriter, new MockComparer());
+            StandardHuffmanCoderInterface standardHuffmanCoderInterface = new StandardHuffmanCoderInterface(inputReader, outputWriter);
             standardHuffmanCoderInterface.Encode();
 
             //then
@@ -41,11 +42,25 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
             MockCoderOutputWriter outputWriter = new MockCoderOutputWriter();
 
             //when
-            PairHuffmanCoderInterface pairHuffmanCoderInterface = new PairHuffmanCoderInterface(inputReader, outputWriter, new MockComparer());
+            PairHuffmanCoderInterface pairHuffmanCoderInterface = new PairHuffmanCoderInterface(inputReader, outputWriter);
             pairHuffmanCoderInterface.Encode();
 
             //then
             outputWriter.AssertEquals(new List<int>() { 1, 1, 0, 1, 0, 1, 1, 0 });
+        }
+
+        [TestMethod]
+        public void MarkowCoderEncodeInput()
+        {
+            //given
+            byte[] input = new byte[] { (byte)'A', (byte)'B', (byte)'C', (byte)'A', (byte)'B', (byte)'D', (byte)'A', (byte)'B', (byte)'C', (byte)'A' };
+            MockInputReader inputReader = new MockInputReader(input);
+            MockCoderOutputWriter outputWriter = new MockCoderOutputWriter();
+
+            //when
+            MarkowHuffmanCoderInterface markowHuffmanCoderInterface = new MarkowHuffmanCoderInterface(inputReader, outputWriter);
+            markowHuffmanCoderInterface.Encode();
+
 
         }
 
@@ -127,6 +142,14 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
                 }
             }
 
+            public byte[] FileBytes
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
             public void Save(Dictionary<string, OutputValues> map)
             {
                 this.symbolMap = map;
@@ -157,24 +180,10 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
             {
                 throw new AssertFailedException($"Expected is not equal to received");
             }
-        }
 
-        private class MockComparer : IComparer<byte>
-        {
-            public int Compare(byte x, byte y)
+            public void CreateFileBytes(Dictionary<string, OutputValues> map)
             {
-                if(x < y)
-                {
-                    return -1;
-                }
-                else if (x > y)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
+                throw new NotImplementedException();
             }
         }
     }

@@ -14,21 +14,48 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.MarkowHuffmanDecoder
     {
         private IDecoderReader decoderReader;
         private IDecoderFileWriter decoderFileWriter;
-        private Dictionary<byte, Dictionary<byte, int>> symbolQuantityDic;
+        private Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> perSymbolDictionary;
+        private int symbolsCount = 0;
 
 
-        public MarkowHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<byte, Dictionary<byte, int>> symbolQuantityDic)
+        public MarkowHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> perSymbolDictionary)
         {
             this.decoderReader = decoderReader;
             this.decoderFileWriter = decoderFileWriter;
-            this.symbolQuantityDic = symbolQuantityDic;
+            this.perSymbolDictionary = perSymbolDictionary;
+            foreach (DefaultableSymbol<byte> key in perSymbolDictionary.Keys)
+            {
+                this.symbolsCount += perSymbolDictionary[key].Sum(x => x.Value);
+            }
         }
 
         public void Decode()
         {
-            HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(Comparer<byte>.Default, symbolQuantityDic);
-            IHuffmanDecoder<byte> huffmanDecoder = new HuffmanDecoder<byte>(huffmanTreeBuilder.BuildTree());
-            huffmanDecoder.Decode(new HuffmanDecoderInput(decoderReader), new MarkowHuffmanDecoderOutput(decoderFileWriter));
+            DefaultableSymbol<byte> previousSymbol;
+            Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>> decoderDictionary = createDecoderDictionary();
+            MarkowHuffmanDecoderOutput markowHuffmanDecoderOutput = new MarkowHuffmanDecoderOutput(decoderFileWriter);
+            decoderDictionary[new DefaultableSymbol<byte>(true)].Decode(new HuffmanDecoderInput(decoderReader), markowHuffmanDecoderOutput);
+            previousSymbol = new DefaultableSymbol<byte>(markowHuffmanDecoderOutput.DecodedSymbol);
+            int symbolsDecoded = 1;
+            while (symbolsDecoded < symbolsCount)
+            {
+                markowHuffmanDecoderOutput = new MarkowHuffmanDecoderOutput(decoderFileWriter);
+                decoderDictionary[previousSymbol].Decode(new HuffmanDecoderInput(decoderReader), markowHuffmanDecoderOutput);
+                previousSymbol = new DefaultableSymbol<byte>(markowHuffmanDecoderOutput.DecodedSymbol);
+                ++symbolsDecoded;
+            }
+        }
+
+        private Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>> createDecoderDictionary()
+        {
+            Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>> coderDictionary = new Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>>();
+            foreach (DefaultableSymbol<byte> key in perSymbolDictionary.Keys)
+            {
+                HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(Comparer<byte>.Default, perSymbolDictionary[key]);
+                IHuffmanDecoder<byte> huffmanDecoder = new HuffmanDecoder<byte>(huffmanTreeBuilder.BuildTree());
+                coderDictionary.Add(key, huffmanDecoder);
+            }
+            return coderDictionary;
         }
     }
 }

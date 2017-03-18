@@ -23,7 +23,7 @@ namespace HuffmanCoder.Logic.Writers.Decoding
 
         public void Save()
         {
-            File.WriteAllBytes(filePath, bytes.ToArray())
+            File.WriteAllBytes(filePath, bytes.ToArray());
         }
 
         public void Write(byte data)
