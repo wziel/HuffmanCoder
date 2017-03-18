@@ -17,9 +17,9 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         byte[] Create(uint bitAmount, Dictionary<string, OutputValues> map);
     }
 
-    public class HeaderCreator
+    public class HeaderCreator : IHeaderCreator
     {
-        internal byte[] Create(uint bitAmount, Dictionary<string, OutputValues> map)
+        public byte[] Create(uint bitAmount, Dictionary<string, OutputValues> map)
         {
             throw new NotImplementedException();
         }
