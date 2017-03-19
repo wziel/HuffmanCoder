@@ -11,7 +11,6 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         bool IsReady { get; }
         byte Data { get; }
         bool IsEmpty { get; }
-        byte CurrentByteAligned { get; }
         void Add(bool bit);   
     }
 
@@ -24,14 +23,6 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         private int currentPosition = START_POSITION;
         private byte data = EMPTY_DATA;
         private byte[] bitMasks = {128,64,32,16,8,4,2,1};
-
-        public byte CurrentByteAligned
-        {
-            get
-            {
-                return Data;
-            }
-        }
 
         public byte Data
         {
