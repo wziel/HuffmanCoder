@@ -14,11 +14,13 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
         private int symbolsCount;
         private int symbolsDecoded = 0;
         private bool isEnd = false;
+        private bool isByteCountEven;
 
-        public PairHuffmanDecoderOutput(IDecoderFileWriter decoderFileWriter, int symbolsCount)
+        public PairHuffmanDecoderOutput(IDecoderFileWriter decoderFileWriter, int symbolsCount, bool isByteCountEven)
         {
             this.decoderFileWriter = decoderFileWriter;
             this.symbolsCount = symbolsCount;
+            this.isByteCountEven = isByteCountEven;
         }
         public bool IsEnd()
         {
@@ -28,6 +30,12 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
         public void Write(Tuple<byte, byte> symbol)
         {
             decoderFileWriter.Write(symbol.Item1);
+            if(!isByteCountEven && symbolsDecoded == symbolsCount - 1)
+            {
+                ++symbolsDecoded;
+                isEnd = true;
+                return;
+            }
             decoderFileWriter.Write(symbol.Item2);
             ++symbolsDecoded;
             if (symbolsDecoded == symbolsCount)

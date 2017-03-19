@@ -53,13 +53,16 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
         public void MarkowCoderEncodeInput()
         {
             //given
-            byte[] input = new byte[] { (byte)'A', (byte)'B', (byte)'C', (byte)'A', (byte)'B', (byte)'D', (byte)'A', (byte)'B', (byte)'C', (byte)'A' };
+            byte[] input = new byte[] { (byte)'A', (byte)'A', (byte)'B', (byte)'C', (byte)'A', (byte)'C', (byte)'D', (byte)'B', (byte)'A', (byte)'A' };
             MockInputReader inputReader = new MockInputReader(input);
             MockCoderOutputWriter outputWriter = new MockCoderOutputWriter();
 
             //when
             MarkowHuffmanCoderInterface markowHuffmanCoderInterface = new MarkowHuffmanCoderInterface(inputReader, outputWriter);
             markowHuffmanCoderInterface.Encode();
+
+            //then
+            outputWriter.AssertSize(12);
 
 
         }
@@ -173,6 +176,14 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
                     {
                         Fail(expected);
                     }
+                }
+            }
+
+            public void AssertSize(int expected)
+            {
+                if (size != expected)
+                {
+                    throw new AssertFailedException($"Size of output doesn't equals expected size.");
                 }
             }
 

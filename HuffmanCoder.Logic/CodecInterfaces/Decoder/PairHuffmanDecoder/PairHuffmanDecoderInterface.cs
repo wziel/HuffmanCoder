@@ -15,13 +15,15 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
         private IDecoderReader decoderReader;
         private IDecoderFileWriter decoderFileWriter;
         private Dictionary<Tuple<byte, byte>, int> symbolQuantityDic;
+        private bool isByteCountEven;
 
 
-        public PairHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<Tuple<byte, byte>, int> symbolQuantityDic)
+        public PairHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<Tuple<byte, byte>, int> symbolQuantityDic, bool isByteCountEven)
         {
             this.decoderReader = decoderReader;
             this.decoderFileWriter = decoderFileWriter;
             this.symbolQuantityDic = symbolQuantityDic;
+            this.isByteCountEven = isByteCountEven;
         }
 
         public void Decode()
@@ -30,7 +32,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
             var tree = builder.BuildTree(Comparer<Tuple<byte, byte>>.Default, symbolQuantityDic);
             var decoder = builder.GetDecoder(tree);
             int symbolsCount = symbolQuantityDic.Sum(x => x.Value);
-            decoder.Decode(new HuffmanDecoderInput(decoderReader), new PairHuffmanDecoderOutput(decoderFileWriter, symbolsCount));
+            decoder.Decode(new HuffmanDecoderInput(decoderReader), new PairHuffmanDecoderOutput(decoderFileWriter, symbolsCount, isByteCountEven));
         }
     }
 }
