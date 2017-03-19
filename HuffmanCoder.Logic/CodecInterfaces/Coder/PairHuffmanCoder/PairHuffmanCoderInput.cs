@@ -8,7 +8,7 @@ using HuffmanCoder.Logic.Readers.Encoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
 {
-    class PairHuffmanCoderInput : IHuffmanCoderInput<Tuple<byte, byte>>
+    class PairHuffmanCoderInput : ICoderInput<Tuple<byte, byte>>
     {
         private bool isEnd = false;
 

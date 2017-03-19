@@ -44,16 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\HuffmanTreeBuilder.cs" />
+    <Compile Include="Builder\HuffmanCodecBuilder.cs" />
     <Compile Include="Builder\HuffmanTreeNodeComparer.cs" />
     <Compile Include="Codec\HuffmanCoder.cs" />
     <Compile Include="Codec\HuffmanDecoder.cs" />
-    <Compile Include="Codec\IHuffmanCoder.cs" />
-    <Compile Include="Codec\IHuffmanCoderInput.cs" />
-    <Compile Include="Codec\IHuffmanCoderOutput.cs" />
-    <Compile Include="Codec\IHuffmanDecoder.cs" />
-    <Compile Include="Codec\IHuffmanDecoderInput.cs" />
-    <Compile Include="Codec\IHuffmanDecoderOutput.cs" />
+    <Compile Include="Codec\ICoder.cs" />
+    <Compile Include="Codec\ICoderInput.cs" />
+    <Compile Include="Codec\ICoderOutput.cs" />
+    <Compile Include="Codec\IDecoder.cs" />
+    <Compile Include="Codec\IDecoderInput.cs" />
+    <Compile Include="Codec\IDecoderOutput.cs" />
+    <Compile Include="Codec\OneSymbolCoder.cs" />
+    <Compile Include="Codec\OneSymbolDecoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builder\HuffmanTreeNode.cs" />
     <Compile Include="Tree\IHuffmanTreeNode.cs" />

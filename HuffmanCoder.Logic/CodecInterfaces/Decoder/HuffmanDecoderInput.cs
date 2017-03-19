@@ -8,7 +8,7 @@ using HuffmanCoder.Logic.Readers.Decoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Decoder
 {
-    class HuffmanDecoderInput : IHuffmanDecoderInput
+    class HuffmanDecoderInput : IDecoderInput
     {
         private IDecoderReader decoderReader;
 

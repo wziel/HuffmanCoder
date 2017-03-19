@@ -86,56 +86,5 @@ namespace HuffmanCoder.UnitTests.Model.Codec
             //then
             output.AssertEquals(new List<int>() { 0, 1, 0, 1, 1, 0, 1, 1, 1 });
         }
-
-        private class MockCoderInput<T> : IHuffmanCoderInput<T>
-        {
-            private List<T> input = new List<T>();
-            private int idx = 0;
-
-            internal MockCoderInput(List<T> input)
-            {
-                this.input = input;
-            }
-
-            public bool IsEnd()
-            {
-                return idx == input.Count;
-            }
-
-            public T Read()
-            {
-                return input[idx++];
-            }
-        }
-
-        private class MockCoderOutput : IHuffmanCoderOutput
-        {
-            private List<int> output = new List<int>();
-
-            public void Write(bool bit)
-            {
-                output.Add(bit ? 1 : 0);
-            }
-
-            public void AssertEquals(List<int> expected)
-            {
-                if(expected.Count != output.Count)
-                {
-                    Fail(expected);
-                }
-                for(int i = 0; i < expected.Count; ++i)
-                {
-                    if(output[i] != expected[i])
-                    {
-                        Fail(expected);
-                    }
-                }
-            }
-
-            public void Fail(List<int> expected)
-            {
-                throw new AssertFailedException($"Expected is not equal to received");
-            }
-        }
     }
 }

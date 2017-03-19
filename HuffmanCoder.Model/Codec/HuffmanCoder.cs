@@ -7,7 +7,11 @@ using HuffmanCoder.Model.Tree;
 
 namespace HuffmanCoder.Model.Codec
 {
-    public class HuffmanCoder<T> : IHuffmanCoder<T>
+    /// <summary>
+    /// Coder that encodes data using huffman algorithm.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    internal class HuffmanCoder<T> : ICoder<T>
     {
         private Dictionary<T, bool[]> EncodingDictionary { get; } = new Dictionary<T, bool[]>();
 
@@ -31,7 +35,7 @@ namespace HuffmanCoder.Model.Codec
             currentEncoding.RemoveAt(currentEncoding.Count - 1);
         }
 
-        public void Encode(IHuffmanCoderInput<T> input, IHuffmanCoderOutput output)
+        public void Encode(ICoderInput<T> input, ICoderOutput output)
         {
             while(!input.IsEnd())
             {

@@ -7,7 +7,11 @@ using HuffmanCoder.Model.Tree;
 
 namespace HuffmanCoder.Model.Codec
 {
-    public class HuffmanDecoder<T> : IHuffmanDecoder<T>
+    /// <summary>
+    /// Decoder that decodes data using huffman algorithm.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    internal class HuffmanDecoder<T> : IDecoder<T>
     {
         private IHuffmanTreeNode<T> root;
 
@@ -16,12 +20,12 @@ namespace HuffmanCoder.Model.Codec
             this.root = root;
         }
 
-        public void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output)
+        public void Decode(IDecoderInput input, IDecoderOutput<T> output)
         {
             Decode(input, output, root);
         }
 
-        private void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output, IHuffmanTreeNode<T> currentNode)
+        private void Decode(IDecoderInput input, IDecoderOutput<T> output, IHuffmanTreeNode<T> currentNode)
         {
             while(!output.IsEnd())
             {

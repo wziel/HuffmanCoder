@@ -32,7 +32,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.MarkowHuffmanDecoder
         public void Decode()
         {
             DefaultableSymbol<byte> previousSymbol;
-            Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>> decoderDictionary = createDecoderDictionary();
+            Dictionary<DefaultableSymbol<byte>, IDecoder<byte>> decoderDictionary = createDecoderDictionary();
             MarkowHuffmanDecoderOutput markowHuffmanDecoderOutput = new MarkowHuffmanDecoderOutput(decoderFileWriter);
             decoderDictionary[new DefaultableSymbol<byte>(true)].Decode(new HuffmanDecoderInput(decoderReader), markowHuffmanDecoderOutput);
             previousSymbol = new DefaultableSymbol<byte>(markowHuffmanDecoderOutput.DecodedSymbol);
@@ -46,14 +46,15 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.MarkowHuffmanDecoder
             }
         }
 
-        private Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>> createDecoderDictionary()
+        private Dictionary<DefaultableSymbol<byte>, IDecoder<byte>> createDecoderDictionary()
         {
-            Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>> coderDictionary = new Dictionary<DefaultableSymbol<byte>, IHuffmanDecoder<byte>>();
+            Dictionary<DefaultableSymbol<byte>, IDecoder<byte>> coderDictionary = new Dictionary<DefaultableSymbol<byte>, IDecoder<byte>>();
             foreach (DefaultableSymbol<byte> key in perSymbolDictionary.Keys)
             {
-                HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(Comparer<byte>.Default, perSymbolDictionary[key]);
-                IHuffmanDecoder<byte> huffmanDecoder = new HuffmanDecoder<byte>(huffmanTreeBuilder.BuildTree());
-                coderDictionary.Add(key, huffmanDecoder);
+                var builder = new HuffmanCodecBuilder<byte>();
+                var tree = builder.BuildTree(Comparer<byte>.Default, perSymbolDictionary[key]);
+                var decoder = builder.GetDecoder(tree);
+                coderDictionary.Add(key, decoder);
             }
             return coderDictionary;
         }

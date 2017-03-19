@@ -66,13 +66,19 @@
     <Compile Include="Logic\Readers\Encoding\InputReaderTests.cs" />
     <Compile Include="Logic\Writers\Encoding\CoderOutputWriterTests.cs" />
     <Compile Include="Logic\Writers\Decoding\HeaderCreatorTests.cs" />
-    <Compile Include="Model\Builder\HuffmanTreeBuilderTests.cs" />
+    <Compile Include="Model\Builder\HuffmanCodecBuilderTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeNodeTests.cs" />
     <Compile Include="Model\Builder\HuffmanTreeNodeComparerTests.cs" />
     <Compile Include="Model\Codec\HuffmanCoderTests.cs" />
     <Compile Include="Model\Codec\HuffmanDecoderTests.cs" />
+    <Compile Include="Model\Codec\MockCoderInput.cs" />
+    <Compile Include="Model\Codec\MockCoderOutput.cs" />
+    <Compile Include="Model\Codec\MockDecoderInput.cs" />
+    <Compile Include="Model\Codec\MockDecoderOutput.cs" />
     <Compile Include="Model\Codec\MockHuffmanTreeBuilder.cs" />
     <Compile Include="Logic\Writers\Encoding\ByteCreatorTests.cs" />
+    <Compile Include="Model\Codec\OneSymbolCoderTests.cs" />
+    <Compile Include="Model\Codec\OneSymbolDecoderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

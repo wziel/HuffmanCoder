@@ -22,7 +22,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
         public void Encode()
         {
             DefaultableSymbol<byte> previousSymbol;
-            Dictionary<DefaultableSymbol<byte>, IHuffmanCoder<byte>> coderDictionary = createCoderDictionary();
+            Dictionary<DefaultableSymbol<byte>, ICoder<byte>> coderDictionary = createCoderDictionary();
             coderDictionary[new DefaultableSymbol<byte>(true)].Encode(new MarkowHuffmanCoderInput(inputReader.Current), new HuffmanCoderOutput(coderOutputWriter));
             previousSymbol = new DefaultableSymbol<byte>(inputReader.Current);
             while(inputReader.MoveNext())
@@ -32,14 +32,15 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
             }
         }
 
-        private Dictionary<DefaultableSymbol<byte>, IHuffmanCoder<byte>> createCoderDictionary()
+        private Dictionary<DefaultableSymbol<byte>, ICoder<byte>> createCoderDictionary()
         {
             Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> perSymbolDictionary = createSymbolDictionary();
-            Dictionary<DefaultableSymbol<byte>, IHuffmanCoder<byte>> coderDictionary = new Dictionary<DefaultableSymbol<byte>, IHuffmanCoder<byte>>();
+            Dictionary<DefaultableSymbol<byte>, ICoder<byte>> coderDictionary = new Dictionary<DefaultableSymbol<byte>, ICoder<byte>>();
             foreach(DefaultableSymbol<byte> key in perSymbolDictionary.Keys)
             {
-                HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(Comparer<byte>.Default, perSymbolDictionary[key]);
-                IHuffmanCoder<byte> huffmanCoder = new HuffmanCoder<byte>(huffmanTreeBuilder.BuildTree());
+                var builder = new HuffmanCodecBuilder<byte>();
+                var tree = builder.BuildTree(Comparer<byte>.Default, perSymbolDictionary[key]);
+                ICoder<byte> huffmanCoder = builder.GetCoder(tree);
                 coderDictionary.Add(key, huffmanCoder);
             }
             return coderDictionary;

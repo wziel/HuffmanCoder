@@ -21,8 +21,9 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder
         }
         public void Encode()
         {
-            HuffmanTreeBuilder<byte> huffmanTreeBuilder = new HuffmanTreeBuilder<byte>(Comparer<byte>.Default, createDictionary());
-            IHuffmanCoder<byte> huffmanCoder = new HuffmanCoder<byte>(huffmanTreeBuilder.BuildTree());
+            var builder = new HuffmanCodecBuilder<byte>();
+            var tree = builder.BuildTree(Comparer<byte>.Default, createDictionary());
+            ICoder<byte> huffmanCoder = builder.GetCoder(tree);
             huffmanCoder.Encode(new StandardHuffmanCoderInput(inputReader), new HuffmanCoderOutput(coderOutputWriter));
         }
 

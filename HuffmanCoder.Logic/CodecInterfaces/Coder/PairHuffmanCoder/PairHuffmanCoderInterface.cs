@@ -21,9 +21,10 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
         }
         public void Encode()
         {
-            HuffmanTreeBuilder<Tuple<byte, byte>> huffmanTreeBuilder = new HuffmanTreeBuilder<Tuple<byte, byte>>(Comparer<Tuple<byte, byte>>.Default, createDictionary());
-            IHuffmanCoder<Tuple<byte, byte>> huffmanCoder = new HuffmanCoder<Tuple<byte, byte>>(huffmanTreeBuilder.BuildTree());
-            huffmanCoder.Encode(new PairHuffmanCoderInput(inputReader), new HuffmanCoderOutput(coderOutputWriter));
+            var builder = new HuffmanCodecBuilder<Tuple<byte, byte>>();
+            var tree = builder.BuildTree(Comparer<Tuple<byte, byte>>.Default, createDictionary());
+            var coder = builder.GetCoder(tree);
+            coder.Encode(new PairHuffmanCoderInput(inputReader), new HuffmanCoderOutput(coderOutputWriter));
         }
 
         private Dictionary<Tuple<byte, byte>, int> createDictionary()

@@ -10,7 +10,7 @@ namespace HuffmanCoder.Model.Codec
     /// Input of huffman coder, supplies symbols and specifies when there are no more symbols.
     /// </summary>
     /// <typeparam name="T">Type of symbol class.</typeparam>
-    public interface IHuffmanCoderInput<T>
+    public interface ICoderInput<T>
     {
         /// <summary>
         /// Reads a single input symbol.

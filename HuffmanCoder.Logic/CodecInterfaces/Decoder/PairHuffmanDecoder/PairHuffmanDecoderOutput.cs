@@ -8,7 +8,7 @@ using HuffmanCoder.Logic.Writers.Decoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
 {
-    class PairHuffmanDecoderOutput : IHuffmanDecoderOutput<Tuple<byte, byte>>
+    class PairHuffmanDecoderOutput : IDecoderOutput<Tuple<byte, byte>>
     {
         private IDecoderFileWriter decoderFileWriter;
         private int symbolsCount;

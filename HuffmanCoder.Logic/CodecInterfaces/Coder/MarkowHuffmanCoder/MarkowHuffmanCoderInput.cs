@@ -8,7 +8,7 @@ using HuffmanCoder.Logic.Readers.Encoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
 {
-    class MarkowHuffmanCoderInput : IHuffmanCoderInput<byte>
+    class MarkowHuffmanCoderInput : ICoderInput<byte>
     {
         private byte symbol;
         bool isEnd = false;

@@ -10,13 +10,13 @@ namespace HuffmanCoder.Model.Codec
     /// Class responsible for decoding encoded bits to symbols.
     /// </summary>
     /// <typeparam name="T">Type of symbols class.</typeparam>
-    public interface IHuffmanDecoder<T>
+    public interface IDecoder<T>
     {
         /// <summary>
         /// Decodes bits supplied by input to symbols that are delieverd to output.
         /// </summary>
         /// <param name="input">Input which supplies bits.</param>
         /// <param name="output">Output that consumes symbols.</param>
-        void Decode(IHuffmanDecoderInput input, IHuffmanDecoderOutput<T> output);
+        void Decode(IDecoderInput input, IDecoderOutput<T> output);
     }
 }

@@ -11,12 +11,10 @@ namespace HuffmanCoder.Model.Builder
     /// Class used for building a huffman tree based on quantitty of symbols used.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class HuffmanTreeBuilder<T>
+    public class HuffmanCodecBuilder<T>
     {
-        private Dictionary<T, int> symbolQuantityDic = new Dictionary<T, int>();
-        private HuffmanTreeNodeComparer<T> nodeComparer;
-
         /// <summary>
+        /// Builds a Huffman tree based on symbols quantity dictionary.
         /// </summary>
         /// <param name="valueComparer">
         /// Comparer used as a last resort to define
@@ -24,24 +22,24 @@ namespace HuffmanCoder.Model.Builder
         /// relation only if other means based on Quantity and Subtree depth fail.
         /// It should never return 0 (equality) for different elements.
         /// </param>
-        /// <param name="terminalSymbol">symbol that means the end of input</param>
-        public HuffmanTreeBuilder(IComparer<T> valueComparer, Dictionary<T, int> symbolQuantityDic)
+        /// <param name="symbolQuantityDic">dicrionary containing quantity
+        /// of symbol occurences for this tree to build.</param>
+        /// <returns>Huffman tree.</returns>
+        public IHuffmanTreeNode<T> BuildTree(IComparer<T> valueComparer, Dictionary<T, int> symbolQuantityDic)
         {
-            nodeComparer = new HuffmanTreeNodeComparer<T>(valueComparer);
-            this.symbolQuantityDic = symbolQuantityDic;
-        }
-
-        /// <summary>
-        /// Builds a Huffman tree from symbols that previously were added to this builder.
-        /// </summary>
-        /// <returns>Huffman tree from this builder.</returns>
-        public IHuffmanTreeNode<T> BuildTree()
-        {
-            var priorityQueue = GetHuffmanNodePriorityQueue();
-            if (priorityQueue.Count() < 2)
+            var nodeComparer = new HuffmanTreeNodeComparer<T>(valueComparer);
+            if(symbolQuantityDic.Keys.Count == 0)
             {
-                throw new Exception("Huffman tree requires at leas two different symbols");
+                throw new Exception("This builder requires at least one symbol in quantity dicrionary.");
             }
+            if (symbolQuantityDic.Keys.Count == 1)
+            {
+                var only = symbolQuantityDic.Keys.First();
+                return new HuffmanTreeNode<T>(
+                    value: only,
+                    quantity: 1);
+            }
+            var priorityQueue = GetHuffmanNodePriorityQueue(nodeComparer, symbolQuantityDic);
             while (priorityQueue.Count() > 1)
             {
                 var first = priorityQueue.DeleteMin();
@@ -52,10 +50,29 @@ namespace HuffmanCoder.Model.Builder
             return priorityQueue.DeleteMin();
         }
 
+        public ICoder<T> GetCoder(IHuffmanTreeNode<T> root)
+        {
+            if(root.IsLeaf)
+            {
+                return new OneSymbolCoder<T>();
+            }
+            return new HuffmanCoder<T>(root);
+        }
+
+        public IDecoder<T> GetDecoder(IHuffmanTreeNode<T> root)
+        {
+            if(root.IsLeaf)
+            {
+                return new OneSymbolDecoder<T>(root.Value);
+            }
+            return new HuffmanDecoder<T>(root);
+        }
+
         /// <summary>
         /// </summary>
         /// <returns>An initial priority queue created for building Huffman tree.</returns>
-        private IntervalHeap<HuffmanTreeNode<T>> GetHuffmanNodePriorityQueue()
+        private IntervalHeap<HuffmanTreeNode<T>> GetHuffmanNodePriorityQueue(
+            HuffmanTreeNodeComparer<T> nodeComparer, Dictionary<T, int> symbolQuantityDic)
         {
             var priorityQueue = new IntervalHeap<HuffmanTreeNode<T>>(nodeComparer);
             priorityQueue.AddAll(symbolQuantityDic.Select(

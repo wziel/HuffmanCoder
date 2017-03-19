@@ -8,7 +8,7 @@ using HuffmanCoder.Logic.Writers.Decoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.MarkowHuffmanDecoder
 {
-    class MarkowHuffmanDecoderOutput : IHuffmanDecoderOutput<byte>
+    class MarkowHuffmanDecoderOutput : IDecoderOutput<byte>
     {
         private IDecoderFileWriter decoderFileWriter;
         private byte decodedSymbol;

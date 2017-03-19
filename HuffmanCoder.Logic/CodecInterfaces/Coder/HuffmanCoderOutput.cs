@@ -8,7 +8,7 @@ using HuffmanCoder.Logic.Writers.Encoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder
 {
-    class HuffmanCoderOutput : IHuffmanCoderOutput
+    class HuffmanCoderOutput : ICoderOutput
     {
         private ICoderOutputWriter coderOutputWriter;
 

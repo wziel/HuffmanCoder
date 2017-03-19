@@ -26,10 +26,11 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
 
         public void Decode()
         {
-            HuffmanTreeBuilder<Tuple<byte, byte>> huffmanTreeBuilder = new HuffmanTreeBuilder<Tuple<byte, byte>>(Comparer<Tuple<byte, byte>>.Default, symbolQuantityDic);
-            IHuffmanDecoder<Tuple<byte, byte>> huffmanDecoder = new HuffmanDecoder<Tuple<byte, byte>>(huffmanTreeBuilder.BuildTree());
+            var builder = new HuffmanCodecBuilder<Tuple<byte, byte>>();
+            var tree = builder.BuildTree(Comparer<Tuple<byte, byte>>.Default, symbolQuantityDic);
+            var decoder = builder.GetDecoder(tree);
             int symbolsCount = symbolQuantityDic.Sum(x => x.Value);
-            huffmanDecoder.Decode(new HuffmanDecoderInput(decoderReader), new PairHuffmanDecoderOutput(decoderFileWriter, symbolsCount));
+            decoder.Decode(new HuffmanDecoderInput(decoderReader), new PairHuffmanDecoderOutput(decoderFileWriter, symbolsCount));
         }
     }
 }
