@@ -17,11 +17,19 @@ namespace HuffmanCoder.Logic.Writers.Encoding
 
     public class ByteCreator : IByteCreator
     {
+        private const int START_POSITION = 0;
+        private const int END_POSITION = 8;
+        private const byte EMPTY_DATA = 0;
+
+        private int currentPosition = START_POSITION;
+        private byte data = EMPTY_DATA;
+        private byte[] bitMasks = {128,64,32,16,8,4,2,1};
+
         public byte CurrentByteAligned
         {
             get
             {
-                throw new NotImplementedException();
+                return Data;
             }
         }
 
@@ -29,7 +37,10 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         {
             get
             {
-                throw new NotImplementedException();
+                byte result = data;
+                currentPosition = START_POSITION;
+                data = EMPTY_DATA;
+                return result;
             }
         }
 
@@ -37,7 +48,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         {
             get
             {
-                throw new NotImplementedException();
+                return currentPosition == START_POSITION;
             }
         }
 
@@ -45,13 +56,18 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         {
             get
             {
-                throw new NotImplementedException();
+                return currentPosition == END_POSITION;
             }
         }
 
         public void Add(bool bit)
         {
-            throw new NotImplementedException();
+            if (bit)
+            {
+                data = (byte)(data | bitMasks[currentPosition]);
+            }
+
+            ++currentPosition;
         }
     }
 }
