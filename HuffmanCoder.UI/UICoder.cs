@@ -10,13 +10,6 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.UI
 {
-    public enum HuffmanEncodeModel
-    {
-        Standard,
-        Block,
-        Markov
-    }
-
     public class UICoder
     {
         public Statistics Encode(string inputFilePath, string outputFilePath, HuffmanEncodeModel huffmanEncodeModel)

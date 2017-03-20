@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HuffmanCoder.Logic.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

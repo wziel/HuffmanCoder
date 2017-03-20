@@ -58,6 +58,7 @@
     <Compile Include="CodecInterfaces\Decoder\StandardHuffmanDecoder\StandardHuffmanDecoderInterface.cs" />
     <Compile Include="CodecInterfaces\Decoder\StandardHuffmanDecoder\StandardHuffmanDecoderOutput.cs" />
     <Compile Include="CodecInterfaces\DefaultableSymbol.cs" />
+    <Compile Include="Entities\HuffmanEncodeModel.cs" />
     <Compile Include="Entities\BitMeanStatistics.cs" />
     <Compile Include="Entities\FilesSizeStatistics.cs" />
     <Compile Include="Entities\OutputValues.cs" />

@@ -11,7 +11,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
     public interface ICoderOutputWriter
     {
         void Write(bool bit);
-        void CreateFileBytes(Dictionary<string, OutputValues> map);
+        void CreateFileBytes(HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> map);
         Dictionary<string, OutputValues> SymbolMap { get; }
         uint Size { get; }
         byte[] FileBytes { get; }
@@ -69,9 +69,9 @@ namespace HuffmanCoder.Logic.Writers.Encoding
             ++bitsAmount;
         }
 
-        public void CreateFileBytes(Dictionary<string, OutputValues> map)
+        public void CreateFileBytes(HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> map)
         {
-            byte[] header = headerCreator.Create(bitsAmount, map);
+            byte[] header = headerCreator.Create(bitsAmount, huffmanEncodeModel, map);
             this.symbolMap = map;
             if (byteCreator.IsEmpty == false)
             {
