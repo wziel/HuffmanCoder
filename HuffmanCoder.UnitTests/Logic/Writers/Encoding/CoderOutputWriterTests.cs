@@ -19,11 +19,11 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Encoding
             var mockByteCreator = new Mock<IByteCreator>();
             var mockHeaderCreator = new Mock<IHeaderCreator>();
             var coderOutputWriter = new CoderOutputWriter(mockByteCreator.Object, mockHeaderCreator.Object);
-            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(0, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
+            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(0, HuffmanEncodeModel.Standard, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsReady).Returns(false);
             coderOutputWriter.Write(true);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsEmpty).Returns(false);
-            coderOutputWriter.CreateFileBytes(new Dictionary<string, OutputValues>());
+            coderOutputWriter.CreateFileBytes(HuffmanEncodeModel.Standard, new Dictionary<string, OutputValues>());
             Assert.AreEqual(1, coderOutputWriter.FileBytes.Length);
         }
 
@@ -33,12 +33,12 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Encoding
             var mockByteCreator = new Mock<IByteCreator>();
             var mockHeaderCreator = new Mock<IHeaderCreator>();
             var coderOutputWriter = new CoderOutputWriter(mockByteCreator.Object, mockHeaderCreator.Object);
-            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(0, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
+            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(0, HuffmanEncodeModel.Standard, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsReady).Returns(false);
             for (int i=0; i<8; ++i)
                 coderOutputWriter.Write(true);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsEmpty).Returns(false);
-            coderOutputWriter.CreateFileBytes(new Dictionary<string, OutputValues>());
+            coderOutputWriter.CreateFileBytes(HuffmanEncodeModel.Standard, new Dictionary<string, OutputValues>());
             Assert.AreEqual(1, coderOutputWriter.FileBytes.Length);
         }
 
@@ -48,14 +48,14 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Encoding
             var mockByteCreator = new Mock<IByteCreator>();
             var mockHeaderCreator = new Mock<IHeaderCreator>();
             var coderOutputWriter = new CoderOutputWriter(mockByteCreator.Object, mockHeaderCreator.Object);
-            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(0, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
+            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(0, HuffmanEncodeModel.Standard, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsReady).Returns(false);
             for (int i = 0; i < 8; ++i)
                 coderOutputWriter.Write(true);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsReady).Returns(true);
             coderOutputWriter.Write(true);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsEmpty).Returns(false);
-            coderOutputWriter.CreateFileBytes(new Dictionary<string, OutputValues>());
+            coderOutputWriter.CreateFileBytes(HuffmanEncodeModel.Standard, new Dictionary<string, OutputValues>());
             Assert.AreEqual(2, coderOutputWriter.FileBytes.Length);
         }
     }

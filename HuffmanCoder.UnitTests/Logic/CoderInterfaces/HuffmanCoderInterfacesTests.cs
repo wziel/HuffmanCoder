@@ -192,7 +192,7 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
                 throw new AssertFailedException($"Expected is not equal to received");
             }
 
-            public void CreateFileBytes(Dictionary<string, OutputValues> map)
+            public void CreateFileBytes(HuffmanEncodeModel huffmanEncodeMode, Dictionary<string, OutputValues> map)
             {
                 throw new NotImplementedException();
             }
