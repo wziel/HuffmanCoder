@@ -8,7 +8,7 @@ namespace HuffmanCoder.Logic.Entities
 {
     public struct OutputValues
     {
-        public int Counts { get; set; }
+        public ushort Counts { get; set; }
         public int BitsLength { get; set; }
     }
 }

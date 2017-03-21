@@ -7,61 +7,61 @@ namespace HuffmanCoder.Logic.Writers.Encoding
 {
     /*Header consists of:
     -headerSize - 4 bytes
-    -huffmanEncodeModel - 4 bytes
-    -dataSizeInBits - 4 bytes
+    -huffmanEncodeModel - 1 byte
+    -specialSymbol - 1 byte
     -map (symbol and symbol counts)
     */
     
     public interface IHeaderCreator
     {
-        byte[] Create(uint bitAmount, HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> symbolsMap);
+        byte[] Create(HuffmanEncodeModel huffmanEncodeModel, bool specialSymbol, Dictionary<string, OutputValues> symbolsMap);
     }
 
     public class HeaderCreator : IHeaderCreator
     {
-        public byte[] Create(uint bitAmount, HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> symbolsMap)
+        public byte[] Create(HuffmanEncodeModel huffmanEncodeModel, bool specialSymbol, Dictionary<string, OutputValues> symbolsMap)
         {
-            List<byte> huffmanEncodeModelByteList = new List<byte>(BitConverter.GetBytes((uint)huffmanEncodeModel));
-            List<byte> bitAmountByteList = new List<byte>(BitConverter.GetBytes(bitAmount));
-            List<byte> symbolsMapByteList = CreateSymbolsMapByteList(symbolsMap);
+            byte huffmanEncodeModelByte = Convert.ToByte(huffmanEncodeModel);
+            byte specialSymbolByte = Convert.ToByte(specialSymbol);
+            List<byte> symbolsMapByteList = CreateSymbolsMapByteList(huffmanEncodeModel, symbolsMap);
 
-            byte[] header = CreateHeaderFromByteLists(huffmanEncodeModelByteList, bitAmountByteList, symbolsMapByteList);
+            byte[] header = CreateHeaderFromBytes(huffmanEncodeModelByte, specialSymbolByte, symbolsMapByteList);
             return header;
         }
 
-        private List<byte> CreateSymbolsMapByteList(Dictionary<string, OutputValues> symbolsMap)
+        private List<byte> CreateSymbolsMapByteList(HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> symbolsMap)
         {
-            StringBuilder builder = new StringBuilder();
-            foreach(KeyValuePair<string, OutputValues> symbol in symbolsMap)
-            {
-                builder.Append(symbol.Key);
-                builder.Append(":");
-                builder.Append(symbol.Value.Counts);
-                builder.Append(";");
-            }
+            List<byte> symbolsMapByteList = new List<byte>();
 
-            List<byte> symbolsMapByteList = new List<byte>(System.Text.Encoding.ASCII.GetBytes(builder.ToString()));
-            
-            // If map contains at least one element remove last ';' 
-            if (symbolsMap.Count > 0)
+
+            foreach (KeyValuePair<string, OutputValues> symbol in symbolsMap)
             {
-                symbolsMapByteList.RemoveAt(symbolsMapByteList.Count - 1);
+                string symbolKey = symbol.Key;
+                if(symbolKey.Length == 1 && huffmanEncodeModel != HuffmanEncodeModel.Standard)
+                {
+                    char singleSymbol = symbolKey[0];
+                    symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(singleSymbol)));
+                }
+                else
+                {
+                    symbolsMapByteList.AddRange(new List<byte>(System.Text.Encoding.ASCII.GetBytes(symbolKey)));
+                }
+
+                symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(symbol.Value.Counts)));
             }
 
             return symbolsMapByteList;
         }
 
-        private byte[] CreateHeaderFromByteLists(List<byte> huffmanEncodeModelByteList, List<byte> bitAmountByteList, List<byte> symbolsMapByteList)
+        private byte[] CreateHeaderFromBytes(byte huffmanEncodeModelByte, byte specialSymbolByte, List<byte> symbolsMapByteList)
         {
-            List<byte> headerBody = new List<byte>();
-            headerBody.AddRange(huffmanEncodeModelByteList);
-            headerBody.AddRange(bitAmountByteList);
-            headerBody.AddRange(symbolsMapByteList);
-
-            uint headerBodySize = (uint)headerBody.Count + 4;
+            uint headerSize = (uint)symbolsMapByteList.Count + 6;
      
-            List<byte> header = new List<byte>(BitConverter.GetBytes(headerBodySize));
-            header.AddRange(headerBody);
+            List<byte> header = new List<byte>();
+            header.AddRange(new List<byte>(BitConverter.GetBytes(headerSize)));
+            header.Add(huffmanEncodeModelByte);
+            header.Add(specialSymbolByte);
+            header.AddRange(symbolsMapByteList);
 
             return header.ToArray();
         }
