@@ -59,7 +59,7 @@ namespace HuffmanCoder.UI
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                outputTB.Text = openFileDialog1.FileName;
+                outputTB.Text = saveFileDialog1.FileName;
             }
         }
     }
