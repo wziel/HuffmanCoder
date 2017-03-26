@@ -20,7 +20,8 @@ namespace HuffmanCoder.UI
 
         private void encodeBTN_Click(object sender, EventArgs e)
         {
-            if (!System.IO.File.Exists(inputTB.Text) || !System.IO.File.Exists(outputTB.Text))
+            System.IO.File.Create(outputTB.Text);
+            if (!System.IO.File.Exists(inputTB.Text))
             {
                 MessageBox.Show("Please choose input file and output file");
                 return;
@@ -38,7 +39,8 @@ namespace HuffmanCoder.UI
 
         private void decodeBTN_Click(object sender, EventArgs e)
         {
-            if (!System.IO.File.Exists(inputTB.Text) || !System.IO.File.Exists(outputTB.Text))
+            System.IO.File.Create(inputTB.Text);
+            if (!System.IO.File.Exists(outputTB.Text))
             {
                 MessageBox.Show("Please choose input file and output file");
                 return;

@@ -81,7 +81,6 @@ namespace HuffmanCoder.Logic.Readers.Encoding
 
         public void Reset()
         {
-            throw new NotImplementedException();
         }
     }
 }
