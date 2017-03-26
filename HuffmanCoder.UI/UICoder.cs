@@ -1,4 +1,8 @@
-﻿using HuffmanCoder.Logic.Entities;
+﻿using HuffmanCoder.Logic.CodecInterfaces.Coder;
+using HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder;
+using HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder;
+using HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder;
+using HuffmanCoder.Logic.Entities;
 using HuffmanCoder.Logic.Helpers;
 using HuffmanCoder.Logic.Readers.Encoding;
 using HuffmanCoder.Logic.Writers.Encoding;
@@ -15,10 +19,17 @@ namespace HuffmanCoder.UI
         public Statistics Encode(string inputFilePath, string outputFilePath, HuffmanEncodeModel huffmanEncodeModel)
         {
             Statistics statiscs;
+            IHuffmanCoderInterface huffmanCoderInterface;
             IStatisticsBuilder statiscsGenerator = new StatisticsBuilder();
             IInputReader input = new InputReader(inputFilePath);
             ICoderOutputWriter output = new CoderOutputWriter(new ByteCreator(), new HeaderCreator());
-            //ToDo Michal depends on enum
+            if (huffmanEncodeModel == HuffmanEncodeModel.Standard)
+                huffmanCoderInterface = new StandardHuffmanCoderInterface(input, output);
+            else if (huffmanEncodeModel == HuffmanEncodeModel.Block)
+                huffmanCoderInterface = new PairHuffmanCoderInterface(input, output);
+            else
+                huffmanCoderInterface = new MarkowHuffmanCoderInterface(input, output);
+            huffmanCoderInterface.Encode();
             System.IO.File.WriteAllBytes(outputFilePath, output.FileBytes);
             statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, input.Size, output.Size);
             return statiscs;

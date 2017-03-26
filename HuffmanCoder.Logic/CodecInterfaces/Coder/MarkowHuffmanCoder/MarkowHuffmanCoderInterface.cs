@@ -10,7 +10,7 @@ using HuffmanCoder.Model.Codec;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
 {
-    class MarkowHuffmanCoderInterface : IHuffmanCoderInterface
+    public class MarkowHuffmanCoderInterface : IHuffmanCoderInterface
     {
         private IInputReader inputReader;
         private ICoderOutputWriter coderOutputWriter;
