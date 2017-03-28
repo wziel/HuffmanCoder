@@ -16,7 +16,7 @@ namespace HuffmanCoder.UnitTests.Model.Codec
         public void Encode_NumberOfBitsIsEqualsToNumberOfSymbolsEncoded()
         {
             //given
-            var coder = new OneSymbolCoder<char>();
+            var coder = new OneSymbolCoder<char>('a');
             var input = new MockCoderInput<char>(new List<char>() { 'a', 'a', 'a', 'a' });
             var output = new MockCoderOutput();
             //when

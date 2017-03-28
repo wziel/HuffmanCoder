@@ -52,5 +52,10 @@ namespace HuffmanCoder.Model.Codec
                 }
             }
         }
+
+        public Dictionary<T, bool[]> GetEncodingDictionary()
+        {
+            return EncodingDictionary;
+        }
     }
 }

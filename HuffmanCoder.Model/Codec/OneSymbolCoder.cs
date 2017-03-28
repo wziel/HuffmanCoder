@@ -12,6 +12,13 @@ namespace HuffmanCoder.Model.Codec
     /// <typeparam name="T"></typeparam>
     internal class OneSymbolCoder<T> : ICoder<T>
     {
+        private T symbol;
+
+        public OneSymbolCoder(T symbol)
+        {
+            this.symbol = symbol;
+        }
+
         public void Encode(ICoderInput<T> input, ICoderOutput output)
         {
             while(!input.IsEnd())
@@ -19,6 +26,14 @@ namespace HuffmanCoder.Model.Codec
                 input.Read();
                 output.Write(true);
             }
+        }
+
+        public Dictionary<T, bool[]> GetEncodingDictionary()
+        {
+            return new Dictionary<T, bool[]>
+            {
+                { symbol, new bool[] { true } }
+            };
         }
     }
 }

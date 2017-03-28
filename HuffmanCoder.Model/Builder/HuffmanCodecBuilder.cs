@@ -30,7 +30,7 @@ namespace HuffmanCoder.Model.Builder
             var nodeComparer = new HuffmanTreeNodeComparer<T>(valueComparer);
             if(symbolQuantityDic.Keys.Count == 0)
             {
-                throw new Exception("This builder requires at least one symbol in quantity dicrionary.");
+                throw new Exception("This builder requires at least one symbol in quantity dictionary.");
             }
             if (symbolQuantityDic.Keys.Count == 1)
             {
@@ -54,7 +54,7 @@ namespace HuffmanCoder.Model.Builder
         {
             if(root.IsLeaf)
             {
-                return new OneSymbolCoder<T>();
+                return new OneSymbolCoder<T>(root.Value);
             }
             return new HuffmanCoder<T>(root);
         }
