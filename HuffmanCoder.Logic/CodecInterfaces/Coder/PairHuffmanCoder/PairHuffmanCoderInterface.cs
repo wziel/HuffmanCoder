@@ -7,6 +7,7 @@ using HuffmanCoder.Logic.Readers.Encoding;
 using HuffmanCoder.Logic.Writers.Encoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
+using HuffmanCoder.Logic.Entities;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
 {
@@ -21,19 +22,22 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
         }
         public void Encode()
         {
-            var builder = new HuffmanCodecBuilder<Tuple<byte, byte>>();
-            var tree = builder.BuildTree(Comparer<Tuple<byte, byte>>.Default, createDictionary());
+            var symbolQuantityDic = createDictionary();
+            var builder = new HuffmanCodecBuilder<Tuple<byte, DefaultableSymbol<byte>>>();
+            var tree = builder.BuildTree(Comparer<Tuple<byte, DefaultableSymbol<byte>>>.Default, symbolQuantityDic);
             var coder = builder.GetCoder(tree);
-            coder.Encode(new PairHuffmanCoderInput(inputReader), new HuffmanCoderOutput(coderOutputWriter));
+            var coderInput = new PairHuffmanCoderInput(inputReader);
+            coder.Encode(coderInput, new HuffmanCoderOutput(coderOutputWriter));
+            coderOutputWriter.CreateFileBytes(HuffmanEncodeModel.Block, coderInput.isSpecialSymbol, SymbolQuantityMapConverter.PairIntToExtConvert(symbolQuantityDic, coder.GetEncodingDictionary()));
         }
 
-        private Dictionary<Tuple<byte, byte>, int> createDictionary()
+        private Dictionary<Tuple<byte, DefaultableSymbol<byte>>, int> createDictionary()
         {
-            Dictionary<Tuple<byte, byte>, int> symbolQuantityDic = new Dictionary<Tuple<byte, byte>, int>();
+            var symbolQuantityDic = new Dictionary<Tuple<byte, DefaultableSymbol<byte>>, int>();
             PairHuffmanCoderInput coderInput = new PairHuffmanCoderInput(inputReader);
             do
             {
-                Tuple<byte, byte> symbol = coderInput.Read();
+                Tuple<byte, DefaultableSymbol<byte>> symbol = coderInput.Read();
                 if (symbolQuantityDic.ContainsKey(symbol))
                 {
                     ++symbolQuantityDic[symbol];

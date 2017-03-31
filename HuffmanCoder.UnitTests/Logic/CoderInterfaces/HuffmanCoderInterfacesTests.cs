@@ -194,7 +194,7 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
 
             public void CreateFileBytes(HuffmanEncodeModel huffmanEncodeMode, bool specialSymbol, Dictionary<string, OutputValues> map)
             {
-                throw new NotImplementedException();
+                return;
             }
         }
     }

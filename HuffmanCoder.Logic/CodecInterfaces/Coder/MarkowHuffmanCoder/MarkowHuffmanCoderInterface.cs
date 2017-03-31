@@ -7,6 +7,7 @@ using HuffmanCoder.Logic.Readers.Encoding;
 using HuffmanCoder.Logic.Writers.Encoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
+using HuffmanCoder.Logic.Entities;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
 {
@@ -14,6 +15,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
     {
         private IInputReader inputReader;
         private ICoderOutputWriter coderOutputWriter;
+        private Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> symbolDictionary;
         public MarkowHuffmanCoderInterface(IInputReader inputReader, ICoderOutputWriter coderOutputWriter)
         {
             this.inputReader = inputReader;
@@ -30,6 +32,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
                 coderDictionary[previousSymbol].Encode(new MarkowHuffmanCoderInput(inputReader.Current), new HuffmanCoderOutput(coderOutputWriter));
                 previousSymbol = new DefaultableSymbol<byte>(inputReader.Current);
             }
+            coderOutputWriter.CreateFileBytes(HuffmanEncodeModel.Markov, true, SymbolQuantityMapConverter.MarkowIntToExtConvert(this.symbolDictionary, CreateEncodingDictionaries(coderDictionary)));
         }
 
         private Dictionary<DefaultableSymbol<byte>, ICoder<byte>> createCoderDictionary()
@@ -48,7 +51,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
 
         private Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> createSymbolDictionary()
         {
-            Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> perSymbolDictionary = new Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>>();
+            var perSymbolDictionary = new Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>>();
             DefaultableSymbol<byte> previousSymbol;
             perSymbolDictionary.Add(new DefaultableSymbol<byte>(true), new Dictionary<byte, int>()
             {
@@ -72,7 +75,18 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.MarkowHuffmanCoder
                 previousSymbol = new DefaultableSymbol<byte>(inputReader.Current);
             };
             inputReader.Reset();
+            this.symbolDictionary = perSymbolDictionary;
             return perSymbolDictionary;
+        }
+
+        private Dictionary<DefaultableSymbol<byte>, Dictionary<byte, bool[]>> CreateEncodingDictionaries(Dictionary<DefaultableSymbol<byte>, ICoder<byte>> coderDictionary)
+        {
+            var encodingDictionaries = new Dictionary<DefaultableSymbol<byte>, Dictionary<byte, bool[]>>();
+            foreach (KeyValuePair<DefaultableSymbol<byte>, ICoder<byte>> entry in coderDictionary)
+            {
+                encodingDictionaries.Add(entry.Key, entry.Value.GetEncodingDictionary());
+            }
+            return encodingDictionaries;
         }
     }
 }

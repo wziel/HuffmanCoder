@@ -16,6 +16,22 @@ namespace HuffmanCoder.Logic.CodecInterfaces
             this.isDefault = isDefault;
         }
 
+        public bool IsDefault
+        {
+            get
+            {
+                return isDefault;
+            }
+        }
+
+        public T Value
+        {
+            get
+            {
+                return value;
+            }
+        }
+
         public DefaultableSymbol(T value) : this(value, false) { }
 
         public DefaultableSymbol(T value, bool isDefault)

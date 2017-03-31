@@ -7,6 +7,7 @@ using HuffmanCoder.Logic.Readers.Encoding;
 using HuffmanCoder.Logic.Writers.Encoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
+using HuffmanCoder.Logic.Entities;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder
 {
@@ -21,10 +22,12 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.StandardHuffmanCoder
         }
         public void Encode()
         {
+            Dictionary<byte, int> symbolQuantityDic = createDictionary();
             var builder = new HuffmanCodecBuilder<byte>();
-            var tree = builder.BuildTree(Comparer<byte>.Default, createDictionary());
+            var tree = builder.BuildTree(Comparer<byte>.Default, symbolQuantityDic);
             ICoder<byte> huffmanCoder = builder.GetCoder(tree);
             huffmanCoder.Encode(new StandardHuffmanCoderInput(inputReader), new HuffmanCoderOutput(coderOutputWriter));
+            coderOutputWriter.CreateFileBytes(HuffmanEncodeModel.Standard, false, SymbolQuantityMapConverter.StandardIntToExtConvert(symbolQuantityDic, huffmanCoder.GetEncodingDictionary()));
         }
 
         private Dictionary<byte, int> createDictionary()

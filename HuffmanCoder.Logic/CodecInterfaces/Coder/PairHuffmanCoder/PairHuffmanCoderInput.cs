@@ -8,9 +8,14 @@ using HuffmanCoder.Logic.Readers.Encoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
 {
-    class PairHuffmanCoderInput : ICoderInput<Tuple<byte, byte>>
+    class PairHuffmanCoderInput : ICoderInput<Tuple<byte, DefaultableSymbol<byte>>>
     {
         private bool isEnd = false;
+
+        public bool isSpecialSymbol
+        {
+            get; set;
+        } = false;
 
         private IInputReader inputReader;
 
@@ -23,19 +28,20 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
             return isEnd;
         }
 
-        public Tuple<byte, byte> Read()
+        public Tuple<byte, DefaultableSymbol<byte>> Read()
         {
             byte firstSymbol = inputReader.Current;
             isEnd = !inputReader.MoveNext();
             if(isEnd)
             {
-                return new Tuple<byte, byte>(firstSymbol, (byte)0);
+                isSpecialSymbol = true;
+                return new Tuple<byte, DefaultableSymbol<byte>>(firstSymbol, new DefaultableSymbol<byte>(true));
             }
             else
             {
                 byte secondSymbol = inputReader.Current;
                 isEnd = !inputReader.MoveNext();
-                return new Tuple<byte, byte>(firstSymbol, secondSymbol);
+                return new Tuple<byte, DefaultableSymbol<byte>>(firstSymbol, new DefaultableSymbol<byte>(secondSymbol));
             }
         }
     }
