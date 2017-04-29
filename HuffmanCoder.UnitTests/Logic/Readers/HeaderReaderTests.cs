@@ -15,7 +15,7 @@ namespace HuffmanCoder.UnitTests.Logic.Readers
         public void HeaderReadOneElementInMapStandar_Tests()
         {
             HeaderReader headerReader = new HeaderReader();
-            byte[] map = new Byte[] { 65, 3 };
+            byte[] map = new Byte[] { 65, 3, 0 };
             headerReader.Read(map, true, HuffmanCoder.Logic.Entities.HuffmanEncodeModel.Standard);   
             Assert.AreEqual((uint)3, headerReader.symbolCounts["A"]);
         }
@@ -25,7 +25,7 @@ namespace HuffmanCoder.UnitTests.Logic.Readers
         public void HeaderReadTwoElementsInMapStandard()
         {
             HeaderReader headerReader = new HeaderReader();
-            byte[] map = new Byte[] { 65, 3, 66, 4 };
+            byte[] map = new Byte[] { 65, 3, 0, 66, 4, 0 };
             headerReader.Read(map, true, HuffmanCoder.Logic.Entities.HuffmanEncodeModel.Standard);
             Assert.AreEqual((uint)3, headerReader.symbolCounts["A"]);
             Assert.AreEqual((uint)4, headerReader.symbolCounts["B"]);

@@ -29,9 +29,9 @@ namespace HuffmanCoder.Logic.Readers
 
         private void StandardRead(byte[] map)
         {
-            for (int i = 0; i < map.Length; i += 2)
+            for (int i = 0; i < map.Length; i += StandardSymbolSize + CountsSize )
             {
-                symbolCountDict.Add(((char)map[i]).ToString(), map[i + 1]);
+                    symbolCountDict.Add(map[i].ToString(), BitConverter.ToUInt16(map.Skip(i + 1).Take(CountsSize).ToArray(), 0));
             }
         }
 

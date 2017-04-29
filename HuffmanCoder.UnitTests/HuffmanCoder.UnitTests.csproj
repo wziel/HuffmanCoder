@@ -63,6 +63,7 @@
     <Compile Include="Logic\CoderInterfaces\HuffmanCoderInterfacesTests.cs" />
     <Compile Include="Logic\CoderInterfaces\HuffmanDecoderInterfacesTests.cs" />
     <Compile Include="Logic\Helpers\HuffmanStatisticsHelperTest.cs" />
+    <Compile Include="Logic\Readers\Decoding\DecoderReaderTests.cs" />
     <Compile Include="Logic\Readers\HeaderReaderTests.cs" />
     <Compile Include="Logic\Readers\Encoding\InputReaderTests.cs" />
     <Compile Include="Logic\Writers\Encoding\CoderOutputWriterTests.cs" />
@@ -82,9 +83,7 @@
     <Compile Include="Model\Codec\OneSymbolDecoderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\Readers\Decoding\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\HuffmanCoder.Logic\HuffmanCoder.Logic.csproj">
       <Project>{e7039cd7-b04c-4937-8ad7-c0e8a74ad7d5}</Project>
@@ -97,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\5_bytes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\encoded_file.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

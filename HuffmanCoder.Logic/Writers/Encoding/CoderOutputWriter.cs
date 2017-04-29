@@ -77,7 +77,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
             {
                 ++currentSize;
                 data.Add(byteCreator.Data);
-            }
+            } 
             fileBytes = header.Concat(data).ToArray();
         }
     }

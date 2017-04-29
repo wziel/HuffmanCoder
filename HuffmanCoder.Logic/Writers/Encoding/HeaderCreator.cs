@@ -32,7 +32,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         private List<byte> CreateSymbolsMapByteList(HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> symbolsMap)
         {
             List<byte> symbolsMapByteList = new List<byte>();
-
+            System.Text.Encoding extendedASCII = System.Text.Encoding.GetEncoding(1252);
 
             foreach (KeyValuePair<string, OutputValues> symbol in symbolsMap)
             {
@@ -44,7 +44,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
                 }
                 else
                 {
-                    symbolsMapByteList.AddRange(new List<byte>(System.Text.Encoding.ASCII.GetBytes(symbolKey)));
+                    symbolsMapByteList.Add(Convert.ToByte(symbolKey[0]));
                 }
 
                 symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(symbol.Value.Counts)));
