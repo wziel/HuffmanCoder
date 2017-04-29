@@ -122,7 +122,7 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
             {
                 this.bits = bits;
             }
-            public Dictionary<string, int> symbolCounts
+            public Dictionary<string, ushort> SymbolCounts
             {
                 get
                 {

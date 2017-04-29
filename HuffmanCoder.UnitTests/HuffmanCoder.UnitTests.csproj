@@ -63,7 +63,7 @@
     <Compile Include="Logic\CoderInterfaces\HuffmanCoderInterfacesTests.cs" />
     <Compile Include="Logic\CoderInterfaces\HuffmanDecoderInterfacesTests.cs" />
     <Compile Include="Logic\Helpers\HuffmanStatisticsHelperTest.cs" />
-    <Compile Include="Logic\Readers\BitReaderTests.cs" />
+    <Compile Include="Logic\Readers\HeaderReaderTests.cs" />
     <Compile Include="Logic\Readers\Encoding\InputReaderTests.cs" />
     <Compile Include="Logic\Writers\Encoding\CoderOutputWriterTests.cs" />
     <Compile Include="Logic\Writers\Decoding\HeaderCreatorTests.cs" />
