@@ -82,6 +82,7 @@ namespace HuffmanCoder.Logic.Readers.Encoding
         public void Reset()
         {
             stream.BaseStream.Seek(0, SeekOrigin.Begin);
+            iterator = 0;
         }
     }
 }
