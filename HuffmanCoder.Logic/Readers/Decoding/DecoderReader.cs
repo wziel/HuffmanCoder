@@ -27,7 +27,8 @@ namespace HuffmanCoder.Logic.Readers.Decoding
             this.fileStream = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
             this.binaryReader = new BinaryReader(fileStream);
             InitHeader();
-            currentBitArray = new BitArray(binaryReader.ReadByte());
+            byte[] firstByte = binaryReader.ReadBytes(1);
+            currentBitArray = new BitArray(firstByte);
         }
 
         private void InitHeader()
@@ -63,7 +64,7 @@ namespace HuffmanCoder.Logic.Readers.Decoding
             bool bit;
             if (positionInByte == 8)
             {
-                currentBitArray = new BitArray(binaryReader.ReadByte());
+                currentBitArray = new BitArray(binaryReader.ReadBytes(1));
                 positionInByte = 0;
             }
             bit = currentBitArray[positionInByte];

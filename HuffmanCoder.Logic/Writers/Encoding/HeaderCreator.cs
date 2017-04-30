@@ -23,7 +23,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         {
             byte huffmanEncodeModelByte = Convert.ToByte(huffmanEncodeModel);
             byte specialSymbolByte = Convert.ToByte(specialSymbol);
-            List<byte> symbolsMapByteList = CreateSymbolsMapByteList(huffmanEncodeModel, symbolsMap);
+            List<byte> symbolsMapByteList = CreateSymbolsMapByteList(huffmanEncodeModel, symbolsMap, specialSymbol);
 
             byte[] header = CreateHeaderFromBytes(huffmanEncodeModelByte, specialSymbolByte, symbolsMapByteList);
             return header;
@@ -52,7 +52,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
                 }
                 else
                 {
-                    symbolsMapByteList.Add(Convert.ToByte(ToByteArray(symbolKey)));
+                    symbolsMapByteList.AddRange(ToByteArray(symbolKey));
                 }
 
                 symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(symbol.Value.Counts)));

@@ -31,7 +31,7 @@ namespace HuffmanCoder.Logic.Readers
         {
             for (int i = 0; i < map.Length; i += StandardSymbolSize + CountsSize )
             {
-                    symbolCountDict.Add(map[i].ToString(), BitConverter.ToUInt16(map.Skip(i + 1).Take(CountsSize).ToArray(), 0));
+                    symbolCountDict.Add(((char)map[i]).ToString(), BitConverter.ToUInt16(map.Skip(i + 1).Take(CountsSize).ToArray(), 0));
             }
         }
 
