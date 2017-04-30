@@ -64,8 +64,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
                 ++currentSize;
                 data.Add(byteCreator.Data);
             }
-            else
-                byteCreator.Add(bit);
+            byteCreator.Add(bit);
             ++bitsAmount;
         }
 

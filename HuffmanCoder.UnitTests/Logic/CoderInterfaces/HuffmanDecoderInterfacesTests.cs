@@ -139,6 +139,23 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
                 this.bits = bits;
                 this.symbolCounts = symbolCounts;
             }
+
+            public HuffmanEncodeModel HuffmanEncodeModel
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            public bool IsByteCountEven
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
             public Dictionary<string, ushort> SymbolCounts
             {
                 get

@@ -27,6 +27,7 @@ namespace HuffmanCoder.UI
             else
                 huffmanDecoderInterface = new MarkowHuffmanDecoderInterface(input, output);
                 huffmanDecoderInterface.Decode();
+            output.Save();
         }
     }
 }
