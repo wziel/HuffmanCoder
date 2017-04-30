@@ -8,7 +8,7 @@ using HuffmanCoder.Logic.Writers.Decoding;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
 {
-    class PairHuffmanDecoderOutput : IDecoderOutput<Tuple<byte, byte>>
+    class PairHuffmanDecoderOutput : IDecoderOutput<Tuple<byte, DefaultableSymbol<byte>>>
     {
         private IDecoderFileWriter decoderFileWriter;
         private int symbolsCount;
@@ -27,7 +27,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
             return isEnd;
         }
 
-        public void Write(Tuple<byte, byte> symbol)
+        public void Write(Tuple<byte, DefaultableSymbol<byte>> symbol)
         {
             decoderFileWriter.Write(symbol.Item1);
             if(!isByteCountEven && symbolsDecoded == symbolsCount - 1)
@@ -36,7 +36,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
                 isEnd = true;
                 return;
             }
-            decoderFileWriter.Write(symbol.Item2);
+            decoderFileWriter.Write(symbol.Item2.Value);
             ++symbolsDecoded;
             if (symbolsDecoded == symbolsCount)
                 isEnd = true;

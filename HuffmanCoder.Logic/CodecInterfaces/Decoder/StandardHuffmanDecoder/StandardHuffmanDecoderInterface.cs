@@ -17,11 +17,11 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.StandardHuffmanDecoder
         private Dictionary<byte, int> symbolQuantityDic;
         
 
-        public StandardHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<byte, int> symbolQuantityDic)
+        public StandardHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter)
         {
             this.decoderReader = decoderReader;
             this.decoderFileWriter = decoderFileWriter;
-            this.symbolQuantityDic = symbolQuantityDic;
+            this.symbolQuantityDic = SymbolQuantityMapConverter.StandardExtToIntConvert(decoderReader.SymbolCounts);
         }
             
         public void Decode()

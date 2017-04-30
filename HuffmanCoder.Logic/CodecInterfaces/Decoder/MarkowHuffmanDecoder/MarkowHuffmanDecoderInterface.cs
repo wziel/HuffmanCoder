@@ -18,11 +18,11 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.MarkowHuffmanDecoder
         private int symbolsCount = 0;
 
 
-        public MarkowHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> perSymbolDictionary)
+        public MarkowHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter)
         {
             this.decoderReader = decoderReader;
             this.decoderFileWriter = decoderFileWriter;
-            this.perSymbolDictionary = perSymbolDictionary;
+            this.perSymbolDictionary = SymbolQuantityMapConverter.MarkowExtToIntConvert(decoderReader.SymbolCounts);
             foreach (DefaultableSymbol<byte> key in perSymbolDictionary.Keys)
             {
                 this.symbolsCount += perSymbolDictionary[key].Sum(x => x.Value);

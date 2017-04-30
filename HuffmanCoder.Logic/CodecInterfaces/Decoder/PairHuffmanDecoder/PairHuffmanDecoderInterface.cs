@@ -14,22 +14,22 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
     {
         private IDecoderReader decoderReader;
         private IDecoderFileWriter decoderFileWriter;
-        private Dictionary<Tuple<byte, byte>, int> symbolQuantityDic;
+        private Dictionary<Tuple<byte, DefaultableSymbol<byte>>, int> symbolQuantityDic;
         private bool isByteCountEven;
 
 
-        public PairHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, Dictionary<Tuple<byte, byte>, int> symbolQuantityDic, bool isByteCountEven)
+        public PairHuffmanDecoderInterface(IDecoderReader decoderReader, IDecoderFileWriter decoderFileWriter, bool isByteCountEven)
         {
             this.decoderReader = decoderReader;
             this.decoderFileWriter = decoderFileWriter;
-            this.symbolQuantityDic = symbolQuantityDic;
+            this.symbolQuantityDic = SymbolQuantityMapConverter.PairExtToIntConvert(decoderReader.SymbolCounts);
             this.isByteCountEven = isByteCountEven;
         }
 
         public void Decode()
         {
-            var builder = new HuffmanCodecBuilder<Tuple<byte, byte>>();
-            var tree = builder.BuildTree(Comparer<Tuple<byte, byte>>.Default, symbolQuantityDic);
+            var builder = new HuffmanCodecBuilder<Tuple<byte, DefaultableSymbol<byte>>>();
+            var tree = builder.BuildTree(Comparer<Tuple<byte, DefaultableSymbol<byte>>>.Default, symbolQuantityDic);
             var decoder = builder.GetDecoder(tree);
             int symbolsCount = symbolQuantityDic.Sum(x => x.Value);
             decoder.Decode(new HuffmanDecoderInput(decoderReader), new PairHuffmanDecoderOutput(decoderFileWriter, symbolsCount, isByteCountEven));

@@ -23,18 +23,18 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
         {
             //given
             int[] input = new int[] { 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0 };
-            MockDecoderReader mockDecoderReader = new MockDecoderReader(input);
             MockDecoderFileWriter mockDecoderFileWriter = new MockDecoderFileWriter();
-            var symbolQuantityDic = new Dictionary<byte, int>()
+            var symbolQuantityDic = new Dictionary<string, ushort>()
             {
-                {(byte) 'A', 4 },
-                {(byte) 'B', 3 },
-                {(byte) 'C', 2 },
-                {(byte) 'D', 1 }
+                {"A", 4 },
+                {"B", 3 },
+                {"C", 2 },
+                {"D", 1 }
             };
+            MockDecoderReader mockDecoderReader = new MockDecoderReader(input, symbolQuantityDic);
 
             //when
-            StandardHuffmanDecoderInterface standardHuffmanDecoder = new StandardHuffmanDecoderInterface(mockDecoderReader, mockDecoderFileWriter, symbolQuantityDic);
+            StandardHuffmanDecoderInterface standardHuffmanDecoder = new StandardHuffmanDecoderInterface(mockDecoderReader, mockDecoderFileWriter);
             standardHuffmanDecoder.Decode();
 
             //then
@@ -47,17 +47,17 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
         {
             //given
             int[] input = new int[] { 1, 1, 0, 1, 0, 1, 1, 0 };
-            MockDecoderReader mockDecoderReader = new MockDecoderReader(input);
             MockDecoderFileWriter mockDecoderFileWriter = new MockDecoderFileWriter();
-            var symbolQuantityDic = new Dictionary<Tuple<byte, byte>, int>()
+            var symbolQuantityDic = new Dictionary<string, ushort>()
             {
-                {new Tuple<byte, byte>((byte) 'A', (byte) 'B'), 2 },
-                {new Tuple<byte, byte>((byte) 'C', (byte) 'A'), 2 },
-                {new Tuple<byte, byte>((byte) 'B', (byte) 'D'), 1 }
+                {"AB", 2 },
+                {"CA", 2 },
+                {"BD", 1 }
             };
+            MockDecoderReader mockDecoderReader = new MockDecoderReader(input, symbolQuantityDic);
 
             //when
-            PairHuffmanDecoderInterface pairHuffmanDecoder = new PairHuffmanDecoderInterface(mockDecoderReader, mockDecoderFileWriter, symbolQuantityDic, true);
+            PairHuffmanDecoderInterface pairHuffmanDecoder = new PairHuffmanDecoderInterface(mockDecoderReader, mockDecoderFileWriter, true);
             pairHuffmanDecoder.Decode();
 
             //then
@@ -65,48 +65,63 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [TestMethod]
         public void MarkowDecoderDecodeOutput()
         {
             //given
             int[] input = new int[] { 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0 };
-            MockDecoderReader mockDecoderReader = new MockDecoderReader(input);
             MockDecoderFileWriter mockDecoderFileWriter = new MockDecoderFileWriter();
-            var symbolQuantityDic = new Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>>()
+            var symbolQuantityDic = new Dictionary<string, ushort>()
             {
-                { new DefaultableSymbol<byte>(true), new Dictionary<byte, int>()
-                    {
-                        {(byte) 'A', 1}
-                    }
-                },
-                { new DefaultableSymbol<byte>((byte) 'A'), new Dictionary<byte, int>()
-                    {
-                        {(byte) 'A', 2},
-                        {(byte) 'B', 1},
-                        {(byte) 'C', 1}
-                    }
-                },
-                { new DefaultableSymbol<byte>((byte) 'B'), new Dictionary<byte, int>()
-                    {
-                        {(byte) 'C', 1},
-                        {(byte) 'A', 1}
-                    }
-                },
-                { new DefaultableSymbol<byte>((byte) 'C'), new Dictionary<byte, int>()
-                    {
-                        {(byte) 'A', 1},
-                        {(byte) 'D', 1}
-                    }
-                },
-                { new DefaultableSymbol<byte>((byte) 'D'), new Dictionary<byte, int>()
-                    {
-                        {(byte) 'B', 1}
-                    }
-                },
+                {"A", 1 },
+                {"AA", 2 },
+                {"AB", 1 },
+                {"AC", 1 },
+                {"BC", 1 },
+                {"BA", 1 },
+                {"CA", 1 },
+                {"CD", 1 },
+                {"DB", 1 }
             };
+            //{
+            //    { new DefaultableSymbol<byte>(true), new Dictionary<byte, int>()
+            //        {
+            //            {(byte) 'A', 1}
+            //        }
+            //    },
+            //    { new DefaultableSymbol<byte>((byte) 'A'), new Dictionary<byte, int>()
+            //        {
+            //            {(byte) 'A', 2},
+            //            {(byte) 'B', 1},
+            //            {(byte) 'C', 1}
+            //        }
+            //    },
+            //    { new DefaultableSymbol<byte>((byte) 'B'), new Dictionary<byte, int>()
+            //        {
+            //            {(byte) 'C', 1},
+            //            {(byte) 'A', 1}
+            //        }
+            //    },
+            //    { new DefaultableSymbol<byte>((byte) 'C'), new Dictionary<byte, int>()
+            //        {
+            //            {(byte) 'A', 1},
+            //            {(byte) 'D', 1}
+            //        }
+            //    },
+            //    { new DefaultableSymbol<byte>((byte) 'D'), new Dictionary<byte, int>()
+            //        {
+            //            {(byte) 'B', 1}
+            //        }
+            //    },
+            //};
+
+            MockDecoderReader mockDecoderReader = new MockDecoderReader(input, symbolQuantityDic);
 
             //when
-            MarkowHuffmanDecoderInterface markowHuffmanDecoder = new MarkowHuffmanDecoderInterface(mockDecoderReader, mockDecoderFileWriter, symbolQuantityDic);
+            MarkowHuffmanDecoderInterface markowHuffmanDecoder = new MarkowHuffmanDecoderInterface(mockDecoderReader, mockDecoderFileWriter);
             markowHuffmanDecoder.Decode();
 
             //then
@@ -117,16 +132,18 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
         {
             private int[] bits;
             private int index = 0;
+            private Dictionary<string, ushort> symbolCounts;
 
-            public MockDecoderReader(int[] bits)
+            public MockDecoderReader(int[] bits, Dictionary<string, ushort> symbolCounts)
             {
                 this.bits = bits;
+                this.symbolCounts = symbolCounts;
             }
             public Dictionary<string, ushort> SymbolCounts
             {
                 get
                 {
-                    throw new NotImplementedException();
+                    return this.symbolCounts;
                 }
             }
 

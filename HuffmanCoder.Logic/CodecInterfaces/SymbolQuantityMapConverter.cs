@@ -9,10 +9,10 @@ namespace HuffmanCoder.Logic.CodecInterfaces
 {
     public class SymbolQuantityMapConverter
     {
-        public static Dictionary<byte, int> StandardExtToIntConvert(Dictionary<string, int> mapFromFile)
+        public static Dictionary<byte, int> StandardExtToIntConvert(Dictionary<string, ushort> mapFromFile)
         {
             var internalSymbolQuantMap = new Dictionary<byte, int>();
-            foreach (KeyValuePair<string, int> entry in mapFromFile)
+            foreach (KeyValuePair<string, ushort> entry in mapFromFile)
             {
                 if(entry.Key.Length > 1)
                 {
@@ -23,10 +23,10 @@ namespace HuffmanCoder.Logic.CodecInterfaces
             return internalSymbolQuantMap;
         }
 
-        public static Dictionary<Tuple<byte, DefaultableSymbol<byte>>, int> PairExtToIntConvert(Dictionary<string, int> mapFromFile)
+        public static Dictionary<Tuple<byte, DefaultableSymbol<byte>>, int> PairExtToIntConvert(Dictionary<string, ushort> mapFromFile)
         {
             var internalSymbolQuantMap = new Dictionary<Tuple<byte, DefaultableSymbol<byte>>, int>();
-            foreach (KeyValuePair<string, int> entry in mapFromFile)
+            foreach (KeyValuePair<string, ushort> entry in mapFromFile)
             {
                 if (entry.Key.Length == 1)
                 {
@@ -40,10 +40,10 @@ namespace HuffmanCoder.Logic.CodecInterfaces
             return internalSymbolQuantMap;
         }
 
-        public static Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> MarkowExtToIntConvert(Dictionary<string, int> mapFromFile)
+        public static Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>> MarkowExtToIntConvert(Dictionary<string, ushort> mapFromFile)
         {
             var internalSymbolQuantMap = new Dictionary<DefaultableSymbol<byte>, Dictionary<byte, int>>();
-            foreach (KeyValuePair<string, int> entry in mapFromFile)
+            foreach (KeyValuePair<string, ushort> entry in mapFromFile)
             {
                 if (entry.Key.Length == 1)
                 {
@@ -54,10 +54,17 @@ namespace HuffmanCoder.Logic.CodecInterfaces
                 }
                 else
                 {
-                    internalSymbolQuantMap.Add(new DefaultableSymbol<byte>((byte) entry.Key[0]), new Dictionary<byte, int>()
+                    if (internalSymbolQuantMap.ContainsKey(new DefaultableSymbol<byte>((byte)entry.Key[0])))
+                    {
+                        internalSymbolQuantMap[new DefaultableSymbol<byte>((byte)entry.Key[0])].Add((byte)entry.Key[1], entry.Value);
+                    }
+                    else
+                    {
+                        internalSymbolQuantMap.Add(new DefaultableSymbol<byte>((byte)entry.Key[0]), new Dictionary<byte, int>()
                     {
                         {(byte) entry.Key[1], entry.Value}
                     });
+                    }
                 }
             }
             return internalSymbolQuantMap;
