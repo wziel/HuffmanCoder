@@ -13,12 +13,16 @@ namespace HuffmanCoder.Logic.Readers.Decoding
     {
         Dictionary<string, ushort> SymbolCounts { get; }
         bool ReadBit();
+        HuffmanEncodeModel HuffmanEncodeModel { get; }
+        bool IsByteCountEven { get; }
     }
     public sealed class DecoderReader : IDecoderReader, IDisposable
     {
         private FileStream fileStream;
         private BinaryReader binaryReader;
         private Dictionary<string, ushort> symbolCounts;
+        private byte huffmanEncodeModel;
+        private byte specialSymbolByte;
 
         private byte positionInByte=0;
         private BitArray currentBitArray;
@@ -35,8 +39,8 @@ namespace HuffmanCoder.Logic.Readers.Decoding
         {
             bool specialSymbol = true;
             uint headerSize = binaryReader.ReadUInt32();
-            byte huffmanEncodeModel = binaryReader.ReadByte();
-            byte specialSymbolByte = binaryReader.ReadByte();
+            this.huffmanEncodeModel = binaryReader.ReadByte();
+            this.specialSymbolByte = binaryReader.ReadByte();
             if (specialSymbolByte == 0)
                 specialSymbol = false;
             byte[] map = binaryReader.ReadBytes((int)headerSize - 6);
@@ -50,6 +54,22 @@ namespace HuffmanCoder.Logic.Readers.Decoding
             get
             {
                 return symbolCounts;
+            }
+        }
+
+        public HuffmanEncodeModel HuffmanEncodeModel
+        {
+            get
+            {
+                return (HuffmanEncodeModel)huffmanEncodeModel;
+            }
+        }
+
+        public bool IsByteCountEven
+        {
+            get
+            {
+                return specialSymbolByte != 0;
             }
         }
 

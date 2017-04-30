@@ -20,13 +20,13 @@ namespace HuffmanCoder.UI
             IHuffmanDecoderInterface huffmanDecoderInterface;
             IDecoderReader input = new DecoderReader(inputFilePath);
             IDecoderFileWriter output = new DecoderFileWriter(outputFilePath);
-            //if (huffmanEncodeModel == HuffmanEncodeModel.Standard)
-            //   // huffmanCoderInterface = new StandardHuffmanDecoderInterface(input, output);
-            //else if (huffmanEncodeModel == HuffmanEncodeModel.Block)
-            //    //huffmanCoderInterface = new PairHuffmanDecoderInterface(input, output);
-            //else
-            //    //huffmanCoderInterface = new MarkowHuffmanDecoderInterface(input, output);
-            //huffmanDecoderInterface.Decode();
+            if (input.HuffmanEncodeModel == HuffmanEncodeModel.Standard)
+               huffmanDecoderInterface = new StandardHuffmanDecoderInterface(input, output);
+            else if (input.HuffmanEncodeModel == HuffmanEncodeModel.Block)
+              huffmanDecoderInterface = new PairHuffmanDecoderInterface(input, output, input.IsByteCountEven);
+            else
+                huffmanDecoderInterface = new MarkowHuffmanDecoderInterface(input, output);
+                huffmanDecoderInterface.Decode();
         }
     }
 }
