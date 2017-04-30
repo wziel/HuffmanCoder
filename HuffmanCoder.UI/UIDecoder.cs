@@ -1,4 +1,11 @@
-﻿using System;
+﻿using HuffmanCoder.Logic.CodecInterfaces.Decoder;
+using HuffmanCoder.Logic.CodecInterfaces.Decoder.MarkowHuffmanDecoder;
+using HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder;
+using HuffmanCoder.Logic.CodecInterfaces.Decoder.StandardHuffmanDecoder;
+using HuffmanCoder.Logic.Entities;
+using HuffmanCoder.Logic.Readers.Decoding;
+using HuffmanCoder.Logic.Writers.Decoding;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +17,16 @@ namespace HuffmanCoder.UI
     {
         public void Decode(string inputFilePath, string outputFilePath)
         {
-            IHuffmanCoderInterface huffmanCoderInterface;
-            IStatisticsBuilder statiscsGenerator = new StatisticsBuilder();
-            IInputReader input = new InputReader(inputFilePath);
-            ICoderOutputWriter output = new CoderOutputWriter(new ByteCreator(), new HeaderCreator());
-            if (huffmanEncodeModel == HuffmanEncodeModel.Standard)
-                huffmanCoderInterface = new StandardHuffmanDecoderInterface(input, output);
-            else if (huffmanEncodeModel == HuffmanEncodeModel.Block)
-                huffmanCoderInterface = new PairHuffmanDecoderInterface(input, output);
-            else
-                huffmanCoderInterface = new MarkowHuffmanDecoderInterface(input, output);
-            huffmanCoderInterface.Encode();
-            System.IO.File.WriteAllBytes(outputFilePath, output.FileBytes);
-            statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, input.Size, output.Size);
-            return statiscs;
+            IHuffmanDecoderInterface huffmanDecoderInterface;
+            IDecoderReader input = new DecoderReader(inputFilePath);
+            IDecoderFileWriter output = new DecoderFileWriter(outputFilePath);
+            //if (huffmanEncodeModel == HuffmanEncodeModel.Standard)
+            //   // huffmanCoderInterface = new StandardHuffmanDecoderInterface(input, output);
+            //else if (huffmanEncodeModel == HuffmanEncodeModel.Block)
+            //    //huffmanCoderInterface = new PairHuffmanDecoderInterface(input, output);
+            //else
+            //    //huffmanCoderInterface = new MarkowHuffmanDecoderInterface(input, output);
+            //huffmanDecoderInterface.Decode();
         }
     }
 }
