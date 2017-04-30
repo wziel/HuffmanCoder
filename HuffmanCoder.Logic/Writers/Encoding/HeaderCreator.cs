@@ -29,25 +29,38 @@ namespace HuffmanCoder.Logic.Writers.Encoding
             return header;
         }
 
-        private List<byte> CreateSymbolsMapByteList(HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> symbolsMap)
+        private byte[] ToByteArray(string text)
+        {
+            var array = new byte[text.Length];
+            for (int i = 0; i < text.Length; ++i)
+                array[i] = Convert.ToByte(text[i]);
+            return array;
+        }
+
+        private List<byte> CreateSymbolsMapByteList(HuffmanEncodeModel huffmanEncodeModel, Dictionary<string, OutputValues> symbolsMap, bool specialSymbol)
         {
             List<byte> symbolsMapByteList = new List<byte>();
-            System.Text.Encoding extendedASCII = System.Text.Encoding.GetEncoding(1252);
-
+            char specialSymbolCharacter = '0';
+            ushort specialSymbolCounts = 0;
             foreach (KeyValuePair<string, OutputValues> symbol in symbolsMap)
             {
                 string symbolKey = symbol.Key;
                 if(symbolKey.Length == 1 && huffmanEncodeModel != HuffmanEncodeModel.Standard)
                 {
-                    char singleSymbol = symbolKey[0];
-                    symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(singleSymbol)));
+                    specialSymbolCharacter = symbolKey[0];
+                    specialSymbolCounts = symbol.Value.Counts;
                 }
                 else
                 {
-                    symbolsMapByteList.Add(Convert.ToByte(symbolKey[0]));
+                    symbolsMapByteList.Add(Convert.ToByte(ToByteArray(symbolKey)));
                 }
 
                 symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(symbol.Value.Counts)));
+            }
+            if (specialSymbol)
+            {
+                symbolsMapByteList.Add(Convert.ToByte(specialSymbol));
+                symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(specialSymbolCounts)));
             }
 
             return symbolsMapByteList;
