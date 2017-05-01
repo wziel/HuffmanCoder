@@ -53,9 +53,8 @@ namespace HuffmanCoder.Logic.Writers.Encoding
                 else
                 {
                     symbolsMapByteList.AddRange(ToByteArray(symbolKey));
+                    symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(symbol.Value.Counts)));
                 }
-
-                symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(symbol.Value.Counts)));
             }
             if (specialSymbol)
             {

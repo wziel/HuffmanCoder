@@ -16,7 +16,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
         public void WithoutMap()
         {
             var headerCrator = new HeaderCreator();
-            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, true, new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>());
+            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, false, new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>());
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte
             Assert.AreEqual(6, header.Length);
         }
@@ -27,7 +27,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             var headerCrator = new HeaderCreator();
             var map = new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>();
             map.Add("A", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
-            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, true, map);
+            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, false, map);
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (A5) - 3 bytes
             Assert.AreEqual(9, header.Length);
         }
@@ -39,7 +39,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             var map = new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>();
             map.Add("A", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             map.Add("B", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 3 });
-            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, true, map);
+            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, false, map);
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (A5B3) - 6 bytes
             Assert.AreEqual(12, header.Length);
         }
@@ -52,7 +52,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             map.Add("A", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             map.Add("B", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 3 });
             map.Add("C", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 7 });
-            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, true, map);
+            byte[] header = headerCrator.Create(HuffmanEncodeModel.Standard, false, map);
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (A5B3C7) - 9 bytes
             Assert.AreEqual(15, header.Length);
         }
@@ -63,7 +63,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             var headerCrator = new HeaderCreator();
             var map = new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>();
             map.Add("AA", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
-            byte[] header = headerCrator.Create(HuffmanEncodeModel.Block, true, map);
+            byte[] header = headerCrator.Create(HuffmanEncodeModel.Block, false, map);
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (AA5) - 4 bytes
             Assert.AreEqual(10, header.Length);
         }
@@ -75,7 +75,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             var map = new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>();
             map.Add("AA", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             map.Add("BC", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
-            byte[] header = headerCrator.Create(HuffmanEncodeModel.Block, true, map);
+            byte[] header = headerCrator.Create(HuffmanEncodeModel.Block, false, map);
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (AA5BC5) - 8 bytes
             Assert.AreEqual(14, header.Length);
         }
