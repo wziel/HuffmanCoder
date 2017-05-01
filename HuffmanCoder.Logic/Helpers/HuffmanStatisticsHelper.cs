@@ -55,12 +55,17 @@ namespace HuffmanCoder.Logic.Helpers
         {
             double inputFileBitRate = EvaluateInputFileBitRate(symbolStatisticsList);
             double outputFileBitRate = EvaluateOutputFileBitRate(symbolStatisticsList);
+            double outputFileBitRateWithHeader = EvaluateOutputFileBitRateWithHeader(symbolStatisticsList);
+
             double bitRateProportion = Math.Round(outputFileBitRate / inputFileBitRate, DECIMAL_DIGITS);
+            double bitRateProportionWithHeader = Math.Round(outputFileBitRateWithHeader / inputFileBitRate, DECIMAL_DIGITS);
 
             BitRateStatistics statistics = new BitRateStatistics();
             statistics.InputFileBitRate = inputFileBitRate;
             statistics.OutputFileBitRate = outputFileBitRate;
+            statistics.OutputFileBitRateWithHeader = outputFileBitRateWithHeader;
             statistics.BitRateProportion = bitRateProportion;
+            statistics.BitRateProportionWithHeader = bitRateProportionWithHeader;
 
             return statistics;
         }
@@ -87,14 +92,25 @@ namespace HuffmanCoder.Logic.Helpers
             return bitRate;
         }
 
-        public FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize)
+        private double EvaluateOutputFileBitRateWithHeader(List<SymbolStatistics> symbolStatisticsList)
+        {
+            //TODO IMPLEMENT
+            return 0;
+        }
+
+        public FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize, uint headerSize)
         {
             FileSizeStatistics statistics = new FileSizeStatistics();
 
             statistics.InputFileSize = inputFileSize;
             statistics.OutputFileSize = outputFileSize;
-            double proportion = (double)outputFileSize / (double)inputFileSize;
-            statistics.FileSizeProportion = Math.Round(proportion, DECIMAL_DIGITS);
+            statistics.OutputFileSizeWithHeader = outputFileSize + headerSize;
+
+            double compressionRatio = (double)outputFileSize / (double)inputFileSize;
+            double compressionRatioWithHeader = (double)statistics.OutputFileSizeWithHeader / (double)inputFileSize;
+
+            statistics.CompressionRatio = Math.Round(compressionRatio, DECIMAL_DIGITS);
+            statistics.CompressionRatioWithHeader = Math.Round(compressionRatioWithHeader, DECIMAL_DIGITS);
 
             return statistics;
         }

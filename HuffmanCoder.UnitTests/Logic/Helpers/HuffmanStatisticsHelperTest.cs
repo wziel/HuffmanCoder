@@ -115,13 +115,13 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
             FileSizeStatistics expectedStatistics = new FileSizeStatistics();
             expectedStatistics.InputFileSize = 100;
             expectedStatistics.OutputFileSize = 50;
-            expectedStatistics.FileSizeProportion = 0.5;
+            expectedStatistics.CompressionRatio = 0.5;
 
             FileSizeStatistics statistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize);
 
             Assert.AreEqual(expectedStatistics.InputFileSize, statistics.InputFileSize);
             Assert.AreEqual(expectedStatistics.OutputFileSize, statistics.OutputFileSize);
-            Assert.AreEqual(expectedStatistics.FileSizeProportion, statistics.FileSizeProportion);
+            Assert.AreEqual(expectedStatistics.CompressionRatio, statistics.CompressionRatio);
         }
     }
 }

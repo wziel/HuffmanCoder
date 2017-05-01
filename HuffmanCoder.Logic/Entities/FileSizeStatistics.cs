@@ -10,6 +10,8 @@ namespace HuffmanCoder.Logic.Entities
     {
         public uint InputFileSize { get; set; }
         public uint OutputFileSize { get; set; }
-        public double FileSizeProportion { get; set; }
+        public uint OutputFileSizeWithHeader { get; set; }
+        public double CompressionRatio { get; set; }
+        public double CompressionRatioWithHeader { get; set; }
     }
 }

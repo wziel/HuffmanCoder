@@ -31,7 +31,7 @@ namespace HuffmanCoder.UI
                 huffmanCoderInterface = new MarkowHuffmanCoderInterface(input, output);
             huffmanCoderInterface.Encode();
             System.IO.File.WriteAllBytes(outputFilePath, output.FileBytes);
-            statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, input.Size, output.Size);
+            statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, output.Header, input.Size, output.Size);
             return statiscs;
         }
     }

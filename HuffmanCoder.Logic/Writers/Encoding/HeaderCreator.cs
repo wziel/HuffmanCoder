@@ -14,18 +14,23 @@ namespace HuffmanCoder.Logic.Writers.Encoding
     
     public interface IHeaderCreator
     {
-        byte[] Create(HuffmanEncodeModel huffmanEncodeModel, bool specialSymbol, Dictionary<string, OutputValues> symbolsMap);
+        Header Create(HuffmanEncodeModel huffmanEncodeModel, bool specialSymbol, Dictionary<string, OutputValues> symbolsMap);
     }
 
     public class HeaderCreator : IHeaderCreator
     {
-        public byte[] Create(HuffmanEncodeModel huffmanEncodeModel, bool specialSymbol, Dictionary<string, OutputValues> symbolsMap)
+        public Header Create(HuffmanEncodeModel huffmanEncodeModel, bool specialSymbol, Dictionary<string, OutputValues> symbolsMap)
         {
             byte huffmanEncodeModelByte = Convert.ToByte(huffmanEncodeModel);
             byte specialSymbolByte = Convert.ToByte(specialSymbol);
             List<byte> symbolsMapByteList = CreateSymbolsMapByteList(huffmanEncodeModel, symbolsMap, specialSymbol);
 
-            byte[] header = CreateHeaderFromBytes(huffmanEncodeModelByte, specialSymbolByte, symbolsMapByteList);
+            byte[] headerContent = CreateHeaderFromBytes(huffmanEncodeModelByte, specialSymbolByte, symbolsMapByteList);
+
+            Header header = new Header();
+            header.Content = headerContent;
+            header.Size = (uint) headerContent.Length;
+
             return header;
         }
 

@@ -15,6 +15,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         Dictionary<string, OutputValues> SymbolMap { get; }
         uint Size { get; }
         byte[] FileBytes { get; }
+        Header Header { get;  }
     }
     public class CoderOutputWriter : ICoderOutputWriter
     {
@@ -22,9 +23,9 @@ namespace HuffmanCoder.Logic.Writers.Encoding
         private List<Byte> data = new List<byte>();
         private IByteCreator byteCreator;
         private Dictionary<string, OutputValues> symbolMap;
-        private List<Byte> header = new List<byte>();
         private uint bitsAmount = 0;
         private byte[] fileBytes;
+        private Header header;
         private IHeaderCreator headerCreator;
 
         public CoderOutputWriter(IByteCreator byteCreator, IHeaderCreator headerCreator)
@@ -57,6 +58,14 @@ namespace HuffmanCoder.Logic.Writers.Encoding
             }
         }
 
+        public Header Header
+        {
+            get
+            {
+                return header;
+            }
+        }
+
         public void Write(bool bit)
         {
             if (byteCreator.IsReady)
@@ -70,14 +79,16 @@ namespace HuffmanCoder.Logic.Writers.Encoding
 
         public void CreateFileBytes(HuffmanEncodeModel huffmanEncodeModel, bool specialSymbol, Dictionary<string, OutputValues> map)
         {
-            byte[] header = headerCreator.Create(huffmanEncodeModel, specialSymbol, map);
+            Header header = headerCreator.Create(huffmanEncodeModel, specialSymbol, map);
+            this.header = header;
             this.symbolMap = map;
+
             if (byteCreator.IsEmpty == false)
             {
                 ++currentSize;
                 data.Add(byteCreator.Data);
-            }
-            fileBytes = header.Concat(data).ToArray();
+            } 
+            fileBytes = header.Content.Concat(data).ToArray();
         }
     }
 }

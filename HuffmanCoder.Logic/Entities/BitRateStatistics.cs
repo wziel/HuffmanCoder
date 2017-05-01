@@ -10,6 +10,8 @@ namespace HuffmanCoder.Logic.Entities
     {
         public double InputFileBitRate { get; set; }
         public double OutputFileBitRate { get; set; }
+        public double OutputFileBitRateWithHeader { get; set; }
         public double BitRateProportion { get; set; }
+        public double BitRateProportionWithHeader { get; set; }
     }
 }

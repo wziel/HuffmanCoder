@@ -63,6 +63,7 @@
     <Compile Include="Entities\BitRateStatistics.cs" />
     <Compile Include="Entities\FileSizeStatistics.cs" />
     <Compile Include="Entities\OutputValues.cs" />
+    <Compile Include="Entities\Header.cs" />
     <Compile Include="Entities\Statistics.cs" />
     <Compile Include="Entities\SymbolStatistics.cs" />
     <Compile Include="Helpers\HuffmanStatisticsHelper.cs" />

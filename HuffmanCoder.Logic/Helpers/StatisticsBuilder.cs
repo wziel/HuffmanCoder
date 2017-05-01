@@ -10,12 +10,14 @@ namespace HuffmanCoder.Logic.Helpers
 {
     public interface IStatisticsBuilder
     {
-        Statistics BuildStatistics(Dictionary<string, OutputValues> symbolsMap, uint inputFileSize, uint outputFileSize);
+        Statistics BuildStatistics(Dictionary<string, OutputValues> symbolsMap, Header header, 
+            uint inputFileSize, uint outputFileSize);
     }
 
     public class StatisticsBuilder : IStatisticsBuilder
     {
-        public Statistics BuildStatistics(Dictionary<string, OutputValues> symbolsMap, uint inputFileSize, uint outputFileSize)
+        public Statistics BuildStatistics(Dictionary<string, OutputValues> symbolsMap, Header header, 
+            uint inputFileSize, uint outputFileSize)
         {
             IHuffmanStatisticsHelper helper = new HuffmanStatisticsHelper();
             Statistics statistics = new Statistics();
@@ -23,7 +25,7 @@ namespace HuffmanCoder.Logic.Helpers
             List<SymbolStatistics> symbolStatisticsList = helper.CreateSymbolStatisticsListFromDictionary(symbolsMap);
             statistics.Entropy = helper.EvaluateEntropy(symbolStatisticsList);
             statistics.BitRateStatistics = helper.EvaluateBitRateStatistics(symbolStatisticsList);
-            statistics.FileSizeStatistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize);
+            statistics.FileSizeStatistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize, header.Size);
 
             return statistics;
         }
