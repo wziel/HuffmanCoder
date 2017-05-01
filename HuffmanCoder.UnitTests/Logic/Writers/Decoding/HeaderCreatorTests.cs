@@ -97,9 +97,10 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             var map = new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>();
             map.Add("A", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             map.Add("BC", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
+
             Header header = headerCrator.Create(HuffmanEncodeModel.Markov, true, map);
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (A5BC5) - 8 bytes
-            Assert.AreEqual(14, header.Content.Length);
+            Assert.AreEqual(13, header.Content.Length);
         }
 
         [TestMethod]
@@ -109,9 +110,11 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             var map = new Dictionary<string, HuffmanCoder.Logic.Entities.OutputValues>();
             map.Add("BC", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             map.Add("A", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
+
             Header header = headerCrator.Create(HuffmanEncodeModel.Block, true, map);
             // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (BC5A5) - 8 bytes
-            Assert.AreEqual(14, header.Content.Length);
+            Assert.AreEqual(13, header.Content.Length);
+
         }
     }
 }
