@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.Logic.Entities
 {
-    public struct FilesSizeStatistics
+    public struct FileSizeStatistics
     {
         public uint InputFileSize { get; set; }
         public uint OutputFileSize { get; set; }
-        public double FilesSizeProportion { get; set; }
+        public double FileSizeProportion { get; set; }
     }
 }

@@ -51,50 +51,50 @@ namespace HuffmanCoder.Logic.Helpers
             return Math.Round(entropy, DECIMAL_DIGITS);
         }
 
-        public BitsMeanStatistics EvaluateBitsMeanStatistics(List<SymbolStatistics> symbolStatisticsList)
+        public BitRateStatistics EvaluateBitRateStatistics(List<SymbolStatistics> symbolStatisticsList)
         {
-            double inputFileBitsMean = EvaluateInputFileBitsMean(symbolStatisticsList);
-            double outputFileBitsMean = EvaluateOutputFileBitsMean(symbolStatisticsList);
-            double bitsMeanProportion = Math.Round(outputFileBitsMean / inputFileBitsMean, DECIMAL_DIGITS);
+            double inputFileBitRate = EvaluateInputFileBitRate(symbolStatisticsList);
+            double outputFileBitRate = EvaluateOutputFileBitRate(symbolStatisticsList);
+            double bitRateProportion = Math.Round(outputFileBitRate / inputFileBitRate, DECIMAL_DIGITS);
 
-            BitsMeanStatistics statistics = new BitsMeanStatistics();
-            statistics.InputFileBitsMean = inputFileBitsMean;
-            statistics.OutputFileBitsMean = outputFileBitsMean;
-            statistics.BitsMeanProportion = bitsMeanProportion;
+            BitRateStatistics statistics = new BitRateStatistics();
+            statistics.InputFileBitRate = inputFileBitRate;
+            statistics.OutputFileBitRate = outputFileBitRate;
+            statistics.BitRateProportion = bitRateProportion;
 
             return statistics;
         }
 
-        private double EvaluateInputFileBitsMean(List<SymbolStatistics> symbolStatisticsList)
+        private double EvaluateInputFileBitRate(List<SymbolStatistics> symbolStatisticsList)
         {
-            double bitsMean = 0;
+            double bitRate = 0;
             foreach (SymbolStatistics symbol in symbolStatisticsList)
             {
-                bitsMean += symbol.Probability * symbol.InputFileBitsLength;
+                bitRate += symbol.Probability * symbol.InputFileBitsLength;
             }
 
-            return bitsMean;
+            return bitRate;
         }
 
-        private double EvaluateOutputFileBitsMean(List<SymbolStatistics> symbolStatisticsList)
+        private double EvaluateOutputFileBitRate(List<SymbolStatistics> symbolStatisticsList)
         {
-            double bitsMean = 0;
+            double bitRate = 0;
             foreach (SymbolStatistics symbol in symbolStatisticsList)
             {
-                bitsMean += symbol.Probability * symbol.OutputFileBitsLength;
+                bitRate += symbol.Probability * symbol.OutputFileBitsLength;
             }
 
-            return bitsMean;
+            return bitRate;
         }
 
-        public FilesSizeStatistics EvaluateFilesSizeStatistics(uint inputFileSize, uint outputFileSize)
+        public FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize)
         {
-            FilesSizeStatistics statistics = new FilesSizeStatistics();
+            FileSizeStatistics statistics = new FileSizeStatistics();
 
             statistics.InputFileSize = inputFileSize;
             statistics.OutputFileSize = outputFileSize;
             double proportion = (double)outputFileSize / (double)inputFileSize;
-            statistics.FilesSizeProportion = Math.Round(proportion, DECIMAL_DIGITS);
+            statistics.FileSizeProportion = Math.Round(proportion, DECIMAL_DIGITS);
 
             return statistics;
         }

@@ -11,7 +11,7 @@ namespace HuffmanCoder.Logic.Helpers
     {
         List<SymbolStatistics> CreateSymbolStatisticsListFromDictionary(Dictionary<string, OutputValues> symbolsMap);
         double EvaluateEntropy(List<SymbolStatistics> symbolStatisticsList);
-        BitsMeanStatistics EvaluateBitsMeanStatistics(List<SymbolStatistics> symbolStatisticsList);
-        FilesSizeStatistics EvaluateFilesSizeStatistics(uint inputFileSize, uint outputFileSize);
+        BitRateStatistics EvaluateBitRateStatistics(List<SymbolStatistics> symbolStatisticsList);
+        FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize);
     }
 }

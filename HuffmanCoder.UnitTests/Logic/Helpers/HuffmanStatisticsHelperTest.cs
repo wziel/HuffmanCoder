@@ -90,38 +90,38 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
         }
 
         [TestMethod]
-        public void BitsMean_EvaluateStatistics()
+        public void BitRate_EvaluateStatistics()
         {
             var helper = new HuffmanStatisticsHelper();
 
-            BitsMeanStatistics expectedStatistics = new BitsMeanStatistics();
-            expectedStatistics.InputFileBitsMean = 8;
-            expectedStatistics.OutputFileBitsMean = 2;
-            expectedStatistics.BitsMeanProportion = 0.25;
+            BitRateStatistics expectedStatistics = new BitRateStatistics();
+            expectedStatistics.InputFileBitRate = 8;
+            expectedStatistics.OutputFileBitRate = 2;
+            expectedStatistics.BitRateProportion = 0.25;
 
-            BitsMeanStatistics statistics = helper.EvaluateBitsMeanStatistics(symbolStatisticsList);
+            BitRateStatistics statistics = helper.EvaluateBitRateStatistics(symbolStatisticsList);
 
-            Assert.AreEqual(expectedStatistics.InputFileBitsMean, statistics.InputFileBitsMean);
-            Assert.AreEqual(expectedStatistics.OutputFileBitsMean, statistics.OutputFileBitsMean);
-            Assert.AreEqual(expectedStatistics.BitsMeanProportion, statistics.BitsMeanProportion);
+            Assert.AreEqual(expectedStatistics.InputFileBitRate, statistics.InputFileBitRate);
+            Assert.AreEqual(expectedStatistics.OutputFileBitRate, statistics.OutputFileBitRate);
+            Assert.AreEqual(expectedStatistics.BitRateProportion, statistics.BitRateProportion);
         }
 
         [TestMethod]
-        public void FilesSize_EvaluateStatistics()
+        public void FileSize_EvaluateStatistics()
         {
             var helper = new HuffmanStatisticsHelper();
             uint inputFileSize = 100;
             uint outputFileSize = 50;
-            FilesSizeStatistics expectedStatistics = new FilesSizeStatistics();
+            FileSizeStatistics expectedStatistics = new FileSizeStatistics();
             expectedStatistics.InputFileSize = 100;
             expectedStatistics.OutputFileSize = 50;
-            expectedStatistics.FilesSizeProportion = 0.5;
+            expectedStatistics.FileSizeProportion = 0.5;
 
-            FilesSizeStatistics statistics = helper.EvaluateFilesSizeStatistics(inputFileSize, outputFileSize);
+            FileSizeStatistics statistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize);
 
             Assert.AreEqual(expectedStatistics.InputFileSize, statistics.InputFileSize);
             Assert.AreEqual(expectedStatistics.OutputFileSize, statistics.OutputFileSize);
-            Assert.AreEqual(expectedStatistics.FilesSizeProportion, statistics.FilesSizeProportion);
+            Assert.AreEqual(expectedStatistics.FileSizeProportion, statistics.FileSizeProportion);
         }
     }
 }

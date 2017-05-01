@@ -60,8 +60,8 @@
     <Compile Include="CodecInterfaces\DefaultableSymbol.cs" />
     <Compile Include="CodecInterfaces\SymbolQuantityMapConverter.cs" />
     <Compile Include="Entities\HuffmanEncodeModel.cs" />
-    <Compile Include="Entities\BitMeanStatistics.cs" />
-    <Compile Include="Entities\FilesSizeStatistics.cs" />
+    <Compile Include="Entities\BitRateStatistics.cs" />
+    <Compile Include="Entities\FileSizeStatistics.cs" />
     <Compile Include="Entities\OutputValues.cs" />
     <Compile Include="Entities\Statistics.cs" />
     <Compile Include="Entities\SymbolStatistics.cs" />

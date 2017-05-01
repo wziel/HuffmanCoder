@@ -9,7 +9,7 @@ namespace HuffmanCoder.Logic.Entities
     public struct Statistics
     {
         public double Entropy { get; set; }
-        public BitsMeanStatistics BitsMeanStatistics { get; set; }
-        public FilesSizeStatistics FileSizeStatistics { get; set; }
+        public BitRateStatistics BitRateStatistics { get; set; }
+        public FileSizeStatistics FileSizeStatistics { get; set; }
     }
 }
