@@ -88,8 +88,8 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             map.Add("A", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             map.Add("BC", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             byte[] header = headerCrator.Create(HuffmanEncodeModel.Markov, true, map);
-            // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (A5BC5) - 8 bytes
-            Assert.AreEqual(14, header.Length);
+            // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (A5BC5) - 7 bytes
+            Assert.AreEqual(13, header.Length);
         }
 
         [TestMethod]
@@ -100,8 +100,8 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Decoding
             map.Add("BC", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             map.Add("A", new HuffmanCoder.Logic.Entities.OutputValues { Counts = 5 });
             byte[] header = headerCrator.Create(HuffmanEncodeModel.Block, true, map);
-            // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (BC5A5) - 8 bytes
-            Assert.AreEqual(14, header.Length);
+            // Expected: header size - 4 bytes, huffmanEncodeModel - 1 byte, specialSymbol - 1 byte, map (BC5A5) - 7 bytes
+            Assert.AreEqual(13, header.Length);
         }
     }
 }
