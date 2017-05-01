@@ -24,7 +24,7 @@ namespace HuffmanCoder.Logic.Readers.Decoding
         private byte huffmanEncodeModel;
         private byte specialSymbolByte;
 
-        private byte positionInByte=0;
+        private short positionInByte=7;
         private int bitsAmount = 0;
         private BitArray currentBitArray;
         public DecoderReader(string inputPath)
@@ -83,13 +83,13 @@ namespace HuffmanCoder.Logic.Readers.Decoding
         public bool ReadBit()
         {
             bool bit=false;
-            if (positionInByte == 8)
+            if (positionInByte == -1)
             {
+                positionInByte = 7;
                 currentBitArray = new BitArray(binaryReader.ReadBytes(1));
-                positionInByte = 0;
             }
             bit = currentBitArray[positionInByte];
-            ++positionInByte;
+            --positionInByte;
             ++bitsAmount;
             return bit;
         }

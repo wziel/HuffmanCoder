@@ -29,7 +29,7 @@ namespace HuffmanCoder.UnitTests.Logic.Readers.Decoding
         [TestMethod]
         public void DecoderReader_FirstByteRead()
         {
-            var firstByte = new bool[8] { false, false, false, false, true, true, false, false};
+            var firstByte = new bool[8] { true, false, false, false, true, true, false, false};
             DecoderReader decoderReader = new DecoderReader(System.IO.Path.Combine(GetExecDirectory(), "TestFiles/encoded_file.txt"));
             for (int i=0; i< firstByte.Length; ++i)
             {
