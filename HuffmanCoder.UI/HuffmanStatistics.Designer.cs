@@ -345,7 +345,6 @@
             this.Controls.Add(this.encodedFile);
             this.Name = "HuffmanStatistics";
             this.Text = "Huffman Statistics";
-            this.Load += new System.EventHandler(this.HuffmanStatistics_Load);
             this.bitRateBox.ResumeLayout(false);
             this.bitRateBox.PerformLayout();
             this.compressionRatioBox.ResumeLayout(false);

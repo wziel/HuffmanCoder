@@ -45,10 +45,5 @@ namespace HuffmanCoder.UI
             this.compressionRatioWithHeader.Text = statistics.FileSizeStatistics.CompressionRatioWithHeader.ToString();
 
         }
-
-        private void HuffmanStatistics_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
