@@ -34,7 +34,10 @@ namespace HuffmanCoder.UI
                 huffmanEncodeModel = HuffmanEncodeModel.Block;
             else
                 huffmanEncodeModel = HuffmanEncodeModel.Markov;
-            coder.Encode(inputTB.Text, outputTB.Text, huffmanEncodeModel);
+            Statistics statistics = coder.Encode(inputTB.Text, outputTB.Text, huffmanEncodeModel);
+
+            HuffmanStatistics huffmanStatistics = new HuffmanStatistics(statistics, inputTB.Text);
+            huffmanStatistics.Show();
         }
 
         private void decodeBTN_Click(object sender, EventArgs e)

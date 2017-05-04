@@ -52,12 +52,21 @@
     <Compile Include="HufffmanCoder.Designer.cs">
       <DependentUpon>HufffmanCoder.cs</DependentUpon>
     </Compile>
+    <Compile Include="HuffmanStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HuffmanStatistics.Designer.cs">
+      <DependentUpon>HuffmanStatistics.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UICoder.cs" />
     <Compile Include="UIDecoder.cs" />
     <EmbeddedResource Include="HufffmanCoder.resx">
       <DependentUpon>HufffmanCoder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HuffmanStatistics.resx">
+      <DependentUpon>HuffmanStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

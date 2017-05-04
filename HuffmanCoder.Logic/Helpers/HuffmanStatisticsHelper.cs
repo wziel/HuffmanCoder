@@ -89,11 +89,12 @@ namespace HuffmanCoder.Logic.Helpers
                 bitRate += symbol.Probability * symbol.OutputFileBitsLength;
             }
 
-            return bitRate;
+            return Math.Round(bitRate, DECIMAL_DIGITS);
         }
 
         private double EvaluateOutputFileBitRateWithHeader(List<SymbolStatistics> symbolStatisticsList, uint outputFileSize, uint headerSize)
         {
+            // FIXME
             // outputFileSize in bits / number of unique symbols
             double outputFileBitRateWithHeader = ((outputFileSize + headerSize) * 8) / symbolStatisticsList.Count();
 
