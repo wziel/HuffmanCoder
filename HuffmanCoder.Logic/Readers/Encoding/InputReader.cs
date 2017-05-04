@@ -38,7 +38,6 @@ namespace HuffmanCoder.Logic.Readers.Encoding
             if (data == null || data.Length==0)
                 throw new Exception($"Input file is empty");
             currentByte = data[0];
-            ++iterator;
         }
 
         public byte Current
@@ -72,17 +71,19 @@ namespace HuffmanCoder.Logic.Readers.Encoding
 
         public bool MoveNext()
         {
-            if (iterator == data.Length)
+            if (iterator + 1 == data.Length)
+            {
                 return false;
-            currentByte = data[iterator];
+            }
             ++iterator;
+            currentByte = data[iterator];
             return true;             
         }
 
         public void Reset()
         {
-            stream.BaseStream.Seek(0, SeekOrigin.Begin);
             iterator = 0;
+            currentByte = data[iterator];
         }
     }
 }
