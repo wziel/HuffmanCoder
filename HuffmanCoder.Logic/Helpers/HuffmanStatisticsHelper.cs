@@ -92,10 +92,12 @@ namespace HuffmanCoder.Logic.Helpers
             return bitRate;
         }
 
-        private double EvaluateOutputFileBitRateWithHeader(List<SymbolStatistics> symbolStatisticsList)
+        private double EvaluateOutputFileBitRateWithHeader(Dictionary<string, OutputValues> symbolsMap, uint outputFileSize, uint headerSize)
         {
-            //TODO IMPLEMENT
-            return 0;
+            // outputFileSize in bits / number of unique symbols
+            double outputFileBitRateWithHeader = ((outputFileSize + headerSize) * 8) / symbolsMap.Count();
+
+            return Math.Round(outputFileBitRateWithHeader, DECIMAL_DIGITS);
         }
 
         public FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize, uint headerSize)
