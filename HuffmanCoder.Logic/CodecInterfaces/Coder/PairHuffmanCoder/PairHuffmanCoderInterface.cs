@@ -8,6 +8,7 @@ using HuffmanCoder.Logic.Writers.Encoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
 using HuffmanCoder.Logic.Entities;
+using HuffmanCoder.Logic.CodecInterfaces.Comparers;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
 {
@@ -24,7 +25,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Coder.PairHuffmanCoder
         {
             var symbolQuantityDic = createDictionary();
             var builder = new HuffmanCodecBuilder<Tuple<byte, DefaultableSymbol<byte>>>();
-            var tree = builder.BuildTree(Comparer<Tuple<byte, DefaultableSymbol<byte>>>.Default, symbolQuantityDic);
+            var tree = builder.BuildTree(new PairComparer(), symbolQuantityDic);
             var coder = builder.GetCoder(tree);
             var coderInput = new PairHuffmanCoderInput(inputReader);
             coder.Encode(coderInput, new HuffmanCoderOutput(coderOutputWriter));

@@ -7,6 +7,7 @@ using HuffmanCoder.Logic.Readers.Decoding;
 using HuffmanCoder.Logic.Writers.Decoding;
 using HuffmanCoder.Model.Builder;
 using HuffmanCoder.Model.Codec;
+using HuffmanCoder.Logic.CodecInterfaces.Comparers;
 
 namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
 {
@@ -29,7 +30,7 @@ namespace HuffmanCoder.Logic.CodecInterfaces.Decoder.PairHuffmanDecoder
         public void Decode()
         {
             var builder = new HuffmanCodecBuilder<Tuple<byte, DefaultableSymbol<byte>>>();
-            var tree = builder.BuildTree(Comparer<Tuple<byte, DefaultableSymbol<byte>>>.Default, symbolQuantityDic);
+            var tree = builder.BuildTree(new PairComparer(), symbolQuantityDic);
             var decoder = builder.GetDecoder(tree);
             int symbolsCount = symbolQuantityDic.Sum(x => x.Value);
             decoder.Decode(new HuffmanDecoderInput(decoderReader), new PairHuffmanDecoderOutput(decoderFileWriter, symbolsCount, isByteCountEven));

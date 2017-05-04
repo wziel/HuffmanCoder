@@ -66,7 +66,5 @@ namespace HuffmanCoder.Logic.CodecInterfaces
             }
         }
 
-
-
     }
 }

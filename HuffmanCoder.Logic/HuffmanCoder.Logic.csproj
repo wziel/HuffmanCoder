@@ -49,6 +49,7 @@
     <Compile Include="CodecInterfaces\Coder\PairHuffmanCoder\PairHuffmanCoderInterface.cs" />
     <Compile Include="CodecInterfaces\Coder\StandardHuffmanCoder\StandardHuffmanCoderInput.cs" />
     <Compile Include="CodecInterfaces\Coder\StandardHuffmanCoder\StandardHuffmanCoderInterface.cs" />
+    <Compile Include="CodecInterfaces\Comparers\PairComparer.cs" />
     <Compile Include="CodecInterfaces\Decoder\HuffmanDecoderInput.cs" />
     <Compile Include="CodecInterfaces\Decoder\IHuffmanDecoderInterface.cs" />
     <Compile Include="CodecInterfaces\Decoder\MarkowHuffmanDecoder\MarkowHuffmanDecoderInterface.cs" />
