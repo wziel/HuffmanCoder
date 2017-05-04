@@ -24,7 +24,7 @@ namespace HuffmanCoder.Logic.Helpers
 
             List<SymbolStatistics> symbolStatisticsList = helper.CreateSymbolStatisticsListFromDictionary(symbolsMap);
             statistics.Entropy = helper.EvaluateEntropy(symbolStatisticsList);
-            statistics.BitRateStatistics = helper.EvaluateBitRateStatistics(symbolStatisticsList);
+            statistics.BitRateStatistics = helper.EvaluateBitRateStatistics(symbolStatisticsList, outputFileSize, header.Size);
             statistics.FileSizeStatistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize, header.Size);
 
             return statistics;
