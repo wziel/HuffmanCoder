@@ -63,7 +63,7 @@ namespace HuffmanCoder.Logic.Writers.Encoding
             }
             if (specialSymbol)
             {
-                symbolsMapByteList.Add(Convert.ToByte(specialSymbol));
+                symbolsMapByteList.Add(Convert.ToByte(specialSymbolCharacter));
                 symbolsMapByteList.AddRange(new List<byte>(BitConverter.GetBytes(specialSymbolCounts)));
             }
 
