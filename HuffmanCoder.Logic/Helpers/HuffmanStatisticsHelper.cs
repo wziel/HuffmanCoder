@@ -7,17 +7,30 @@ using System.Threading.Tasks;
 
 namespace HuffmanCoder.Logic.Helpers
 {
+    public interface IHuffmanStatisticsHelper
+    {
+        List<SymbolStatistics> CreateSymbolStatisticsList(Dictionary<string, OutputValues> symbolsMap, uint headerSize = 0);
+
+        double EvaluateEntropy(List<SymbolStatistics> symbolStatisticsList);
+
+        BitRateStatistics EvaluateBitRateStatistics(List<SymbolStatistics> symbolStatisticsList, List<SymbolStatistics> symbolStatisticsListWithHeader);
+
+        FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize, uint headerSize);
+    }
+
     public class HuffmanStatisticsHelper : IHuffmanStatisticsHelper
     {
         private const int DECIMAL_DIGITS = 3;
 
-        public List<SymbolStatistics> CreateSymbolStatisticsListFromDictionary(Dictionary<string, OutputValues> symbolsMap)
+        public List<SymbolStatistics> CreateSymbolStatisticsList(Dictionary<string, OutputValues> symbolsMap, uint headerSize = 0)
         {
             int countsSum = 0;
             foreach (KeyValuePair<string, OutputValues> entry in symbolsMap)
             {
                 countsSum += entry.Value.Counts;
             }
+
+            countsSum += (int)headerSize;
 
             List<SymbolStatistics> symbolStatisticsList = new List<SymbolStatistics>();
             foreach (KeyValuePair<string, OutputValues> entry in symbolsMap)
@@ -51,11 +64,11 @@ namespace HuffmanCoder.Logic.Helpers
             return Math.Round(entropy, DECIMAL_DIGITS);
         }
 
-        public BitRateStatistics EvaluateBitRateStatistics(List<SymbolStatistics> symbolStatisticsList, uint outputFileSize, uint headerSize)
+        public BitRateStatistics EvaluateBitRateStatistics(List<SymbolStatistics> symbolStatisticsList, List<SymbolStatistics> symbolStatisticsListWithHeader)
         {
             double inputFileBitRate = EvaluateInputFileBitRate(symbolStatisticsList);
             double outputFileBitRate = EvaluateOutputFileBitRate(symbolStatisticsList);
-            double outputFileBitRateWithHeader = EvaluateOutputFileBitRateWithHeader(symbolStatisticsList, outputFileSize, headerSize);
+            double outputFileBitRateWithHeader = EvaluateOutputFileBitRate(symbolStatisticsListWithHeader);
 
             double bitRateProportion = Math.Round(outputFileBitRate / inputFileBitRate, DECIMAL_DIGITS);
             double bitRateProportionWithHeader = Math.Round(outputFileBitRateWithHeader / inputFileBitRate, DECIMAL_DIGITS);
@@ -90,15 +103,6 @@ namespace HuffmanCoder.Logic.Helpers
             }
 
             return Math.Round(bitRate, DECIMAL_DIGITS);
-        }
-
-        private double EvaluateOutputFileBitRateWithHeader(List<SymbolStatistics> symbolStatisticsList, uint outputFileSize, uint headerSize)
-        {
-            // FIXME
-            // outputFileSize in bits / number of unique symbols
-            double outputFileBitRateWithHeader = ((outputFileSize + headerSize) * 8) / symbolStatisticsList.Count();
-
-            return Math.Round(outputFileBitRateWithHeader, DECIMAL_DIGITS);
         }
 
         public FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize, uint headerSize)

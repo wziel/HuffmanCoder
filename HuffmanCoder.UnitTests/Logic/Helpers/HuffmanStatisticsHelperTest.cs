@@ -68,7 +68,7 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
         {
             var helper = new HuffmanStatisticsHelper();
 
-            List<SymbolStatistics> result = helper.CreateSymbolStatisticsListFromDictionary(symbolsMap);
+            List<SymbolStatistics> result = helper.CreateSymbolStatisticsList(symbolsMap);
 
             Assert.AreEqual(symbolStatisticsList.Count, result.Count);
 
@@ -99,7 +99,8 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
             expectedStatistics.OutputFileBitRate = 2;
             expectedStatistics.BitRateProportion = 0.25;
 
-            BitRateStatistics statistics = helper.EvaluateBitRateStatistics(symbolStatisticsList);
+            // FIXME bit rate with header
+            BitRateStatistics statistics = helper.EvaluateBitRateStatistics(symbolStatisticsList, symbolStatisticsList);
 
             Assert.AreEqual(expectedStatistics.InputFileBitRate, statistics.InputFileBitRate);
             Assert.AreEqual(expectedStatistics.OutputFileBitRate, statistics.OutputFileBitRate);
@@ -112,16 +113,21 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
             var helper = new HuffmanStatisticsHelper();
             uint inputFileSize = 100;
             uint outputFileSize = 50;
+            uint headerSize = 10;
             FileSizeStatistics expectedStatistics = new FileSizeStatistics();
             expectedStatistics.InputFileSize = 100;
             expectedStatistics.OutputFileSize = 50;
+            expectedStatistics.OutputFileSizeWithHeader = 60;
             expectedStatistics.CompressionRatio = 0.5;
+            expectedStatistics.CompressionRatioWithHeader = 0.6;
 
-            FileSizeStatistics statistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize);
+            FileSizeStatistics statistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize, headerSize);
 
             Assert.AreEqual(expectedStatistics.InputFileSize, statistics.InputFileSize);
             Assert.AreEqual(expectedStatistics.OutputFileSize, statistics.OutputFileSize);
+            Assert.AreEqual(expectedStatistics.OutputFileSizeWithHeader, statistics.OutputFileSizeWithHeader);
             Assert.AreEqual(expectedStatistics.CompressionRatio, statistics.CompressionRatio);
+            Assert.AreEqual(expectedStatistics.CompressionRatioWithHeader, statistics.CompressionRatioWithHeader);
         }
     }
 }
