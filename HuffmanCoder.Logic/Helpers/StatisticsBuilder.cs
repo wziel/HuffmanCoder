@@ -22,9 +22,11 @@ namespace HuffmanCoder.Logic.Helpers
             IHuffmanStatisticsHelper helper = new HuffmanStatisticsHelper();
             Statistics statistics = new Statistics();
 
-            List<SymbolStatistics> symbolStatisticsList = helper.CreateSymbolStatisticsListFromDictionary(symbolsMap);
+            List<SymbolStatistics> symbolStatisticsList = helper.CreateSymbolStatisticsList(symbolsMap);
+            List<SymbolStatistics> symbolStatisticsListWithHeader = helper.CreateSymbolStatisticsList(symbolsMap, header.Size);
+
             statistics.Entropy = helper.EvaluateEntropy(symbolStatisticsList);
-            statistics.BitRateStatistics = helper.EvaluateBitRateStatistics(symbolStatisticsList, outputFileSize, header.Size);
+            statistics.BitRateStatistics = helper.EvaluateBitRateStatistics(symbolStatisticsList, symbolStatisticsListWithHeader);
             statistics.FileSizeStatistics = helper.EvaluateFileSizeStatistics(inputFileSize, outputFileSize, header.Size);
 
             return statistics;

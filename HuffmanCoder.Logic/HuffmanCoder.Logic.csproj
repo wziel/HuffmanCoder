@@ -68,7 +68,6 @@
     <Compile Include="Entities\Statistics.cs" />
     <Compile Include="Entities\SymbolStatistics.cs" />
     <Compile Include="Helpers\HuffmanStatisticsHelper.cs" />
-    <Compile Include="Helpers\IHuffmanStatisticsHelper.cs" />
     <Compile Include="Helpers\StatisticsBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\HeaderReader.cs" />
