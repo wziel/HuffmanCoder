@@ -19,7 +19,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Encoding
             var mockByteCreator = new Mock<IByteCreator>();
             var mockHeaderCreator = new Mock<IHeaderCreator>();
             var coderOutputWriter = new CoderOutputWriter(mockByteCreator.Object, mockHeaderCreator.Object);
-            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(HuffmanEncodeModel.Standard, false, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
+            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(HuffmanEncodeModel.Standard, false, new Dictionary<string, OutputValues>())).Returns(new Header { Content = new byte[0] });
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsReady).Returns(false);
             coderOutputWriter.Write(true);
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsEmpty).Returns(false);
@@ -33,7 +33,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Encoding
             var mockByteCreator = new Mock<IByteCreator>();
             var mockHeaderCreator = new Mock<IHeaderCreator>();
             var coderOutputWriter = new CoderOutputWriter(mockByteCreator.Object, mockHeaderCreator.Object);
-            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(HuffmanEncodeModel.Standard, false, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
+            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(HuffmanEncodeModel.Standard, false, new Dictionary<string, OutputValues>())).Returns(new Header { Content = new byte[0] });
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsReady).Returns(false);
             for (int i=0; i<8; ++i)
                 coderOutputWriter.Write(true);
@@ -48,7 +48,7 @@ namespace HuffmanCoder.UnitTests.Logic.Writers.Encoding
             var mockByteCreator = new Mock<IByteCreator>();
             var mockHeaderCreator = new Mock<IHeaderCreator>();
             var coderOutputWriter = new CoderOutputWriter(mockByteCreator.Object, mockHeaderCreator.Object);
-            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(HuffmanEncodeModel.Standard, false, new Dictionary<string, OutputValues>())).Returns(new byte[0]);
+            mockHeaderCreator.Setup(headerCreator => headerCreator.Create(HuffmanEncodeModel.Standard, false, new Dictionary<string, OutputValues>())).Returns(new Header { Content = new byte[0] });
             mockByteCreator.SetupGet(byteCreator => byteCreator.IsReady).Returns(false);
             for (int i = 0; i < 8; ++i)
                 coderOutputWriter.Write(true);

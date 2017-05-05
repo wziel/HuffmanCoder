@@ -20,7 +20,7 @@ namespace HuffmanCoder.UI
             IHuffmanDecoderInterface huffmanDecoderInterface;
             using (IDecoderReader input = new DecoderReader(inputFilePath))
             {
-                IDecoderFileWriter output = new DecoderFileWriter(outputFilePath));
+                IDecoderFileWriter output = new DecoderFileWriter(outputFilePath);
                 if (input.HuffmanEncodeModel == HuffmanEncodeModel.Standard)
                     huffmanDecoderInterface = new StandardHuffmanDecoderInterface(input, output);
                 else if (input.HuffmanEncodeModel == HuffmanEncodeModel.Block)
