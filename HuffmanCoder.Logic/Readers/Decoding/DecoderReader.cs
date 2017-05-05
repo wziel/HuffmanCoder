@@ -70,7 +70,7 @@ namespace HuffmanCoder.Logic.Readers.Decoding
         {
             get
             {
-                return specialSymbolByte != 0;
+                return specialSymbolByte == 0;
             }
         }
 
