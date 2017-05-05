@@ -21,17 +21,19 @@ namespace HuffmanCoder.UI
             Statistics statiscs;
             IHuffmanCoderInterface huffmanCoderInterface;
             IStatisticsBuilder statiscsGenerator = new StatisticsBuilder();
-            IInputReader input = new InputReader(inputFilePath);
-            ICoderOutputWriter output = new CoderOutputWriter(new ByteCreator(), new HeaderCreator());
-            if (huffmanEncodeModel == HuffmanEncodeModel.Standard)
-                huffmanCoderInterface = new StandardHuffmanCoderInterface(input, output);
-            else if (huffmanEncodeModel == HuffmanEncodeModel.Block)
-                huffmanCoderInterface = new PairHuffmanCoderInterface(input, output);
-            else
-                huffmanCoderInterface = new MarkowHuffmanCoderInterface(input, output);
-            huffmanCoderInterface.Encode();
-            System.IO.File.WriteAllBytes(outputFilePath, output.FileBytes);
-            statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, output.Header, input.Size, output.Size);
+            using (IInputReader input = new InputReader(inputFilePath))
+            {
+                ICoderOutputWriter output = new CoderOutputWriter(new ByteCreator(), new HeaderCreator());
+                if (huffmanEncodeModel == HuffmanEncodeModel.Standard)
+                    huffmanCoderInterface = new StandardHuffmanCoderInterface(input, output);
+                else if (huffmanEncodeModel == HuffmanEncodeModel.Block)
+                    huffmanCoderInterface = new PairHuffmanCoderInterface(input, output);
+                else
+                    huffmanCoderInterface = new MarkowHuffmanCoderInterface(input, output);
+                huffmanCoderInterface.Encode();
+                System.IO.File.WriteAllBytes(outputFilePath, output.FileBytes);
+                statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, output.Header, input.Size, output.Size);
+            }
             return statiscs;
         }
     }

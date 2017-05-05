@@ -18,16 +18,18 @@ namespace HuffmanCoder.UI
         public void Decode(string inputFilePath, string outputFilePath)
         {
             IHuffmanDecoderInterface huffmanDecoderInterface;
-            IDecoderReader input = new DecoderReader(inputFilePath);
-            IDecoderFileWriter output = new DecoderFileWriter(outputFilePath);
-            if (input.HuffmanEncodeModel == HuffmanEncodeModel.Standard)
-               huffmanDecoderInterface = new StandardHuffmanDecoderInterface(input, output);
-            else if (input.HuffmanEncodeModel == HuffmanEncodeModel.Block)
-              huffmanDecoderInterface = new PairHuffmanDecoderInterface(input, output, input.IsByteCountEven);
-            else
-                huffmanDecoderInterface = new MarkowHuffmanDecoderInterface(input, output);
+            using (IDecoderReader input = new DecoderReader(inputFilePath))
+            {
+                IDecoderFileWriter output = new DecoderFileWriter(outputFilePath));
+                if (input.HuffmanEncodeModel == HuffmanEncodeModel.Standard)
+                    huffmanDecoderInterface = new StandardHuffmanDecoderInterface(input, output);
+                else if (input.HuffmanEncodeModel == HuffmanEncodeModel.Block)
+                    huffmanDecoderInterface = new PairHuffmanDecoderInterface(input, output, input.IsByteCountEven);
+                else
+                    huffmanDecoderInterface = new MarkowHuffmanDecoderInterface(input, output);
                 huffmanDecoderInterface.Decode();
-            output.Save();
+                output.Save();
+            }
         }
     }
 }

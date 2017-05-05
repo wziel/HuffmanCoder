@@ -153,6 +153,14 @@ namespace HuffmanCoder.UnitTests.Logic.CoderInterfaces
                 }
             }
 
+            public Header Header
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
             public void Save(Dictionary<string, OutputValues> map)
             {
                 this.symbolMap = map;
