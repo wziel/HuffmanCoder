@@ -6,11 +6,6 @@ using HuffmanCoder.Logic.Entities;
 using HuffmanCoder.Logic.Helpers;
 using HuffmanCoder.Logic.Readers.Encoding;
 using HuffmanCoder.Logic.Writers.Encoding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HuffmanCoder.UI
 {
@@ -36,8 +31,8 @@ namespace HuffmanCoder.UI
 
                 if(huffmanEncodeModel == HuffmanEncodeModel.Standard)
                 {
-                    IHistogramBuilder histogramBuilder = new HistogramBuilder();
-                    histogramBuilder.BuildHistogram(output.SymbolMap);
+                    IHistogramBuilder histogramBuilder = new HistogramBuilder(); 
+                    histogramBuilder.BuildHistogram(output.SymbolMap, outputFilePath);
                 }
             }
             return statiscs;
