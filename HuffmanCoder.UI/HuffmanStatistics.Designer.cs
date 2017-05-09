@@ -54,6 +54,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.symbolsCount = new System.Windows.Forms.Label();
             this.bitRateBox.SuspendLayout();
             this.compressionRatioBox.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +73,7 @@
             // encodedFilePath
             // 
             this.encodedFilePath.AutoSize = true;
-            this.encodedFilePath.Location = new System.Drawing.Point(103, 13);
+            this.encodedFilePath.Location = new System.Drawing.Point(124, 13);
             this.encodedFilePath.Name = "encodedFilePath";
             this.encodedFilePath.Size = new System.Drawing.Size(28, 13);
             this.encodedFilePath.TabIndex = 1;
@@ -90,7 +92,7 @@
             // entropyValue
             // 
             this.entropyValue.AutoSize = true;
-            this.entropyValue.Location = new System.Drawing.Point(103, 57);
+            this.entropyValue.Location = new System.Drawing.Point(124, 57);
             this.entropyValue.Name = "entropyValue";
             this.entropyValue.Size = new System.Drawing.Size(42, 13);
             this.entropyValue.TabIndex = 3;
@@ -109,7 +111,7 @@
             this.bitRateBox.Controls.Add(this.label2);
             this.bitRateBox.Controls.Add(this.label1);
             this.bitRateBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bitRateBox.Location = new System.Drawing.Point(19, 98);
+            this.bitRateBox.Location = new System.Drawing.Point(19, 133);
             this.bitRateBox.Name = "bitRateBox";
             this.bitRateBox.Size = new System.Drawing.Size(451, 144);
             this.bitRateBox.TabIndex = 4;
@@ -227,8 +229,8 @@
             this.compressionRatioBox.Controls.Add(this.label9);
             this.compressionRatioBox.Controls.Add(this.label10);
             this.compressionRatioBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.compressionRatioBox.Location = new System.Drawing.Point(19, 255);
-            this.compressionRatioBox.Name = "groupBox1";
+            this.compressionRatioBox.Location = new System.Drawing.Point(19, 290);
+            this.compressionRatioBox.Name = "compressionRatioBox";
             this.compressionRatioBox.Size = new System.Drawing.Size(451, 144);
             this.compressionRatioBox.TabIndex = 5;
             this.compressionRatioBox.TabStop = false;
@@ -332,11 +334,32 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Input file size [bytes]:";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label11.Location = new System.Drawing.Point(16, 94);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(93, 13);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "Symbols count:";
+            // 
+            // symbolsCount
+            // 
+            this.symbolsCount.AutoSize = true;
+            this.symbolsCount.Location = new System.Drawing.Point(124, 94);
+            this.symbolsCount.Name = "symbolsCount";
+            this.symbolsCount.Size = new System.Drawing.Size(72, 13);
+            this.symbolsCount.TabIndex = 7;
+            this.symbolsCount.Text = "symbolsCount";
+            // 
             // HuffmanStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 411);
+            this.ClientSize = new System.Drawing.Size(486, 449);
+            this.Controls.Add(this.symbolsCount);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.compressionRatioBox);
             this.Controls.Add(this.bitRateBox);
             this.Controls.Add(this.entropyValue);
@@ -383,5 +406,7 @@
         private System.Windows.Forms.Label outputFileSizeWithHeader;
         private System.Windows.Forms.Label compressionRatioWithoutHeader;
         private System.Windows.Forms.Label compressionRatioWithHeader;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label symbolsCount;
     }
 }

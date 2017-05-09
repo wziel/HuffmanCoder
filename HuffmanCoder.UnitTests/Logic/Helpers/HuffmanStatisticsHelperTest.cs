@@ -14,6 +14,7 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
     public class HuffmanStatisticsHelperTests
     {
         private Dictionary<string, OutputValues> symbolsMap;
+        private int symbolsCount = 10;
         private List<SymbolStatistics> symbolStatisticsList;
 
         [TestInitialize]
@@ -68,7 +69,7 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
         {
             var helper = new HuffmanStatisticsHelper();
 
-            List<SymbolStatistics> result = helper.CreateSymbolStatisticsList(symbolsMap);
+            List<SymbolStatistics> result = helper.CreateSymbolStatisticsList(symbolsMap, symbolsCount);
 
             Assert.AreEqual(symbolStatisticsList.Count, result.Count);
 
@@ -94,17 +95,28 @@ namespace HuffmanCoder.UnitTests.Logic.Helpers
         {
             var helper = new HuffmanStatisticsHelper();
 
+            uint inputFileSize = 10;
+            uint outputFileSize = 5;
+            uint headerSize = 5;
+
             BitRateStatistics expectedStatistics = new BitRateStatistics();
             expectedStatistics.InputFileBitRate = 8;
-            expectedStatistics.OutputFileBitRate = 2;
-            expectedStatistics.BitRateProportion = 0.25;
+            expectedStatistics.OutputFileBitRate = 4;
+            expectedStatistics.OutputFileBitRateWithHeader = 8;
+              
+            expectedStatistics.BitRateProportion = 0.5;
+            expectedStatistics.BitRateProportionWithHeader = 1;
 
-            // FIXME bit rate with header
-            BitRateStatistics statistics = helper.EvaluateBitRateStatistics(symbolStatisticsList, symbolStatisticsList);
+     
+
+            BitRateStatistics statistics = helper.EvaluateBitRateStatistics(symbolsCount, inputFileSize, outputFileSize, headerSize);
 
             Assert.AreEqual(expectedStatistics.InputFileBitRate, statistics.InputFileBitRate);
             Assert.AreEqual(expectedStatistics.OutputFileBitRate, statistics.OutputFileBitRate);
+            Assert.AreEqual(expectedStatistics.OutputFileBitRateWithHeader, statistics.OutputFileBitRateWithHeader);
             Assert.AreEqual(expectedStatistics.BitRateProportion, statistics.BitRateProportion);
+            Assert.AreEqual(expectedStatistics.BitRateProportionWithHeader, statistics.BitRateProportionWithHeader);
+
         }
 
         [TestMethod]

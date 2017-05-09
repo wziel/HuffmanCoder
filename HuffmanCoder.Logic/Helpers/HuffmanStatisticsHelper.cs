@@ -9,11 +9,13 @@ namespace HuffmanCoder.Logic.Helpers
 {
     public interface IHuffmanStatisticsHelper
     {
-        List<SymbolStatistics> CreateSymbolStatisticsList(Dictionary<string, OutputValues> symbolsMap, uint headerSize = 0);
+        int CountSymbols(Dictionary<string, OutputValues> symbolsMap);
+
+        List<SymbolStatistics> CreateSymbolStatisticsList(Dictionary<string, OutputValues> symbolsMap, int symbolsCount);
 
         double EvaluateEntropy(List<SymbolStatistics> symbolStatisticsList);
 
-        BitRateStatistics EvaluateBitRateStatistics(List<SymbolStatistics> symbolStatisticsList, List<SymbolStatistics> symbolStatisticsListWithHeader);
+        BitRateStatistics EvaluateBitRateStatistics(int symbolsCount, uint inputFileSize, uint outputFileSize, uint headerSize);
 
         FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize, uint headerSize);
     }
@@ -22,21 +24,24 @@ namespace HuffmanCoder.Logic.Helpers
     {
         private const int DECIMAL_DIGITS = 3;
 
-        public List<SymbolStatistics> CreateSymbolStatisticsList(Dictionary<string, OutputValues> symbolsMap, uint headerSize = 0)
+        public int CountSymbols(Dictionary<string, OutputValues> symbolsMap)
         {
-            int countsSum = 0;
+            int symbolsCount = 0;
             foreach (KeyValuePair<string, OutputValues> entry in symbolsMap)
             {
-                countsSum += entry.Value.Counts;
+                symbolsCount += entry.Value.Counts;
             }
 
-            countsSum += (int)headerSize;
+            return symbolsCount;
+        }
 
+        public List<SymbolStatistics> CreateSymbolStatisticsList(Dictionary<string, OutputValues> symbolsMap, int symbolsCount)
+        {
             List<SymbolStatistics> symbolStatisticsList = new List<SymbolStatistics>();
             foreach (KeyValuePair<string, OutputValues> entry in symbolsMap)
             {
                 SymbolStatistics symbol = new SymbolStatistics();
-                symbol.Probability = (double)entry.Value.Counts / (double)countsSum;
+                symbol.Probability = (double)entry.Value.Counts / (double)symbolsCount;
                 symbol.OutputFileBitsLength = entry.Value.BitsLength;
                 symbol.InputFileBitsLength = GetBitsLengthFromStringSymbol(entry.Key);
 
@@ -64,11 +69,11 @@ namespace HuffmanCoder.Logic.Helpers
             return Math.Round(entropy, DECIMAL_DIGITS);
         }
 
-        public BitRateStatistics EvaluateBitRateStatistics(List<SymbolStatistics> symbolStatisticsList, List<SymbolStatistics> symbolStatisticsListWithHeader)
+        public BitRateStatistics EvaluateBitRateStatistics(int symbolsCount, uint inputFileSize, uint outputFileSize, uint headerSize)
         {
-            double inputFileBitRate = EvaluateInputFileBitRate(symbolStatisticsList);
-            double outputFileBitRate = EvaluateOutputFileBitRate(symbolStatisticsList);
-            double outputFileBitRateWithHeader = EvaluateOutputFileBitRate(symbolStatisticsListWithHeader);
+            double inputFileBitRate = Math.Round((double)(inputFileSize * 8) / (double)symbolsCount, DECIMAL_DIGITS);
+            double outputFileBitRate = Math.Round((double)(outputFileSize * 8) / (double)symbolsCount, DECIMAL_DIGITS);
+            double outputFileBitRateWithHeader = Math.Round((double)((outputFileSize + headerSize) * 8) / (double)symbolsCount, DECIMAL_DIGITS);
 
             double bitRateProportion = Math.Round(outputFileBitRate / inputFileBitRate, DECIMAL_DIGITS);
             double bitRateProportionWithHeader = Math.Round(outputFileBitRateWithHeader / inputFileBitRate, DECIMAL_DIGITS);
@@ -81,28 +86,6 @@ namespace HuffmanCoder.Logic.Helpers
             statistics.BitRateProportionWithHeader = bitRateProportionWithHeader;
 
             return statistics;
-        }
-
-        private double EvaluateInputFileBitRate(List<SymbolStatistics> symbolStatisticsList)
-        {
-            double bitRate = 0;
-            foreach (SymbolStatistics symbol in symbolStatisticsList)
-            {
-                bitRate += symbol.Probability * symbol.InputFileBitsLength;
-            }
-
-            return bitRate;
-        }
-
-        private double EvaluateOutputFileBitRate(List<SymbolStatistics> symbolStatisticsList)
-        {
-            double bitRate = 0;
-            foreach (SymbolStatistics symbol in symbolStatisticsList)
-            {
-                bitRate += symbol.Probability * symbol.OutputFileBitsLength;
-            }
-
-            return Math.Round(bitRate, DECIMAL_DIGITS);
         }
 
         public FileSizeStatistics EvaluateFileSizeStatistics(uint inputFileSize, uint outputFileSize, uint headerSize)
