@@ -29,7 +29,8 @@ namespace HuffmanCoder.UI
         {
             this.encodedFilePath.Text = inputFilePath;
             this.entropyValue.Text = statistics.Entropy.ToString();
-            this.symbolsCount.Text = statistics.SymbolsCount.ToString();
+            this.uniqueSymbolCount.Text = statistics.UniqueSymbolsCount.ToString();
+            this.totalSymbolsCount.Text = statistics.SymbolsCount.ToString();
 
             // Bit rate box
             this.inputFileBitRate.Text = statistics.BitRateStatistics.InputFileBitRate.ToString();

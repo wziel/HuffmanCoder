@@ -8,6 +8,7 @@ namespace HuffmanCoder.Logic.Entities
 {
     public struct Statistics
     {
+        public int UniqueSymbolsCount { get; set; }
         public int SymbolsCount { get; set; }
         public double Entropy { get; set; }
         public BitRateStatistics BitRateStatistics { get; set; }

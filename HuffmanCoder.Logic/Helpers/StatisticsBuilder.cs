@@ -25,6 +25,7 @@ namespace HuffmanCoder.Logic.Helpers
             int symbolsCount = helper.CountSymbols(symbolsMap);
             List<SymbolStatistics> symbolStatisticsList = helper.CreateSymbolStatisticsList(symbolsMap, symbolsCount);
 
+            statistics.UniqueSymbolsCount = symbolsMap.Count();
             statistics.SymbolsCount = symbolsCount;
             statistics.Entropy = helper.EvaluateEntropy(symbolStatisticsList);
             statistics.BitRateStatistics = helper.EvaluateBitRateStatistics(symbolsCount, inputFileSize, outputFileSize, header.Size);
@@ -33,5 +34,4 @@ namespace HuffmanCoder.Logic.Helpers
             return statistics;
         }
     }
-
 }

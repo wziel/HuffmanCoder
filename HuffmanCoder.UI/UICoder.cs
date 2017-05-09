@@ -20,7 +20,7 @@ namespace HuffmanCoder.UI
         {
             Statistics statiscs;
             IHuffmanCoderInterface huffmanCoderInterface;
-            IStatisticsBuilder statiscsGenerator = new StatisticsBuilder();
+            IStatisticsBuilder statisticsBuilder = new StatisticsBuilder();
             using (IInputReader input = new InputReader(inputFilePath))
             {
                 ICoderOutputWriter output = new CoderOutputWriter(new ByteCreator(), new HeaderCreator());
@@ -32,7 +32,13 @@ namespace HuffmanCoder.UI
                     huffmanCoderInterface = new MarkowHuffmanCoderInterface(input, output);
                 huffmanCoderInterface.Encode();
                 System.IO.File.WriteAllBytes(outputFilePath, output.FileBytes);
-                statiscs = statiscsGenerator.BuildStatistics(output.SymbolMap, output.Header, input.Size, output.Size);
+                statiscs = statisticsBuilder.BuildStatistics(output.SymbolMap, output.Header, input.Size, output.Size);
+
+                if(huffmanEncodeModel == HuffmanEncodeModel.Standard)
+                {
+                    IHistogramBuilder histogramBuilder = new HistogramBuilder();
+                    histogramBuilder.BuildHistogram(output.SymbolMap);
+                }
             }
             return statiscs;
         }

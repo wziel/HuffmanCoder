@@ -54,10 +54,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.symbolsCount = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.uniqueSymbolCount = new System.Windows.Forms.Label();
+            this.totalSymbolsCount = new System.Windows.Forms.Label();
             this.bitRateBox.SuspendLayout();
             this.compressionRatioBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // encodedFile
@@ -111,7 +115,7 @@
             this.bitRateBox.Controls.Add(this.label2);
             this.bitRateBox.Controls.Add(this.label1);
             this.bitRateBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bitRateBox.Location = new System.Drawing.Point(19, 133);
+            this.bitRateBox.Location = new System.Drawing.Point(19, 158);
             this.bitRateBox.Name = "bitRateBox";
             this.bitRateBox.Size = new System.Drawing.Size(451, 144);
             this.bitRateBox.TabIndex = 4;
@@ -229,7 +233,7 @@
             this.compressionRatioBox.Controls.Add(this.label9);
             this.compressionRatioBox.Controls.Add(this.label10);
             this.compressionRatioBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.compressionRatioBox.Location = new System.Drawing.Point(19, 290);
+            this.compressionRatioBox.Location = new System.Drawing.Point(19, 315);
             this.compressionRatioBox.Name = "compressionRatioBox";
             this.compressionRatioBox.Size = new System.Drawing.Size(451, 144);
             this.compressionRatioBox.TabIndex = 5;
@@ -334,32 +338,64 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Input file size [bytes]:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.totalSymbolsCount);
+            this.groupBox1.Controls.Add(this.uniqueSymbolCount);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.groupBox1.Location = new System.Drawing.Point(19, 87);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(451, 65);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Symbols count";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label11.Location = new System.Drawing.Point(16, 94);
+            this.label11.Location = new System.Drawing.Point(155, 16);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(93, 13);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "Symbols count:";
+            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Unique";
             // 
-            // symbolsCount
+            // label12
             // 
-            this.symbolsCount.AutoSize = true;
-            this.symbolsCount.Location = new System.Drawing.Point(124, 94);
-            this.symbolsCount.Name = "symbolsCount";
-            this.symbolsCount.Size = new System.Drawing.Size(72, 13);
-            this.symbolsCount.TabIndex = 7;
-            this.symbolsCount.Text = "symbolsCount";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(304, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(36, 13);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Total";
+            // 
+            // uniqueSymbolCount
+            // 
+            this.uniqueSymbolCount.AutoSize = true;
+            this.uniqueSymbolCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.uniqueSymbolCount.Location = new System.Drawing.Point(155, 38);
+            this.uniqueSymbolCount.Name = "uniqueSymbolCount";
+            this.uniqueSymbolCount.Size = new System.Drawing.Size(80, 13);
+            this.uniqueSymbolCount.TabIndex = 12;
+            this.uniqueSymbolCount.Text = "uSymbolsCount";
+            // 
+            // totalSymbolsCount
+            // 
+            this.totalSymbolsCount.AutoSize = true;
+            this.totalSymbolsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.totalSymbolsCount.Location = new System.Drawing.Point(304, 38);
+            this.totalSymbolsCount.Name = "totalSymbolsCount";
+            this.totalSymbolsCount.Size = new System.Drawing.Size(77, 13);
+            this.totalSymbolsCount.TabIndex = 14;
+            this.totalSymbolsCount.Text = "tSymbolsCount";
             // 
             // HuffmanStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 449);
-            this.Controls.Add(this.symbolsCount);
-            this.Controls.Add(this.label11);
+            this.ClientSize = new System.Drawing.Size(486, 483);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.compressionRatioBox);
             this.Controls.Add(this.bitRateBox);
             this.Controls.Add(this.entropyValue);
@@ -372,6 +408,8 @@
             this.bitRateBox.PerformLayout();
             this.compressionRatioBox.ResumeLayout(false);
             this.compressionRatioBox.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -406,7 +444,10 @@
         private System.Windows.Forms.Label outputFileSizeWithHeader;
         private System.Windows.Forms.Label compressionRatioWithoutHeader;
         private System.Windows.Forms.Label compressionRatioWithHeader;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label symbolsCount;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label totalSymbolsCount;
+        private System.Windows.Forms.Label uniqueSymbolCount;
     }
 }
