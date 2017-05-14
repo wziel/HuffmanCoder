@@ -50,12 +50,12 @@ namespace HuffmanCoder.Logic.Helpers
         {
             var csvContent = new StringBuilder();
 
-            foreach(KeyValuePair<string,int> entry in symbols)
+            for(int i=0; i<symbols.Count(); i++)
             {
-                var symbol = entry.Key;
-                var bitsLength = entry.Value;
-                var newline = $"{symbol},{bitsLength}";
-                csvContent.AppendLine(newline); 
+                var position = i + 1;
+                var bitsLength = symbols[i].Value;
+                var newline = $"{position},{bitsLength}";
+                csvContent.AppendLine(newline);
             }
 
             File.WriteAllText(histogramPath, csvContent.ToString());
